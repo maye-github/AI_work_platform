@@ -1,0 +1,81 @@
+id: REL-201
+type: REL
+title: リリース・運用計画（メーカーマスタメンテ 検索系）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+related_ids:
+- REL-201
+- TC-201
+- IT-201
+release:
+- version: v0.1.0（検索系のみ）
+  environment: 検証
+  scope_ids:
+  - R-201
+  - R-202
+  - R-203
+  - R-204
+  - R-205
+  - R-206
+  - R-207
+  - R-212
+  - R-213
+  notes: メーカーマスタメンテの**検索系**を実装。要件 14 件のうち 9 件が範囲。登録・更新・削除・複製・被参照・排他（R-208〜R-211, R-214）は**次期スコープ**。
+  procedure:
+  - 'no': 1
+    do: ビルド成果物の配置
+    check: 起動ログにエラーが無い
+  - 'no': 2
+    do: 環境設定の投入（DB 接続・コード値明細）
+    check: 実値がリポジトリに無い
+  - 'no': 3
+    do: 'スモーク: /R60Maker/init と /R60Maker/search'
+    check: errorCode が返る
+  - 'no': 4
+    do: 画面 1 周（初期表示→検索→ソート→頁送り→CSV）
+    check: 行数が一致する
+  rollback:
+  - 'no': 1
+    do: 直前のビルド成果物へ切り戻す
+  - 'no': 2
+    do: 環境設定を戻す
+  - 'no': 3
+    do: スモーク再実施
+  rollback_target_minutes: 15
+  rollback_drilled: false
+  monitoring:
+  - metric: search の 5xx 件数
+    threshold: null
+    owner: 運用
+  - metric: E-203/E-204 の発生件数
+    threshold: null
+    owner: 運用
+  - metric: 検索応答時間
+    threshold: null
+    owner: 運用
+  criteria:
+  - condition: 結合・総合テスト全件合格
+    state: unmet
+    evidence: IT-201〜IT-208 は全て not_run（ブラウザ/DB 実行基盤が未整備）
+  - condition: 切戻し演練の完了
+    state: unmet
+    evidence: 未実施
+  - condition: plat gate が 6 道全 PASS
+    state: met
+    evidence: gate1..gate6=PASS / Exit 0
+  - condition: docs/** に .xlsx を置かない
+    state: met
+    evidence: 生成物は export/ のみ
+  - condition: 成果物に機密の実値が無い
+    state: met
+    evidence: gate6=PASS / plat mask check 0 件
+  - condition: 未決事項が裁定済み
+    state: unmet
+    evidence: ISS-201/202 は弊社提案で暫定採用・顧客確認中。Q-201〜208 は未回答
+  judgement: リリース判定は行っていない。充足 3・未充足 3。範囲も検索系のみで、モジュール全体は未完成。

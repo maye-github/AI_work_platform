@@ -1,0 +1,49 @@
+doc: TECH_STACK
+title: 技術スタック宣言（R60Login）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+human_review_required: true
+stack:
+  backend:
+    language: Python 3.12
+    framework: FastAPI
+    db_access: SQLAlchemy Core（text() のみ・ORM は使わない）
+    driver: oracledb Thin
+    validation: Pydantic v2
+    test: pytest
+  frontend:
+    language: TypeScript 5
+    framework: Vue 3（script setup）
+    ui: Element Plus
+    state: Pinia
+    build: Vite
+    test: vitest
+  database:
+    rdbms: Oracle 19c
+    timezone: Asia/Tokyo
+    nls_date_format: RR-MM-DD
+    note: 本画面は SELECT のみ。DDL/DML を 1 文も発行しない。
+  conventions:
+    naming_definition_layer: snake_case
+    naming_interface_layer: camelCase
+    id_pattern: R/F/I/D/L/E/TC/IT/REL の号段制
+  commands:
+    build: npm run build（frontend）／pip install -e .（backend）
+    test: pytest tests/unit（backend）／npm test（frontend）
+    lint: ruff check（backend）／eslint（frontend）
+    run: uvicorn app.main:app --reload
+constraints:
+  closed_network: false
+  reason: 本件は調達・生産系の共通基盤上で動く。閉域要件は顧客の標準規約に従う（Q-101/ISS-101 で確認中）。
+decisions:
+- topic: ORM を使わない
+  choice: SQLAlchemy Core の text() のみ
+  why: 参照 SQL を設計書（DSN）と 1 対 1 で対応させ、レビューで照合できるようにするため。
+- topic: 状態管理
+  choice: Pinia
+  why: 画面横断の Session 情報を保持する必要がある（R-104）。

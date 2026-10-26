@@ -1,0 +1,102 @@
+id: Q-101
+type: Q
+title: 日方確認事項一覧
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- Q-101
+- Q-102
+- Q-103
+- Q-104
+- Q-105
+- Q-106
+- Q-107
+- Q-108
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+questions:
+- id: Q-101
+  question: 画面遷移の方式（同一ウィンドウ／別ウィンドウ／新規タブ）はどれか。
+  why: 遷移の実装方式が変わり、ログイン成功時の後続処理が変わる。
+  options:
+  - 同一ウィンドウ
+  - 別ウィンドウ／新規タブ
+  impact: ログイン成功時・メニュー遷移時の実装と、テスト観点。
+  status: open
+  answer: null
+  related_ids:
+  - Q-101
+- id: Q-102
+  question: 標準規約のエラーコード体系と、正常／業務エラー／システムエラーの区分値は何か。
+  why: 本画面の応答に載せる errorCode の値が決まらない。
+  options:
+  - 標準規約の値一覧の提供
+  impact: 3 端点の応答仕様と、エラー一覧の設計。
+  status: open
+  answer: null
+  related_ids:
+  - Q-102
+- id: Q-103
+  question: セッションエラー画面・メニューヘッダの遷移先 URL と提供オリジン（同一／別オリジン）は何か。
+  why: 遷移先が決まらず、認証情報の受け渡し方式（Cookie 属性・CORS）も決まらない。
+  options:
+  - URL の提供
+  impact: 業務エラー時の遷移実装、非機能（セキュリティ）。
+  status: open
+  answer: null
+  related_ids:
+  - Q-103
+- id: Q-104
+  question: 画面マスタの提供内容（項目定義・有効判定の条件・並び順の決まり方）は何か。
+  why: 画面候補の取得条件と表示順が決まらない。
+  options:
+  - マスタ定義書の提供
+  impact: 初期表示と /init の SQL・応答項目。
+  status: open
+  answer: null
+  related_ids:
+  - Q-104
+- id: Q-105
+  question: 「オンライン利用が許可されていない状態」をどう判定するか（参照先・値・更新頻度）。
+  why: 稼働状態チェックの実装が決まらない。
+  options:
+  - 標準規約の該当箇所の提供
+  impact: 3 端点の前処理と、テストでの状態作り分け。
+  status: open
+  answer: null
+  related_ids:
+  - Q-105
+- id: Q-106
+  question: 社員マスタの項目（会社・事業場・氏名等の物理名・桁）と論理削除の表現は何か。
+  why: Session に保存する項目と SQL の SELECT 列が決まらない。
+  options:
+  - マスタ定義書の提供
+  impact: ログイン判定の SQL、Session の保持項目。
+  status: open
+  answer: null
+  related_ids:
+  - Q-106
+- id: Q-107
+  question: 遷移 URL の host/port は環境ごとに異なるとのこと。設定値の受渡し方法は何か。
+  why: URL 組立の設定の持ち方が決まらない。
+  options:
+  - 環境設定の受渡し方法の指定
+  impact: 設定ファイル設計と、環境別のテスト。
+  status: open
+  answer: null
+  related_ids:
+  - Q-107
+- id: Q-108
+  question: 非機能要件（対応ブラウザ・画面解像度・同時利用数・性能目標）の具体値は何か。
+  why: 性能・同時実行の受け入れ条件が書けない。
+  options:
+  - 標準規約の該当箇所の提供
+  impact: 結合テストの非機能観点と、リリース判定条件。
+  status: open
+  answer: null
+  related_ids:
+  - Q-108

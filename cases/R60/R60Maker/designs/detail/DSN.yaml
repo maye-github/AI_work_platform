@@ -1,0 +1,158 @@
+id: D-201
+type: D
+title: データモデル（メーカーマスタメンテ）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- D-201
+- D-202
+- D-203
+- L-201
+- L-202
+- L-203
+- L-204
+- L-205
+- L-206
+- L-207
+- L-208
+- L-209
+- L-210
+- L-211
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+models:
+- id: D-201
+  title: メーカーマスタ
+  table_name: R60_MAKER_M_TBL
+  entity: メーカー
+  key:
+  - MAKER_CD
+  columns:
+  - name: MAKER_CD
+    logical: メーカーコード
+    type: string
+    length: 5
+    required: true
+    note: 主キー。半角英数字5桁
+  - name: MAKER_NM
+    logical: メーカー日本語名
+    type: string
+    length: 30
+    required: true
+    note: 30Byte。禁止文字あり
+  - name: MAKER_ANM
+    logical: メーカーカナ名
+    type: string
+    length: 15
+    required: false
+    note: 半角カナ15桁
+  - name: SEND_KBN
+    logical: 送信区分
+    type: code
+    length: 1
+    required: true
+    note: INSERT 時 '0' 固定
+  - name: SEND_STS
+    logical: 送信ステータス
+    type: code
+    length: 1
+    required: true
+    note: 削除時：更新前 '9' なら維持、以外は '0'
+  - name: DEL_FLG
+    logical: 削除フラグ
+    type: code
+    length: 1
+    required: true
+    note: '''1'' が削除。検索の既定は ''0'' のみ'
+  - name: REG_STS
+    logical: 登録ステータス
+    type: code
+    length: 1
+    required: true
+    note: 判定基準は共通仕様（Q-205・暫定案あり）
+  - name: ASD_STU_FLG
+    logical: ASD設定フラグ
+    type: code
+    length: 1
+    required: true
+    note: INSERT 時 '0' 固定
+  - name: REV_NO
+    logical: 改訂番号
+    type: number
+    length: 8
+    required: true
+    note: 更新・削除で +1
+  - name: KSN_DAT
+    logical: 更新日時
+    type: date
+    length: null
+    required: true
+    note: 排他の比較対象（Q-206）
+  related_ids:
+  - D-201
+  - F-203
+  - F-208
+  - F-209
+- id: D-202
+  title: コード値明細
+  table_name: R60_CDV_DTL
+  entity: コード値
+  key:
+  - CDV_ID
+  - CDV_VAL
+  columns:
+  - name: CDV_ID
+    logical: コード値ID
+    type: string
+    length: 9
+    required: true
+    note: 000000488=頁件数／000000063=削除フラグ／000000024=件数上限
+  - name: CDV_VAL
+    logical: 値
+    type: string
+    length: 10
+    required: true
+    note: 候補の値
+  - name: CDV_NM
+    logical: 名称
+    type: string
+    length: 40
+    required: true
+    note: 画面に出す名称
+  - name: DSP_ORD
+    logical: 表示順
+    type: number
+    length: 3
+    required: true
+    note: 候補の並び
+  related_ids:
+  - D-202
+  - F-201
+  - F-203
+- id: D-203
+  title: 被参照（参照のみ）
+  table_name: （購入品目別仕入先／原材料仕入単価）
+  entity: 被参照先
+  key:
+  - −
+  columns:
+  - name: REF_KBN
+    logical: 参照区分
+    type: code
+    length: 1
+    required: true
+    note: '''1''=購入品目別仕入先／''2''=原材料仕入単価'
+  - name: MAKER_CD
+    logical: メーカーコード
+    type: string
+    length: 5
+    required: true
+    note: 参照している側のキー
+  related_ids:
+  - D-203
+  - F-209
+  - L-208

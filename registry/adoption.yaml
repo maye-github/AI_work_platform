@@ -1,0 +1,609 @@
+results:
+  R60/R60Login/ASM-101:
+    added: 0
+    added_items: []
+    approved_at: '2026-10-26'
+    measurable: true
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 1
+    total: 5
+    unchanged: 5
+  R60/R60Login/D-101:
+    added: 3
+    added_items:
+    - models/D-101
+    - models/D-102
+    - models/D-103
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 3
+    total: 3
+    unchanged: 0
+  R60/R60Login/E-101:
+    added: 5
+    added_items:
+    - messages/E-101
+    - messages/E-102
+    - messages/E-103
+    - messages/E-104
+    - messages/E-105
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 3
+    total: 5
+    unchanged: 0
+  R60/R60Login/F-101:
+    added: 9
+    added_items:
+    - functions/F-101
+    - functions/F-102
+    - functions/F-103
+    - functions/F-104
+    - functions/F-105
+    - functions/F-106
+    - functions/F-107
+    - functions/F-108
+    - functions/F-109
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 2
+    total: 9
+    unchanged: 0
+  R60/R60Login/I-101:
+    added: 12
+    added_items:
+    - items/I-101
+    - items/I-102
+    - items/I-103
+    - items/I-104
+    - items/I-105
+    - items/I-106
+    - items/I-107
+    - items/I-108
+    - items/I-109
+    - items/I-110
+    - items/I-111
+    - items/I-112
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 2
+    total: 12
+    unchanged: 0
+  R60/R60Login/ISS-101:
+    added: 0
+    added_items: []
+    approved_at: '2026-10-26'
+    measurable: true
+    modified: 2
+    modified_items:
+    - issues/ISS-101
+    - issues/ISS-102
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 1
+    total: 3
+    unchanged: 1
+  R60/R60Login/IT-101:
+    added: 18
+    added_items:
+    - scenarios/IT-101
+    - scenarios/IT-102
+    - scenarios/IT-103
+    - scenarios/IT-104
+    - scenarios/IT-105
+    - scenarios/IT-106
+    - scenarios/IT-107
+    - scenarios/IT-108
+    - acceptance_map/#1
+    - acceptance_map/#2
+    - acceptance_map/#3
+    - acceptance_map/#4
+    - acceptance_map/#5
+    - acceptance_map/#6
+    - acceptance_map/#7
+    - acceptance_map/#8
+    - acceptance_map/#9
+    - acceptance_map/#10
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 7
+    total: 18
+    unchanged: 0
+  R60/R60Login/L-101:
+    added: 8
+    added_items:
+    - logic/L-101
+    - logic/L-102
+    - logic/L-103
+    - logic/L-104
+    - logic/L-105
+    - logic/L-106
+    - logic/L-107
+    - logic/L-108
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 3
+    total: 8
+    unchanged: 0
+  R60/R60Login/Q-101:
+    added: 0
+    added_items: []
+    approved_at: '2026-10-26'
+    measurable: true
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 1
+    total: 8
+    unchanged: 8
+  R60/R60Login/R-101:
+    added: 0
+    added_items: []
+    approved_at: '2026-10-26'
+    measurable: true
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 1
+    total: 10
+    unchanged: 10
+  R60/R60Login/REL-101:
+    added: 1
+    added_items:
+    - release/#1
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 8
+    total: 1
+    unchanged: 0
+  R60/R60Login/TC-101:
+    added: 27
+    added_items:
+    - cases/TC-101
+    - cases/TC-102
+    - cases/TC-103
+    - cases/TC-104
+    - cases/TC-105
+    - cases/TC-106
+    - cases/TC-107
+    - cases/TC-108
+    - cases/TC-109
+    - cases/TC-110
+    - cases/TC-111
+    - cases/TC-112
+    - cases/TC-113
+    - cases/TC-114
+    - cases/TC-115
+    - cases/TC-116
+    - cases/TC-117
+    - cases/TC-118
+    - cases/TC-119
+    - cases/TC-120
+    - cases/TC-121
+    - cases/TC-122
+    - cases/TC-123
+    - cases/TC-124
+    - cases/TC-125
+    - cases/TC-126
+    - cases/TC-127
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 6
+    total: 27
+    unchanged: 0
+  R60/R60Maker/ASM-201:
+    added: 0
+    added_items: []
+    approved_at: '2026-10-26'
+    measurable: true
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 1
+    total: 5
+    unchanged: 5
+  R60/R60Maker/D-201:
+    added: 3
+    added_items:
+    - models/D-201
+    - models/D-202
+    - models/D-203
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 3
+    total: 3
+    unchanged: 0
+  R60/R60Maker/E-201:
+    added: 7
+    added_items:
+    - messages/E-201
+    - messages/E-202
+    - messages/E-203
+    - messages/E-204
+    - messages/E-205
+    - messages/E-206
+    - messages/E-207
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 3
+    total: 7
+    unchanged: 0
+  R60/R60Maker/F-201:
+    added: 11
+    added_items:
+    - functions/F-201
+    - functions/F-202
+    - functions/F-203
+    - functions/F-204
+    - functions/F-205
+    - functions/F-206
+    - functions/F-207
+    - functions/F-208
+    - functions/F-209
+    - functions/F-210
+    - functions/F-211
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 2
+    total: 11
+    unchanged: 0
+  R60/R60Maker/I-201:
+    added: 30
+    added_items:
+    - items/I-201
+    - items/I-202
+    - items/I-203
+    - items/I-204
+    - items/I-205
+    - items/I-206
+    - items/I-207
+    - items/I-208
+    - items/I-209
+    - items/I-210
+    - items/I-211
+    - items/I-212
+    - items/I-213
+    - items/I-214
+    - items/I-215
+    - items/I-216
+    - items/I-217
+    - items/I-218
+    - items/I-219
+    - items/I-220
+    - items/I-221
+    - items/I-222
+    - items/I-223
+    - items/I-224
+    - items/I-225
+    - items/I-226
+    - items/I-227
+    - items/I-228
+    - items/I-229
+    - items/I-230
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 2
+    total: 30
+    unchanged: 0
+  R60/R60Maker/ISS-201:
+    added: 0
+    added_items: []
+    approved_at: '2026-10-26'
+    measurable: true
+    modified: 2
+    modified_items:
+    - issues/ISS-201
+    - issues/ISS-202
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 1
+    total: 2
+    unchanged: 0
+  R60/R60Maker/IT-201:
+    added: 22
+    added_items:
+    - scenarios/IT-201
+    - scenarios/IT-202
+    - scenarios/IT-203
+    - scenarios/IT-204
+    - scenarios/IT-205
+    - scenarios/IT-206
+    - scenarios/IT-207
+    - scenarios/IT-208
+    - acceptance_map/#1
+    - acceptance_map/#2
+    - acceptance_map/#3
+    - acceptance_map/#4
+    - acceptance_map/#5
+    - acceptance_map/#6
+    - acceptance_map/#7
+    - acceptance_map/#8
+    - acceptance_map/#9
+    - acceptance_map/#10
+    - acceptance_map/#11
+    - acceptance_map/#12
+    - acceptance_map/#13
+    - acceptance_map/#14
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 7
+    total: 22
+    unchanged: 0
+  R60/R60Maker/L-201:
+    added: 11
+    added_items:
+    - logic/L-201
+    - logic/L-202
+    - logic/L-203
+    - logic/L-204
+    - logic/L-205
+    - logic/L-206
+    - logic/L-207
+    - logic/L-208
+    - logic/L-209
+    - logic/L-210
+    - logic/L-211
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 3
+    total: 11
+    unchanged: 0
+  R60/R60Maker/Q-201:
+    added: 0
+    added_items: []
+    approved_at: '2026-10-26'
+    measurable: true
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 1
+    total: 8
+    unchanged: 8
+  R60/R60Maker/R-201:
+    added: 0
+    added_items: []
+    approved_at: '2026-10-26'
+    measurable: true
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 1
+    total: 14
+    unchanged: 14
+  R60/R60Maker/REL-201:
+    added: 1
+    added_items:
+    - release/#1
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 8
+    total: 1
+    unchanged: 0
+  R60/R60Maker/TC-201:
+    added: 35
+    added_items:
+    - cases/TC-201
+    - cases/TC-202
+    - cases/TC-203
+    - cases/TC-204
+    - cases/TC-205
+    - cases/TC-206
+    - cases/TC-207
+    - cases/TC-208
+    - cases/TC-209
+    - cases/TC-210
+    - cases/TC-211
+    - cases/TC-212
+    - cases/TC-213
+    - cases/TC-214
+    - cases/TC-215
+    - cases/TC-216
+    - cases/TC-217
+    - cases/TC-218
+    - cases/TC-219
+    - cases/TC-220
+    - cases/TC-221
+    - cases/TC-222
+    - cases/TC-223
+    - cases/TC-224
+    - cases/TC-225
+    - cases/TC-226
+    - cases/TC-227
+    - cases/TC-228
+    - cases/TC-229
+    - cases/TC-230
+    - cases/TC-231
+    - cases/TC-232
+    - cases/TC-233
+    - cases/TC-234
+    - cases/TC-235
+    approved_at: '2026-10-26'
+    measurable: false
+    modified: 0
+    modified_items: []
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 6
+    total: 35
+    unchanged: 0
+schema: '1'
+snapshots:
+  R60/R60Login/ASM-101:
+    captured_at: 2026-10-26 16:37
+    items:
+      assumptions/ASM-101: f05368b6104db071
+      assumptions/ASM-102: 6702b562f0eb9ebf
+      assumptions/ASM-103: c71ffa2ff86223e2
+      assumptions/ASM-104: e9a1002290110cfc
+      assumptions/ASM-105: 08c0b8a62dfa0060
+    stage: 1
+  R60/R60Login/ISS-101:
+    captured_at: 2026-10-26 16:37
+    items:
+      issues/ISS-101: 08ab510716a6aa12
+      issues/ISS-102: f688addd24f14e3b
+      issues/ISS-103: 16a5bfa03e0df21f
+    stage: 1
+  R60/R60Login/Q-101:
+    captured_at: 2026-10-26 16:37
+    items:
+      questions/Q-101: ab721d03efd2724c
+      questions/Q-102: 6d0b36fa42214f9a
+      questions/Q-103: e6c1563fe4cbceab
+      questions/Q-104: 5ea1a464e2a96b3d
+      questions/Q-105: b016dec955af8d55
+      questions/Q-106: ee58efe27d6869ac
+      questions/Q-107: 89e346cef7a74021
+      questions/Q-108: 6d40f019ff4259d1
+    stage: 1
+  R60/R60Login/R-101:
+    captured_at: 2026-10-26 16:37
+    items:
+      requirements/R-101: 4f42de216dfec96c
+      requirements/R-102: bf6b7f257e7b80fb
+      requirements/R-103: bfe44ba037a29eb2
+      requirements/R-104: 8969d651db4558a1
+      requirements/R-105: 422262ba3dc32531
+      requirements/R-106: 6da481a8d1e9e30b
+      requirements/R-107: 49f9e7d6558ff315
+      requirements/R-108: 6ac750a013c8d53e
+      requirements/R-109: 88d993d72b2fd5c4
+      requirements/R-110: 4c93adfb3372722e
+    stage: 1
+  R60/R60Maker/ASM-201:
+    captured_at: 2026-10-26 16:58
+    items:
+      assumptions/ASM-201: 1c696f44d58f48ff
+      assumptions/ASM-202: 24be5899e1635878
+      assumptions/ASM-203: b905a944802f2daf
+      assumptions/ASM-204: f8c1134484bd30d2
+      assumptions/ASM-205: 9b1916cec2aa51d7
+    stage: 1
+  R60/R60Maker/ISS-201:
+    captured_at: 2026-10-26 16:58
+    items:
+      issues/ISS-201: 0b2cd89f96384610
+      issues/ISS-202: 2f37c6b0620c0607
+    stage: 1
+  R60/R60Maker/Q-201:
+    captured_at: 2026-10-26 16:58
+    items:
+      questions/Q-201: b1a9e218e150e360
+      questions/Q-202: e7d198566c421894
+      questions/Q-203: 26ad4fb5ab9a4296
+      questions/Q-204: 463b83f25dcf4793
+      questions/Q-205: ed965bb88aa60383
+      questions/Q-206: 38bcb607a2c8378c
+      questions/Q-207: 26a3e697624747df
+      questions/Q-208: bdb75b7467d4d973
+    stage: 1
+  R60/R60Maker/R-201:
+    captured_at: 2026-10-26 16:58
+    items:
+      requirements/R-201: 384716d8f0cd9634
+      requirements/R-202: a7062ef2a1b6e260
+      requirements/R-203: 7bcef85a9152857f
+      requirements/R-204: fea794710cdc045a
+      requirements/R-205: af9160eca10a6865
+      requirements/R-206: b26d8d5c3588d75a
+      requirements/R-207: 6f71a7251d2fffca
+      requirements/R-208: dfdaf7bff175c2e3
+      requirements/R-209: e82e85d87ae480b6
+      requirements/R-210: da79929bde7c17c2
+      requirements/R-211: da426d4c22827a20
+      requirements/R-212: cf08bcd5e7790c37
+      requirements/R-213: f2bd355bbc2bfb93
+      requirements/R-214: 6a2bbc0fa6cc7b99
+    stage: 1

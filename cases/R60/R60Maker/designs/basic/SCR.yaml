@@ -1,0 +1,474 @@
+id: I-201
+type: I
+title: 画面項目一覧（メーカーマスタメンテナンス）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- I-201
+- I-202
+- I-203
+- I-204
+- I-205
+- I-206
+- I-207
+- I-208
+- I-209
+- I-210
+- I-211
+- I-212
+- I-213
+- I-214
+- I-215
+- I-216
+- I-217
+- I-218
+- I-219
+- I-220
+- I-221
+- I-222
+- I-223
+- I-224
+- I-225
+- I-226
+- I-227
+- I-228
+- I-229
+- I-230
+- F-201
+- F-202
+- F-203
+- F-204
+- F-205
+- F-206
+- F-207
+- F-208
+- F-209
+- F-210
+- F-211
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+items:
+- id: I-201
+  title: 画面タイトル
+  screen: 検索画面
+  kind: label
+  data_type: string
+  length: null
+  required: false
+  spec: 固定値を表示（標準仕様）
+  source_req: R-201
+  source_function: F-201
+  related_ids:
+  - I-201
+  - R-201
+  - F-201
+- id: I-202
+  title: システム日
+  screen: 検索画面
+  kind: label
+  data_type: string
+  length: null
+  required: false
+  spec: 標準仕様の書式
+  source_req: R-201
+  source_function: F-201
+  related_ids:
+  - I-202
+  - R-201
+  - F-201
+- id: I-203
+  title: 会社
+  screen: 検索画面
+  kind: label
+  data_type: string
+  length: null
+  required: false
+  spec: ログインユーザの会社
+  source_req: R-201
+  source_function: F-201
+  related_ids:
+  - I-203
+  - R-201
+  - F-201
+- id: I-204
+  title: 部署
+  screen: 検索画面
+  kind: label
+  data_type: string
+  length: null
+  required: false
+  spec: ログインユーザの部署
+  source_req: R-201
+  source_function: F-201
+  related_ids:
+  - I-204
+  - R-201
+  - F-201
+- id: I-205
+  title: ユーザー名
+  screen: 検索画面
+  kind: label
+  data_type: string
+  length: null
+  required: false
+  spec: ログインユーザの氏名
+  source_req: R-201
+  source_function: F-201
+  related_ids:
+  - I-205
+  - R-201
+  - F-201
+- id: I-206
+  title: メーカーコード
+  screen: 検索画面
+  kind: input
+  data_type: string
+  length: 5
+  required: false
+  spec: 半角英数字5文字。前方一致で検索
+  source_req: R-202
+  source_function: F-202
+  related_ids:
+  - I-206
+  - R-202
+  - F-202
+- id: I-207
+  title: メーカー日本語名
+  screen: 検索画面
+  kind: input
+  data_type: string
+  length: 30
+  required: false
+  spec: 30Byte・禁止文字あり。中間一致で検索
+  source_req: R-202
+  source_function: F-202
+  related_ids:
+  - I-207
+  - R-202
+  - F-202
+- id: I-208
+  title: 削除含む
+  screen: 検索画面
+  kind: check
+  data_type: code
+  length: 1
+  required: false
+  spec: 初期値オフ。ON なら DEL_FLG 条件を付けない
+  source_req: R-203
+  source_function: F-203
+  related_ids:
+  - I-208
+  - R-203
+  - F-203
+- id: I-209
+  title: 1頁件数
+  screen: 検索画面
+  kind: select
+  data_type: code
+  length: null
+  required: false
+  spec: コード値明細 000000488 から取得
+  source_req: R-201
+  source_function: F-201
+  related_ids:
+  - I-209
+  - R-201
+  - F-201
+- id: I-210
+  title: 仕掛表示
+  screen: 検索画面
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: REG_STS='0' を追加して検索
+  source_req: R-204
+  source_function: F-203
+  related_ids:
+  - I-210
+  - R-204
+  - F-203
+- id: I-211
+  title: 表示
+  screen: 検索画面
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: REG_STS 条件なしで検索
+  source_req: R-203
+  source_function: F-203
+  related_ids:
+  - I-211
+  - R-203
+  - F-203
+- id: I-212
+  title: 検索条件(非)表示
+  screen: 検索画面
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: 検索条件部の縮小／拡大
+  source_req: R-206
+  source_function: F-206
+  related_ids:
+  - I-212
+  - R-206
+  - F-206
+- id: I-213
+  title: 一覧:メーカーコード
+  screen: 検索画面
+  kind: link
+  data_type: string
+  length: null
+  required: false
+  spec: ソート可。リンクで修正画面へ
+  source_req: R-207
+  source_function: F-203
+  related_ids:
+  - I-213
+  - R-207
+  - F-203
+- id: I-214
+  title: 一覧:日本語名
+  screen: 検索画面
+  kind: link
+  data_type: string
+  length: null
+  required: false
+  spec: ソート可
+  source_req: R-207
+  source_function: F-203
+  related_ids:
+  - I-214
+  - R-207
+  - F-203
+- id: I-215
+  title: 一覧:カナ名
+  screen: 検索画面
+  kind: label
+  data_type: string
+  length: null
+  required: false
+  spec: ソート対象外
+  source_req: R-203
+  source_function: F-203
+  related_ids:
+  - I-215
+  - R-203
+  - F-203
+- id: I-216
+  title: 一覧:削除
+  screen: 検索画面
+  kind: label
+  data_type: code
+  length: 1
+  required: false
+  spec: コード値明細 000000063 で名称化
+  source_req: R-203
+  source_function: F-203
+  related_ids:
+  - I-216
+  - R-203
+  - F-203
+- id: I-217
+  title: 複製
+  screen: 検索画面
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: 検索成功後に活性
+  source_req: R-208
+  source_function: F-203
+  related_ids:
+  - I-217
+  - R-208
+  - F-203
+- id: I-218
+  title: 戻る
+  screen: 検索画面
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: 標準仕様
+  source_req: R-213
+  source_function: F-211
+  related_ids:
+  - I-218
+  - R-213
+  - F-211
+- id: I-219
+  title: 業務終了
+  screen: 検索画面
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: 標準仕様
+  source_req: R-213
+  source_function: F-211
+  related_ids:
+  - I-219
+  - R-213
+  - F-211
+- id: I-220
+  title: ダウンロード
+  screen: 検索画面
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: 検索成功後に活性。直前条件で CSV
+  source_req: R-212
+  source_function: F-210
+  related_ids:
+  - I-220
+  - R-212
+  - F-210
+- id: I-221
+  title: 新規
+  screen: 検索画面
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: 検索成功後に活性
+  source_req: R-209
+  source_function: F-203
+  related_ids:
+  - I-221
+  - R-209
+  - F-203
+- id: I-222
+  title: ページャ
+  screen: 検索画面
+  kind: link
+  data_type: '-'
+  length: null
+  required: false
+  spec: 頁送り・件数表示（標準仕様）
+  source_req: R-205
+  source_function: F-204
+  related_ids:
+  - I-222
+  - R-205
+  - F-204
+- id: I-223
+  title: コード
+  screen: マスタ項目画面
+  kind: input
+  data_type: string
+  length: 5
+  required: true
+  spec: 新規・複製で必須。半角英数5文字
+  source_req: R-210
+  source_function: F-208
+  related_ids:
+  - I-223
+  - R-210
+  - F-208
+- id: I-224
+  title: 日本語名
+  screen: マスタ項目画面
+  kind: input
+  data_type: string
+  length: 30
+  required: false
+  spec: 緊急配信ON時は必須。30Byte・禁止文字
+  source_req: R-210
+  source_function: F-208
+  related_ids:
+  - I-224
+  - R-210
+  - F-208
+- id: I-225
+  title: カナ名
+  screen: マスタ項目画面
+  kind: input
+  data_type: string
+  length: 15
+  required: false
+  spec: 緊急配信ON時は必須。半角カナ15文字
+  source_req: R-210
+  source_function: F-208
+  related_ids:
+  - I-225
+  - R-210
+  - F-208
+- id: I-226
+  title: 緊急配信
+  screen: マスタ項目画面
+  kind: check
+  data_type: code
+  length: 1
+  required: false
+  spec: 初期値オフ。ON で緊急配信を起動
+  source_req: R-210
+  source_function: F-208
+  related_ids:
+  - I-226
+  - R-210
+  - F-208
+- id: I-227
+  title: 削除
+  screen: マスタ項目画面
+  kind: check
+  data_type: code
+  length: 1
+  required: false
+  spec: 修正モードのみ。ON で削除（論理）
+  source_req: R-211
+  source_function: F-209
+  related_ids:
+  - I-227
+  - R-211
+  - F-209
+- id: I-228
+  title: 登録
+  screen: マスタ項目画面
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: 単項目→項目間→DB 更新→完了メッセージ
+  source_req: R-210
+  source_function: F-208
+  related_ids:
+  - I-228
+  - R-210
+  - F-208
+- id: I-229
+  title: 削除
+  screen: マスタ項目画面
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: 削除確認→被参照→排他→論理削除
+  source_req: R-211
+  source_function: F-209
+  related_ids:
+  - I-229
+  - R-211
+  - F-209
+- id: I-230
+  title: 戻る
+  screen: マスタ項目画面
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: 変更ありなら確認メッセージ（標準仕様）
+  source_req: R-213
+  source_function: F-211
+  related_ids:
+  - I-230
+  - R-213
+  - F-211

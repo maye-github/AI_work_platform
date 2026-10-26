@@ -1,0 +1,234 @@
+id: IT-201
+type: IT
+title: 結合・総合テスト仕様書（メーカーマスタメンテ）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- IT-201
+- IT-202
+- IT-203
+- IT-204
+- IT-205
+- IT-206
+- IT-207
+- IT-208
+- R-201
+- R-202
+- R-203
+- R-204
+- R-205
+- R-206
+- R-207
+- R-208
+- R-209
+- R-210
+- R-211
+- R-212
+- R-213
+- R-214
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+scenarios:
+- id: IT-201
+  title: 初期表示
+  goal: 検索画面が候補と初期値で開く
+  steps:
+  - 'no': 1
+    do: 画面を開く
+    expect: タイトル・システム日・ユーザ情報が出る
+  - 'no': 2
+    do: 1頁件数を見る
+    expect: コード値明細 000000488 の候補が並ぶ
+  covers:
+  - R-201
+  result: not_run
+  evidence: ブラウザ・DB 実行基盤が未整備
+  related_ids:
+  - IT-201
+  - R-201
+- id: IT-202
+  title: 表示ボタンで検索
+  goal: 条件一致の明細が取得できる
+  steps:
+  - 'no': 1
+    do: コードを前方一致で入力
+    expect: ―
+  - 'no': 2
+    do: 表示押下
+    expect: 一致行のみ・削除フラグ昇順→コード昇順
+  covers:
+  - R-203
+  - R-207
+  result: not_run
+  evidence: 同上
+  related_ids:
+  - IT-202
+  - R-203
+  - R-207
+- id: IT-203
+  title: 仕掛表示
+  goal: REG_STS='0' に絞られる
+  steps:
+  - 'no': 1
+    do: 仕掛表示押下
+    expect: 未登録のみが残る
+  covers:
+  - R-204
+  result: not_run
+  evidence: 同上
+  related_ids:
+  - IT-203
+  - R-204
+- id: IT-204
+  title: 入力チェックで中断
+  goal: 形式不正は検索しない
+  steps:
+  - 'no': 1
+    do: コード4文字
+    expect: エラー R60W0103
+  - 'no': 2
+    do: 日本語名31バイト
+    expect: エラー R60W0131
+  covers:
+  - R-202
+  result: not_run
+  evidence: 同上。ロジック層は TC で確認済み
+  related_ids:
+  - IT-204
+  - R-202
+- id: IT-205
+  title: 件数の境界
+  goal: 0件・上限超過でメッセージ
+  steps:
+  - 'no': 1
+    do: 0件条件
+    expect: R60W0010
+  - 'no': 2
+    do: 上限超え条件
+    expect: R60W0005
+  covers:
+  - R-203
+  result: not_run
+  evidence: 同上
+  related_ids:
+  - IT-205
+  - R-203
+- id: IT-206
+  title: ページングとソート
+  goal: 頁送りとコード/日本語名ソート
+  steps:
+  - 'no': 1
+    do: 次頁
+    expect: 条件保持のまま次頁
+  - 'no': 2
+    do: 日本語名でソート
+    expect: 指定順・白名单外は既定順
+  covers:
+  - R-205
+  - R-207
+  result: not_run
+  evidence: 同上
+  related_ids:
+  - IT-206
+  - R-205
+  - R-207
+- id: IT-207
+  title: CSV ダウンロード
+  goal: 直前条件の CSV が出る
+  steps:
+  - 'no': 1
+    do: 検索後にダウンロード
+    expect: 同行数・同項目順の CSV
+  covers:
+  - R-212
+  result: not_run
+  evidence: 出力仕様（文字コード・ヘッダ）が未確定（Q-207）
+  related_ids:
+  - IT-207
+  - R-212
+- id: IT-208
+  title: 登録・更新・削除
+  goal: マスタ画面の CRUD
+  steps:
+  - 'no': 1
+    do: 新規登録
+    expect: R60I0001・一覧再検索
+  - 'no': 2
+    do: 修正
+    expect: R60I0001
+  - 'no': 3
+    do: 削除
+    expect: R60I0002・論理削除
+  covers:
+  - R-208
+  - R-210
+  - R-211
+  result: not_run
+  evidence: '本版スコープ外（TRACEABILITY: unimplemented）。次期で実施'
+  related_ids:
+  - IT-208
+  - R-208
+  - R-210
+  - R-211
+acceptance_map:
+- req_id: R-201
+  acceptance: 候補と初期値が表示される
+  covered_by:
+  - IT-201
+- req_id: R-202
+  acceptance: 形式不正は検索しない
+  covered_by:
+  - IT-204
+- req_id: R-203
+  acceptance: 条件一致の明細が既定順で返る
+  covered_by:
+  - IT-202
+  - IT-205
+- req_id: R-204
+  acceptance: REG_STS='0' に絞られる
+  covered_by:
+  - IT-203
+- req_id: R-205
+  acceptance: 頁単位で表示され条件が保持される
+  covered_by:
+  - IT-206
+- req_id: R-206
+  acceptance: 検索条件部が縮小／拡大する
+  covered_by: []
+  not_covered_reason: 画面制御のみで端点を持たない。ブラウザ操作の実行基盤が無いため今回は未実施（次期に画面操作で確認）
+- req_id: R-207
+  acceptance: コード・日本語名でソートできる
+  covered_by:
+  - IT-206
+- req_id: R-208
+  acceptance: 複製/修正/新規のモードで画面が開く
+  covered_by:
+  - IT-208
+- req_id: R-209
+  acceptance: 新規モードで空の画面が開く
+  covered_by:
+  - IT-208
+- req_id: R-210
+  acceptance: チェックを経て登録・更新できる
+  covered_by:
+  - IT-208
+- req_id: R-211
+  acceptance: チェックを経て論理削除できる
+  covered_by:
+  - IT-208
+- req_id: R-212
+  acceptance: 直前条件の CSV が出る
+  covered_by:
+  - IT-207
+- req_id: R-213
+  acceptance: 標準仕様に従って戻る／終了する
+  covered_by: []
+  not_covered_reason: 標準仕様の中身が未提供（Q-208）。仕様が来たら観点を作り直す
+- req_id: R-214
+  acceptance: 排他が一致しない場合は更新しない
+  covered_by:
+  - IT-208

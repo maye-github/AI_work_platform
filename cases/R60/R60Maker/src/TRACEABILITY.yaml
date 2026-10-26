@@ -1,0 +1,53 @@
+doc: TRACEABILITY
+title: コード-設計 追溯対照表（R60Maker）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+human_review_required: true
+scope: 本版は検索系（初期表示・検索・ページング・ソート・CSV）までを実装
+traces:
+- design_id: D-201
+  logic_ids:
+  - L-202
+  - L-203
+  - L-204
+  source_files:
+  - src/backend/app/logic/search_condition.py
+  - src/backend/app/logic/count_check.py
+  - src/backend/app/logic/sort_whitelist.py
+  - src/backend/app/api/routers/maker.py
+  test_viewpoints: []
+- design_id: D-201
+  logic_ids:
+  - L-201
+  source_files:
+  - src/backend/app/logic/search_condition.py
+  test_viewpoints: []
+- design_id: D-201
+  logic_ids:
+  - L-210
+  source_files:
+  - src/backend/app/logic/csv_writer.py
+  test_viewpoints: []
+- design_id: D-201
+  logic_ids:
+  - L-211
+  source_files:
+  - src/backend/app/logic/reg_sts.py
+  test_viewpoints: []
+unimplemented:
+- id: L-205
+  reason: マスタ画面の初期化は未実装（マスタ画面の本実装は次期スコープ）。
+- id: L-206
+  reason: 登録・更新（DML）は未実装。排他・被参照・緊急配信の共通仕様待ち（ISS-201）。
+- id: L-207
+  reason: 削除（論理削除）は未実装。同上。
+- id: L-208
+  reason: 被参照チェックは未実装（被参照先の接続方法が未確定）。
+- id: L-209
+  reason: 排他チェックは未実装（KSN_DAT の更新主体が未確定・Q-206）。
+extra: []

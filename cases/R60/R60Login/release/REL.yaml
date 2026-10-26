@@ -1,0 +1,88 @@
+id: REL-101
+type: REL
+title: リリース・運用計画（共通マスタログイン v0.1）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+related_ids:
+- REL-101
+- TC-101
+- IT-101
+release:
+- version: v0.1.0
+  environment: 検証
+  scope_ids:
+  - R-101
+  - R-102
+  - R-103
+  - R-104
+  - R-105
+  - R-106
+  - R-107
+  - R-108
+  - R-109
+  - R-110
+  notes: 新規構築。# 工程1〜7 の成果物から ID で集約：要件 10 件、機能 9 件、画面項目 12 件、データモデル 3 件、ロジック 8 件、エラー 5 件、単体 TC 27 件、結合 IT 8 件。本画面は業務データを更新しない（SELECT のみ）。
+  procedure:
+  - 'no': 1
+    do: ビルド成果物の配置（backend / frontend）
+    check: 起動確認（ログにエラーが無い）
+  - 'no': 2
+    do: 環境設定の投入（DB 接続・URL 用の scheme/host/port/context/route）
+    check: 実値がリポジトリに入っていないこと（占位のまま）
+  - 'no': 3
+    do: 'スモーク: 3 端点の疎通（init / login / generateUrl）'
+    check: すべて errorCode が返る
+  - 'no': 4
+    do: 画面 1 周（初期表示 → ログイン → 画面遷移 → URL出力 → 閉じる）
+    check: 遷移先が開く
+  - 'no': 5
+    do: 監視の有効化確認
+    check: アラートが上がること
+  rollback:
+  - 'no': 1
+    do: 直前のビルド成果物へ切り戻す
+  - 'no': 2
+    do: 環境設定を直前の値へ戻す（値を文書に書かない）
+  - 'no': 3
+    do: スモークを再実施
+  rollback_target_minutes: 15
+  rollback_drilled: false
+  monitoring:
+  - metric: 3 端点の 5xx 件数
+    threshold: null
+    owner: 運用
+  - metric: ログイン失敗件数（E-101/E-102/E-105 の合計）
+    threshold: null
+    owner: 運用
+  - metric: 稼働不可（E-103）の発生
+    threshold: null
+    owner: 運用
+  - metric: /R60Login/init の疎通
+    threshold: 1 分間隔
+    owner: 運用
+  criteria:
+  - condition: 結合・総合テスト全件合格
+    state: unmet
+    evidence: IT-101〜IT-108 は全て not_run（ブラウザ/DB 実行基盤が未整備）
+  - condition: 切戻し演練の完了
+    state: unmet
+    evidence: '演練は未実施（rollback_drilled: false）'
+  - condition: plat gate が 6 道全 PASS
+    state: met
+    evidence: gate1..gate6=PASS / Exit 0
+  - condition: docs/** に .xlsx を置かない
+    state: met
+    evidence: 生成物は export/ のみ（gitignore 済み）
+  - condition: 成果物に機密の実値が無い（占位のみ）
+    state: met
+    evidence: gate6=PASS（パターン走査）＋ plat mask check = 0 件
+  - condition: 未決事項が裁定済み
+    state: unmet
+    evidence: ISS-101/ISS-102 は弊社提案で暫定採用・顧客確認中。ISS-103 未回答
+  judgement: リリース判定は行っていない。判定条件 6 条のうち充足 3・未充足 3。判定は人が行う。

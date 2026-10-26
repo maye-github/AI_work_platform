@@ -1,0 +1,233 @@
+id: IT-101
+type: IT
+title: 結合・総合テスト仕様書（R60Login）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- IT-101
+- IT-102
+- IT-103
+- IT-104
+- IT-105
+- IT-106
+- IT-107
+- IT-108
+- R-101
+- R-102
+- R-103
+- R-104
+- R-105
+- R-106
+- R-107
+- R-108
+- R-109
+- R-110
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+scenarios:
+- id: IT-101
+  title: 初期表示の一連
+  goal: 利用者が共通ログインを開き、候補と初期値が揃っている
+  steps:
+  - 'no': 1
+    do: 画面を開く
+    expect: タイトル「共通マスタ　ログイン」（全角空白）
+  - 'no': 2
+    do: 候補を見る
+    expect: 画面候補が表示順に並ぶ
+  - 'no': 3
+    do: 初期値を見る
+    expect: 起動区分=3、権限区分=更新あり、ユーザーＩＤ/URL は空白
+  covers:
+  - R-101
+  result: not_run
+  evidence: ブラウザ実行基盤が未整備（観測点は §4 に記載）
+  related_ids:
+  - IT-101
+  - R-101
+- id: IT-102
+  title: 入力不正でログインできない
+  goal: 7桁でない社員コードでは入れない
+  steps:
+  - 'no': 1
+    do: 6桁を入力
+    expect: エラー表示
+  - 'no': 2
+    do: ログイン押下
+    expect: 遷移しない・セッションエラー画面へ
+  - 'no': 3
+    do: 全角7桁を入力
+    expect: 同様にエラー
+  covers:
+  - R-102
+  - R-109
+  result: not_run
+  evidence: 同上。ロジック層は単体テストで確認済み（TC-104/105/108）
+  related_ids:
+  - IT-102
+  - R-102
+  - R-109
+- id: IT-103
+  title: ログイン成功から業務画面へ
+  goal: 存在する社員コードでログインし、選択画面が開く
+  steps:
+  - 'no': 1
+    do: 有効な社員コードを入力
+    expect: ―
+  - 'no': 2
+    do: 画面候補を選ぶ
+    expect: ―
+  - 'no': 3
+    do: ログイン押下
+    expect: 選択画面が開く・権限区分が引き継がれる
+  covers:
+  - R-103
+  - R-104
+  - R-105
+  result: not_run
+  evidence: DB 環境とブラウザ基盤が必要
+  related_ids:
+  - IT-103
+  - R-103
+  - R-104
+  - R-105
+- id: IT-104
+  title: 社員不存在・論理削除の扱い
+  goal: 存在しない/削除済みでは入れない
+  steps:
+  - 'no': 1
+    do: 不存在コード
+    expect: errorCode=1 のみ返る
+  - 'no': 2
+    do: 削除済みコード
+    expect: 同じ扱い
+  covers:
+  - R-103
+  - R-109
+  result: not_run
+  evidence: DB 環境待ち
+  related_ids:
+  - IT-104
+  - R-103
+  - R-109
+- id: IT-105
+  title: URL出力から遷移する
+  goal: 生成された URL で他システム/別窓から遷移できる
+  steps:
+  - 'no': 1
+    do: 社員コードを平文で入力
+    expect: ―
+  - 'no': 2
+    do: URL出力押下
+    expect: URL 欄に URL が入る
+  - 'no': 3
+    do: 別窓でその URL を開く
+    expect: 対象画面が開く
+  covers:
+  - R-106
+  - R-110
+  result: not_run
+  evidence: URL 組立の順序は単体テストで確認済み（TC-117）
+  related_ids:
+  - IT-105
+  - R-106
+  - R-110
+- id: IT-106
+  title: 稼働不可時の 3 端点
+  goal: オンライン不可なら 3 端点すべて業務エラー
+  steps:
+  - 'no': 1
+    do: 稼働状態を N にする
+    expect: ―
+  - 'no': 2
+    do: init/login/generateUrl を叩く
+    expect: 3 つとも errorCode=1
+  covers:
+  - R-107
+  result: not_run
+  evidence: 稼働状態の参照先が未確定（Q-105）
+  related_ids:
+  - IT-106
+  - R-107
+- id: IT-107
+  title: メニュー遷移
+  goal: 起動区分を引き継いでメニュー画面へ
+  steps:
+  - 'no': 1
+    do: 起動区分=2
+    expect: ―
+  - 'no': 2
+    do: メニュー押下
+    expect: メニュー画面が開き stfKbn=2
+  covers:
+  - R-105
+  result: not_run
+  evidence: ブラウザ操作
+  related_ids:
+  - IT-107
+  - R-105
+- id: IT-108
+  title: 閉じる
+  goal: 確認メッセージのうえ閉じる
+  steps:
+  - 'no': 1
+    do: 閉じる押下
+    expect: 確認ダイアログ
+  - 'no': 2
+    do: OK
+    expect: 画面が閉じる
+  covers:
+  - R-108
+  result: not_run
+  evidence: window.confirm/close の観測基盤が無い
+  related_ids:
+  - IT-108
+  - R-108
+acceptance_map:
+- req_id: R-101
+  acceptance: 12 項目が §3.2 の初期値で表示される
+  covered_by:
+  - IT-101
+- req_id: R-102
+  acceptance: 不正入力ではログインさせない
+  covered_by:
+  - IT-102
+- req_id: R-103
+  acceptance: 存在∧論理削除でない場合のみ成功
+  covered_by:
+  - IT-103
+  - IT-104
+- req_id: R-104
+  acceptance: 成功応答に利用者情報が含まれる
+  covered_by:
+  - IT-103
+- req_id: R-105
+  acceptance: メニューへ遷移し起動区分を引き継ぐ
+  covered_by:
+  - IT-103
+  - IT-107
+- req_id: R-106
+  acceptance: 指定順の URL が生成される
+  covered_by:
+  - IT-105
+- req_id: R-107
+  acceptance: 稼働不可なら 3 端点が業務エラー
+  covered_by:
+  - IT-106
+- req_id: R-108
+  acceptance: 確認のうえ画面が閉じる
+  covered_by:
+  - IT-108
+- req_id: R-109
+  acceptance: 業務/システムを区別しセッションエラー画面へ
+  covered_by:
+  - IT-102
+  - IT-104
+- req_id: R-110
+  acceptance: 当日内で往復し URL 形式と互換
+  covered_by:
+  - IT-105

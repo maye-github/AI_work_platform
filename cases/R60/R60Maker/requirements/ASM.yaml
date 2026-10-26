@@ -1,0 +1,48 @@
+id: ASM-201
+type: ASM
+title: 前提・仮定一覧（R60Maker）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- ASM-201
+- ASM-202
+- ASM-203
+- ASM-204
+- ASM-205
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+assumptions:
+- id: ASM-201
+  text: コード値明細テーブルが存在し、頁件数・削除フラグ・送信ステータスの名称解決に使える。
+  basis: 5.2-3 / `画面項目内容(検索)` No11/23/27 がコード値明細を参照している。
+  if_wrong: 候補や名称が出せず、一覧の表示が成立しない。
+  related_ids:
+  - ASM-201
+- id: ASM-202
+  text: '`R60_GET_SELECT_COLUMN_FNC` が利用可能で、抽出項目を設計書どおりに取得できる。'
+  basis: 5.2-4 が同関数による抽出を前提にしている。
+  if_wrong: SELECT 列が確定せず、一覧の項目が揃わない。
+  related_ids:
+  - ASM-202
+- id: ASM-203
+  text: 緊急配信パッケージ `R60_EMERGENCY_SEND_CTL_PKG` が利用可能である。
+  basis: 5.7-4 が同パッケージの呼出を前提にしている。
+  if_wrong: 緊急配信 ON 時の連携が実装できない。
+  related_ids:
+  - ASM-203
+- id: ASM-204
+  text: 被参照チェックの対象（購入品目別仕入先・原材料仕入単価）が本システムから参照できる。
+  basis: 5.4-6/7 が 2 つの被参照先を挙げている。
+  if_wrong: 削除時の被参照チェックができない。
+  related_ids:
+  - ASM-204
+- id: ASM-205
+  text: 削除は論理削除（`DEL_FLG`）で運用されている。
+  basis: 5.4-9 / 5.7-1 が `DEL_FLG='1'` の UPDATE としている。
+  if_wrong: 物理削除を前提にした設計になり、参照が壊れる。
+  related_ids:
+  - ASM-205

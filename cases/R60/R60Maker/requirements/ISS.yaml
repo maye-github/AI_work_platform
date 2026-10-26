@@ -1,0 +1,42 @@
+id: ISS-201
+type: ISS
+title: 未決事項一覧（R60Maker）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- ISS-201
+- ISS-202
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+issues:
+- id: ISS-201
+  text: 共通仕様（REG_STS 判定・排他基準・メッセージ・標準仕様）が設計書に本文として無い。
+  block: true
+  blocks_stage: 3
+  owner: SE-001
+  resolution: 弊社提案で暫定採用（顧客確認中）。
+  related_ids:
+  - ISS-201
+  proposal:
+  - 'REG_STS 判定（暫定）: コード・日本語名・カナ名の 3 項目がすべて非空なら登録済み(''1'')、それ以外は未登録(''0'')。'
+  - '排他（暫定）: 画面が保持する KSN_DAT と DB の値が不一致なら排他エラー（R60W0006）。'
+  - '標準メッセージ（暫定）: R60A0003/R60A0004 は確認、R60I0001/R60I0002 は完了、R60W00xx は警告として扱う。'
+  rationale: 共通仕様が無いまま工程3 を止めないため、上記を弊社案として置く。回答後に差分のみ差し替える。
+  customer_confirmed: false
+- id: ISS-202
+  text: 画面項目のうち「送信」ラベルの位置と、1 頁件数の初期値の決まり方が未確定。
+  block: false
+  blocks_stage: null
+  owner: SE-001
+  resolution: 弊社提案で暫定採用（顧客確認中）。
+  related_ids:
+  - ISS-202
+  proposal:
+  - 一覧の「送信」は**列見出し**として扱う（暫定）。
+  - 1 頁件数の初期値はコード値明細 `000000488` の先頭を使用する（暫定）。
+  rationale: 画面項目の定義を確定させるための暫定。顧客回答後に I-ID の定義のみ差し替える。
+  customer_confirmed: false

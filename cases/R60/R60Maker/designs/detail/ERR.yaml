@@ -1,0 +1,94 @@
+id: E-201
+type: E
+title: エラー・メッセージ一覧（メーカーマスタメンテ）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- E-201
+- E-202
+- E-203
+- E-204
+- E-205
+- E-206
+- E-207
+- L-201
+- L-202
+- L-203
+- L-204
+- L-205
+- L-206
+- L-207
+- L-208
+- L-209
+- L-210
+- L-211
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+messages:
+- id: E-201
+  title: メーカーコードの形式不正
+  condition: 空（新規・複製）または半角英数字5文字でない
+  message: R60W0103
+  action: 入力し直す
+  severity: warning
+  related_ids:
+  - E-201
+  - F-202
+- id: E-202
+  title: 日本語名の形式不正
+  condition: 30Byte 超、または禁止文字を含む
+  message: R60W0131
+  action: 入力し直す
+  severity: warning
+  related_ids:
+  - E-202
+  - F-202
+- id: E-203
+  title: 検索結果が 0 件
+  condition: 条件に一致するメーカーが無い
+  message: R60W0010
+  action: 条件を見直す
+  severity: warning
+  related_ids:
+  - E-203
+  - F-203
+- id: E-204
+  title: 件数が上限を超えた
+  condition: 件数がコード値明細 000000024 の上限を超えた
+  message: R60W0005
+  action: 条件を絞る
+  severity: warning
+  related_ids:
+  - E-204
+  - F-203
+- id: E-205
+  title: キーが重複している
+  condition: 登録しようとしたコードが既に存在する
+  message: R60W0014
+  action: 別のコードにする
+  severity: warning
+  related_ids:
+  - E-205
+  - F-208
+- id: E-206
+  title: 被参照があるため削除できない
+  condition: 購入品目別仕入先または原材料仕入単価から参照されている
+  message: R60W0024
+  action: 参照を解消する
+  severity: warning
+  related_ids:
+  - E-206
+  - F-209
+- id: E-207
+  title: 排他エラー
+  condition: 画面保持の KSN_DAT と DB の値が一致しない
+  message: R60W0006
+  action: 再検索してやり直す
+  severity: warning
+  related_ids:
+  - E-207
+  - F-208

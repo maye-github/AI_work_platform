@@ -1,0 +1,360 @@
+id: L-201
+type: L
+title: 業務ロジック一覧（メーカーマスタメンテ）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- L-201
+- L-202
+- L-203
+- L-204
+- L-205
+- L-206
+- L-207
+- L-208
+- L-209
+- L-210
+- L-211
+- D-201
+- D-202
+- D-203
+- E-201
+- E-202
+- E-203
+- E-204
+- E-205
+- E-206
+- E-207
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+logic:
+- id: L-201
+  title: 検索条件チェック
+  belongs_to: F-202
+  inputs:
+  - I-206
+  - I-207
+  outputs:
+  - 妥当/不可
+  steps:
+  - 'no': 1
+    do: コードが空でないとき半角英数字5文字か
+    cond: 不一致
+    else: E-201 で中断
+  - 'no': 2
+    do: 日本語名が空でないとき 30Byte 以内かつ禁止文字なし か
+    cond: 不一致
+    else: E-202 で中断
+  boundaries:
+  - item: I-206
+    value: '5'
+    expect: 妥当
+  - item: I-206
+    value: '4'
+    expect: 不可 E-201
+  - item: I-207
+    value: '30'
+    expect: 妥当
+  - item: I-207
+    value: '31'
+    expect: 不可 E-202
+  errors:
+  - E-201
+  - E-202
+  related_ids:
+  - L-201
+  - F-202
+  - E-201
+  - E-202
+- id: L-202
+  title: WHERE 生成
+  belongs_to: F-203
+  inputs:
+  - I-206
+  - I-207
+  - I-208
+  - I-210
+  outputs:
+  - 検索条件
+  steps:
+  - 'no': 1
+    do: コードがあれば前方一致を追加
+    cond: null
+    else: null
+  - 'no': 2
+    do: 日本語名があれば中間一致（ESCAPE '\'）を追加
+    cond: null
+    else: null
+  - 'no': 3
+    do: 削除含む OFF なら DEL_FLG='0' を追加
+    cond: null
+    else: null
+  - 'no': 4
+    do: 仕掛表示なら REG_STS='0' を追加
+    cond: null
+    else: null
+  boundaries: []
+  errors: []
+  related_ids:
+  - L-202
+  - F-203
+  - D-201
+- id: L-203
+  title: 件数取得と上限判定
+  belongs_to: F-203
+  inputs:
+  - 検索条件
+  outputs:
+  - 件数
+  steps:
+  - 'no': 1
+    do: COUNT(ROWID) を取得
+    cond: null
+    else: null
+  - 'no': 2
+    do: 0 件なら E-203
+    cond: '0'
+    else: E-203
+  - 'no': 3
+    do: 上限（コード値 000000024）超過なら E-204
+    cond: '> 上限'
+    else: E-204
+  boundaries:
+  - item: 件数
+    value: '0'
+    expect: E-203
+  - item: 件数
+    value: 上限
+    expect: 受理
+  - item: 件数
+    value: 上限+1
+    expect: E-204
+  errors:
+  - E-203
+  - E-204
+  related_ids:
+  - L-203
+  - F-203
+  - E-203
+  - E-204
+  - D-201
+  - D-202
+- id: L-204
+  title: 明細取得（ページング・ソート）
+  belongs_to: F-204
+  inputs:
+  - I-209
+  - I-221
+  outputs:
+  - その頁の明細
+  steps:
+  - 'no': 1
+    do: 既定は DEL_FLG 昇順→MAKER_CD 昇順
+    cond: null
+    else: null
+  - 'no': 2
+    do: ユーザー指定ソートは MAKER_CD/MAKER_NM の 2 つだけ受理
+    cond: 白名单外
+    else: 既定順に戻す
+  - 'no': 3
+    do: 頁単位で取得
+    cond: null
+    else: null
+  boundaries: []
+  errors: []
+  related_ids:
+  - L-204
+  - F-204
+  - D-201
+- id: L-205
+  title: マスタ画面の初期化
+  belongs_to: F-207
+  inputs:
+  - I-222
+  outputs:
+  - マスタ画面の初期値
+  steps:
+  - 'no': 1
+    do: 新規：空・緊急配信OFF・削除ブランク
+    cond: null
+    else: null
+  - 'no': 2
+    do: 複製：コード・日本語名・カナ名を引継ぎ、緊急配信OFF
+    cond: null
+    else: null
+  - 'no': 3
+    do: 修正：全項目を現行値で埋める
+    cond: null
+    else: null
+  boundaries: []
+  errors: []
+  related_ids:
+  - L-205
+  - F-207
+  - D-201
+- id: L-206
+  title: 登録・更新
+  belongs_to: F-208
+  inputs:
+  - I-222
+  - I-226
+  outputs:
+  - 登録/更新結果
+  steps:
+  - 'no': 1
+    do: モード別チェック（コード必須・形式・名称形式・変更なし・キー重複・被参照・排他）
+    cond: null
+    else: null
+  - 'no': 2
+    do: 新規・複製は INSERT、修正は UPDATE
+    cond: null
+    else: null
+  - 'no': 3
+    do: INSERT 時 DEL_FLG='0'/SEND_KBN='0'/ASD_STU_FLG='0'
+    cond: null
+    else: null
+  - 'no': 4
+    do: 緊急配信 ON なら共通パッケージを呼ぶ
+    cond: null
+    else: null
+  boundaries: []
+  errors:
+  - E-205
+  - E-206
+  - E-207
+  related_ids:
+  - L-206
+  - F-208
+  - E-205
+  - E-206
+  - E-207
+  - D-201
+- id: L-207
+  title: 削除（論理削除）
+  belongs_to: F-209
+  inputs:
+  - I-227
+  outputs:
+  - 削除結果
+  steps:
+  - 'no': 1
+    do: 緊急配信の状態に応じて名称必須を判定
+    cond: null
+    else: null
+  - 'no': 2
+    do: 削除確認
+    cond: null
+    else: null
+  - 'no': 3
+    do: 被参照を確認
+    cond: 参照あり
+    else: E-206
+  - 'no': 4
+    do: 排他を確認
+    cond: 不一致
+    else: E-207
+  - 'no': 5
+    do: DEL_FLG='1'、REG_STS 再判定、REV_NO+1 で UPDATE
+    cond: null
+    else: null
+  boundaries: []
+  errors:
+  - E-206
+  - E-207
+  related_ids:
+  - L-207
+  - F-209
+  - E-206
+  - E-207
+  - D-201
+  - D-203
+- id: L-208
+  title: 被参照チェック
+  belongs_to: F-209
+  inputs:
+  - MAKER_CD
+  outputs:
+  - 参照の有無
+  steps:
+  - 'no': 1
+    do: 区分'1' の被参照を数える
+    cond: '>0'
+    else: 参照あり
+  - 'no': 2
+    do: 区分'2' の被参照を数える
+    cond: '>0'
+    else: 参照あり
+  boundaries: []
+  errors:
+  - E-206
+  related_ids:
+  - L-208
+  - F-209
+  - E-206
+  - D-203
+- id: L-209
+  title: 排他チェック
+  belongs_to: F-208
+  inputs:
+  - KSN_DAT
+  outputs:
+  - 一致/不一致
+  steps:
+  - 'no': 1
+    do: 画面保持の KSN_DAT と DB 値を比較
+    cond: 不一致
+    else: E-207
+  boundaries: []
+  errors:
+  - E-207
+  related_ids:
+  - L-209
+  - F-208
+  - E-207
+  - D-201
+- id: L-210
+  title: CSV 生成
+  belongs_to: F-210
+  inputs:
+  - 直前の検索条件
+  outputs:
+  - CSV
+  steps:
+  - 'no': 1
+    do: 直前の条件で明細を取得
+    cond: null
+    else: null
+  - 'no': 2
+    do: ヘッダ行を付け、項目順は一覧と同じ
+    cond: null
+    else: null
+  boundaries: []
+  errors: []
+  related_ids:
+  - L-210
+  - F-210
+  - D-201
+- id: L-211
+  title: REG_STS 再判定
+  belongs_to: F-208
+  inputs:
+  - MAKER_CD
+  - MAKER_NM
+  - MAKER_ANM
+  outputs:
+  - REG_STS
+  steps:
+  - 'no': 1
+    do: 3 項目がすべて非空なら '1'、それ以外は '0'（暫定。共通仕様待ち）
+    cond: null
+    else: null
+  boundaries: []
+  errors: []
+  related_ids:
+  - L-211
+  - F-208
+  - D-201

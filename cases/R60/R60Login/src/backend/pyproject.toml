@@ -1,0 +1,6 @@
+name = "r60login-backend"
+version = "0.1.0"
+
+requires-python = ">=3.12"
+dependencies = ["fastapi", "pydantic>=2", "SQLAlchemy>=2", "oracledb"]
+optional-dependencies = {dev = ["pytest", "httpx"]}

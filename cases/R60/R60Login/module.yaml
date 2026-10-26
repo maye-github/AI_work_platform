@@ -1,0 +1,10 @@
+case: R60
+module: R60Login
+title: 共通マスタログイン
+owner: SE-001
+status: draft
+version: '0.1'
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+note: module.yaml は人が書く。plat init がひな形を作る
+approval_note: 工程2〜8 は 2026-10-26 の一括承認。ユーザー発話「承認，并一路跑完 8 个工程」。各工程の門番出力と産出は提示済み。工程1 は 26 件、阻塞項は弊社提案（顧客確認中）で解除。

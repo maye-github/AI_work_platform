@@ -1,0 +1,277 @@
+id: L-101
+type: L
+title: 業務ロジック一覧
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- L-101
+- L-102
+- L-103
+- L-104
+- L-105
+- L-106
+- L-107
+- L-108
+- D-101
+- D-102
+- D-103
+- E-101
+- E-102
+- E-103
+- E-104
+- E-105
+- F-101
+- F-102
+- F-103
+- F-105
+- F-107
+- F-108
+- F-109
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+logic:
+- id: L-101
+  title: 初期表示処理
+  belongs_to: F-101
+  inputs:
+  - I-101
+  - I-102
+  - I-106
+  - I-107
+  outputs:
+  - I-106
+  - I-107
+  steps:
+  - 'no': 1
+    do: 画面タイトルを固定値で設定する
+    cond: null
+    else: null
+  - 'no': 2
+    do: 画面マスタから有効な候補を表示順で取得する
+    cond: null
+    else: null
+  - 'no': 3
+    do: 権限区分候補（Y/N）を設定し、初期値を Y にする
+    cond: null
+    else: null
+  - 'no': 4
+    do: 各入力を初期値にする（ユーザーＩＤ・URL は空白、起動区分は 3）
+    cond: null
+    else: null
+  boundaries: []
+  errors:
+  - E-104
+  related_ids:
+  - L-101
+  - F-101
+  - E-104
+  - D-102
+- id: L-102
+  title: 入力チェック
+  belongs_to: F-102
+  inputs:
+  - I-103
+  outputs:
+  - 妥当/不可
+  steps:
+  - 'no': 1
+    do: 未入力か
+    cond: 未入力
+    else: 業務エラー E-101
+  - 'no': 2
+    do: 半角数字 7 桁か
+    cond: 半角数字以外または桁違い
+    else: 業務エラー E-101
+  boundaries:
+  - item: I-103
+    value: '7'
+    expect: 妥当
+  - item: I-103
+    value: '6'
+    expect: 不可 E-101
+  - item: I-103
+    value: '8'
+    expect: 不可 E-101
+  errors:
+  - E-101
+  related_ids:
+  - L-102
+  - F-102
+  - E-101
+- id: L-103
+  title: ログイン判定
+  belongs_to: F-103
+  inputs:
+  - I-103
+  - I-106
+  - I-107
+  outputs:
+  - ログイン可否
+  - 利用者情報
+  steps:
+  - 'no': 1
+    do: stfCd を復号して平文社員コードを得る
+    cond: null
+    else: null
+  - 'no': 2
+    do: 社員マスタを社員コードで参照する（DEL_FLG=N のみ）
+    cond: 1 件
+    else: 次工程へ
+  - 'no': 3
+    do: 該当なし
+    cond: 0 件
+    else: 業務エラー E-102
+  boundaries: []
+  errors:
+  - E-102
+  - E-105
+  related_ids:
+  - L-103
+  - F-103
+  - E-102
+  - E-105
+  - D-101
+- id: L-104
+  title: Session 保存
+  belongs_to: F-103
+  inputs:
+  - 利用者情報
+  outputs:
+  - Session
+  steps:
+  - 'no': 1
+    do: 会社コード・事業場コード・氏名・社員コードを Session に保存する
+    cond: null
+    else: null
+  boundaries: []
+  errors:
+  - E-102
+  related_ids:
+  - L-104
+  - F-103
+  - E-102
+- id: L-105
+  title: 遷移 URL の生成
+  belongs_to: F-105
+  inputs:
+  - I-103
+  - I-104
+  - I-106
+  - I-107
+  outputs:
+  - I-110
+  steps:
+  - 'no': 1
+    do: 社員コードを暗号化する
+    cond: null
+    else: null
+  - 'no': 2
+    do: stfCd / stfKbn / gmnId / kgnKbn の順で URL を組み立てる
+    cond: null
+    else: null
+  - 'no': 3
+    do: host/port は環境設定から取得する
+    cond: null
+    else: null
+  boundaries:
+  - item: I-110
+    value: '150'
+    expect: 受理
+  - item: I-110
+    value: '151'
+    expect: 不可（上限超過）
+  errors:
+  - E-101
+  related_ids:
+  - L-105
+  - F-105
+  - E-101
+  - D-102
+- id: L-106
+  title: 社員コードの暗号化・復号
+  belongs_to: F-109
+  inputs:
+  - 平文社員コード
+  outputs:
+  - 暗号化/復号結果
+  steps:
+  - 'no': 1
+    do: 当日日付（yyyymmdd）を鍵材料にする
+    cond: null
+    else: null
+  - 'no': 2
+    do: 桁変換して暗号化する
+    cond: null
+    else: null
+  - 'no': 3
+    do: 復号時は同じ当日鍵を用いる
+    cond: null
+    else: null
+  - 'no': 4
+    do: 復号できない
+    cond: null
+    else: 業務エラー E-105
+  boundaries: []
+  errors:
+  - E-105
+  related_ids:
+  - L-106
+  - F-109
+  - E-105
+- id: L-107
+  title: 稼働状態チェック
+  belongs_to: F-107
+  inputs: []
+  outputs:
+  - 可/不可
+  steps:
+  - 'no': 1
+    do: 稼働状態を参照する
+    cond: ONLINE_FLG=Y
+    else: 続行
+  - 'no': 2
+    do: オンライン不可
+    cond: ONLINE_FLG=N
+    else: 業務エラー E-103
+  boundaries: []
+  errors:
+  - E-103
+  related_ids:
+  - L-107
+  - F-107
+  - E-103
+  - D-103
+- id: L-108
+  title: エラー区分と遷移
+  belongs_to: F-108
+  inputs: []
+  outputs:
+  - 区分されたエラー
+  steps:
+  - 'no': 1
+    do: 業務エラーならメッセージを解決してセッションエラー画面へ遷移させる
+    cond: null
+    else: null
+  - 'no': 2
+    do: システムエラーなら汎用エラー応答を返す
+    cond: null
+    else: null
+  boundaries: []
+  errors:
+  - E-101
+  - E-102
+  - E-103
+  - E-104
+  - E-105
+  related_ids:
+  - L-108
+  - F-108
+  - E-101
+  - E-102
+  - E-103
+  - E-104
+  - E-105

@@ -1,0 +1,179 @@
+id: R-101
+type: R
+title: 要件一覧（共通マスタログイン）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- R-101
+- R-102
+- R-103
+- R-104
+- R-105
+- R-106
+- R-107
+- R-108
+- R-109
+- R-110
+- Q-101
+- Q-102
+- Q-103
+- Q-104
+- Q-105
+- Q-106
+- Q-107
+- Q-108
+- ASM-101
+- ASM-102
+- ASM-103
+- ASM-104
+- ASM-105
+- ISS-101
+- ISS-102
+- ISS-103
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+requirements:
+- id: R-101
+  title: 初期表示
+  statement: 利用者が本画面を開いたとき、画面タイトル・画面候補・権限区分候補・各項目の初期値を表示できる。
+  inputs:
+  - 画面マスタの候補（全社共通）
+  - 権限区分の候補
+  outputs:
+  - 画面タイトル「共通マスタ　ログイン」
+  - 画面候補（初期値は先頭）
+  - 権限区分候補（初期値「更新あり」）
+  - ユーザーＩＤ＝空白
+  - 起動区分＝3
+  - URL＝空白
+  acceptance: 12 項目すべてが §3.2 の初期値で表示される。画面候補が 0 件でも画面は表示される。
+  source_ref: §3.2 / §3.3 イベント1 / §4.2
+  related_ids:
+  - R-101
+  - Q-104
+  - ASM-102
+  - Q-108
+  - ISS-102
+  - ISS-103
+- id: R-102
+  title: ユーザーＩＤの入力チェック
+  statement: ログイン実行時、ユーザーＩＤが必須かつ半角 7 桁であることを検証できる。
+  inputs:
+  - ユーザーＩＤ
+  outputs:
+  - 妥当／不可の判定
+  acceptance: 未入力・6 桁以下・8 桁以上・半角数字以外を含む場合、ログインさせず業務エラーとして扱う。
+  source_ref: '§3.2 #3 / §3.4 入力チェック / §5'
+  related_ids:
+  - R-102
+- id: R-103
+  title: ログイン判定
+  statement: 暗号化された社員コードを復号し、社員が存在し論理削除されていない場合にログインを許可できる。
+  inputs:
+  - stfCd（暗号化済み）
+  outputs:
+  - ログイン可否
+  - errorCode
+  acceptance: 存在しかつ論理削除されていない場合のみ成功。所属・権限・有効期限は判定に用いない。
+  source_ref: §3.4 / §4.3 / §5
+  related_ids:
+  - R-103
+  - ASM-101
+- id: R-104
+  title: ログイン成功時のセッション情報保持
+  statement: ログイン成功時、会社・事業場・氏名等を Session に保存し、後続の業務画面から参照できるようにする。
+  inputs:
+  - 社員コード
+  outputs:
+  - Session に保持する利用者情報
+  acceptance: 成功応答に利用者情報が含まれ、後続画面から参照できる。
+  source_ref: §3.4
+  related_ids:
+  - R-104
+  - Q-106
+  - ISS-102
+- id: R-105
+  title: メニュー画面への遷移
+  statement: メニューボタン押下時、メニュー画面へ遷移し、起動区分を引き継げる。
+  inputs:
+  - 起動区分
+  outputs:
+  - 遷移（メニュー画面へ）
+  - 引き継ぎ値
+  acceptance: 遷移先が開き、起動区分が引き継がれる。本イベントは端点を持たない（クライアント側で遷移）。
+  source_ref: §3.3 イベント3 / §3.5
+  related_ids:
+  - R-105
+  - Q-101
+  - ISS-101
+- id: R-106
+  title: 遷移 URL の生成
+  statement: URL出力ボタン押下時、指定の形式・パラメータ順で遷移用 URL を生成し、URL 欄に表示できる。
+  inputs:
+  - 社員コード（平文）
+  - 起動区分
+  - 画面 ID
+  - 権限区分
+  outputs:
+  - 遷移用 URL
+  acceptance: '`stfCd`=暗号化社員コード、`stfKbn`=1/2/3、`gmnId`=画面 ID、`kgnKbn`=Y/N の順で並ぶ。パラメータ順が指定どおりであること。'
+  source_ref: §3.6 / §4.4
+  related_ids:
+  - R-106
+  - Q-107
+  - ASM-105
+- id: R-107
+  title: 稼働状態のチェック
+  statement: オンライン利用が許可されていない状態では、ログインさせず業務エラーとして扱える。
+  inputs:
+  - 稼働状態
+  outputs:
+  - エラー応答
+  acceptance: 稼働不可のとき、3 端点すべてが業務エラーを返しログインさせない。
+  source_ref: §3.7 / §5
+  related_ids:
+  - R-107
+  - Q-105
+  - ASM-104
+- id: R-108
+  title: 画面を閉じる
+  statement: 閉じるボタン押下時、確認メッセージを表示したうえで本画面を閉じられる。
+  inputs: []
+  outputs:
+  - 画面の終了
+  acceptance: 確認メッセージの文面は標準規約による。本イベントは端点を持たない。
+  source_ref: §3.3 イベント5
+  related_ids:
+  - R-108
+- id: R-109
+  title: エラー区分とセッションエラー画面への遷移
+  statement: 正常／業務エラー／システムエラーを区別でき、業務エラー時はセッションエラー画面へ遷移できる。
+  inputs:
+  - エラー事象
+  outputs:
+  - 区分されたエラー応答
+  - 遷移
+  acceptance: 社員不存在・入力不正・稼働不可・復号失敗は業務エラーでセッションエラー画面へ。画面マスタ取得失敗はシステムエラー。
+  source_ref: §5 / §3.8
+  related_ids:
+  - R-109
+  - Q-102
+  - Q-103
+  - ISS-101
+- id: R-110
+  title: 社員コードの暗号化・復号
+  statement: 当日の日付（yyyymmdd）を鍵の材料として社員コードを暗号化し、サーバ側で復号できる。
+  inputs:
+  - 社員コード（平文）
+  outputs:
+  - 暗号化された社員コード
+  - 復号結果
+  acceptance: 当日内で往復が一致する。§3.6 の URL 形式と互換であること。方式は貴方の提案による。
+  source_ref: §4.5
+  related_ids:
+  - R-110
+  - ASM-103

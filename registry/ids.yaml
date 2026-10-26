@@ -1,0 +1,2410 @@
+schema: '1'
+updated_at: '2026-10-26'
+cases:
+  R60:
+    modules:
+      R60Login:
+        block: 100
+      R60Maker:
+        block: 200
+ids:
+  R60/R60Login/R-101:
+    type: R
+    title: 要件 (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/R-102:
+    type: R
+    title: 要件 (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/R-103:
+    type: R
+    title: 要件 (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/R-104:
+    type: R
+    title: 要件 (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/R-105:
+    type: R
+    title: 要件 (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/R-106:
+    type: R
+    title: 要件 (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/R-107:
+    type: R
+    title: 要件 (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/R-108:
+    type: R
+    title: 要件 (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/R-109:
+    type: R
+    title: 要件 (9)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/R-110:
+    type: R
+    title: 要件 (10)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/Q-101:
+    type: Q
+    title: 確認事項 (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/Q-102:
+    type: Q
+    title: 確認事項 (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/Q-103:
+    type: Q
+    title: 確認事項 (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/Q-104:
+    type: Q
+    title: 確認事項 (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/Q-105:
+    type: Q
+    title: 確認事項 (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/Q-106:
+    type: Q
+    title: 確認事項 (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/Q-107:
+    type: Q
+    title: 確認事項 (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/Q-108:
+    type: Q
+    title: 確認事項 (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/ASM-101:
+    type: ASM
+    title: 前提 (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/ASM.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/ASM-102:
+    type: ASM
+    title: 前提 (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/ASM.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/ASM-103:
+    type: ASM
+    title: 前提 (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/ASM.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/ASM-104:
+    type: ASM
+    title: 前提 (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/ASM.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/ASM-105:
+    type: ASM
+    title: 前提 (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/ASM.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/ISS-101:
+    type: ISS
+    title: 未決事項 (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/ISS.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/ISS-102:
+    type: ISS
+    title: 未決事項 (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/ISS.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/ISS-103:
+    type: ISS
+    title: 未決事項 (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/requirements/ISS.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/F-101:
+    type: F
+    title: 機能一覧 (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/F-102:
+    type: F
+    title: 機能一覧 (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/F-103:
+    type: F
+    title: 機能一覧 (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/F-104:
+    type: F
+    title: 機能一覧 (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/F-105:
+    type: F
+    title: 機能一覧 (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/F-106:
+    type: F
+    title: 機能一覧 (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/F-107:
+    type: F
+    title: 機能一覧 (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/F-108:
+    type: F
+    title: 機能一覧 (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/F-109:
+    type: F
+    title: 機能一覧 (9)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/I-101:
+    type: I
+    title: 画面項目 (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/I-102:
+    type: I
+    title: 画面項目 (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/I-103:
+    type: I
+    title: 画面項目 (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/I-104:
+    type: I
+    title: 画面項目 (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/I-105:
+    type: I
+    title: 画面項目 (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/I-106:
+    type: I
+    title: 画面項目 (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/I-107:
+    type: I
+    title: 画面項目 (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/I-108:
+    type: I
+    title: 画面項目 (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/I-109:
+    type: I
+    title: 画面項目 (9)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/I-110:
+    type: I
+    title: 画面項目 (10)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/I-111:
+    type: I
+    title: 画面項目 (11)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/I-112:
+    type: I
+    title: 画面項目 (12)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/D-101:
+    type: D
+    title: データモデル (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/DSN.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/D-102:
+    type: D
+    title: データモデル (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/DSN.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/D-103:
+    type: D
+    title: データモデル (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/DSN.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/L-101:
+    type: L
+    title: ロジック (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/L-102:
+    type: L
+    title: ロジック (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/L-103:
+    type: L
+    title: ロジック (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/L-104:
+    type: L
+    title: ロジック (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/L-105:
+    type: L
+    title: ロジック (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/L-106:
+    type: L
+    title: ロジック (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/L-107:
+    type: L
+    title: ロジック (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/L-108:
+    type: L
+    title: ロジック (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/E-101:
+    type: E
+    title: エラー (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/ERR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/E-102:
+    type: E
+    title: エラー (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/ERR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/E-103:
+    type: E
+    title: エラー (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/ERR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/E-104:
+    type: E
+    title: エラー (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/ERR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/E-105:
+    type: E
+    title: エラー (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/designs/detail/ERR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-101:
+    type: TC
+    title: 単体テストケース (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-102:
+    type: TC
+    title: 単体テストケース (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-103:
+    type: TC
+    title: 単体テストケース (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-104:
+    type: TC
+    title: 単体テストケース (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-105:
+    type: TC
+    title: 単体テストケース (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-106:
+    type: TC
+    title: 単体テストケース (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-107:
+    type: TC
+    title: 単体テストケース (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-108:
+    type: TC
+    title: 単体テストケース (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-109:
+    type: TC
+    title: 単体テストケース (9)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-110:
+    type: TC
+    title: 単体テストケース (10)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-111:
+    type: TC
+    title: 単体テストケース (11)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-112:
+    type: TC
+    title: 単体テストケース (12)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-113:
+    type: TC
+    title: 単体テストケース (13)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-114:
+    type: TC
+    title: 単体テストケース (14)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-115:
+    type: TC
+    title: 単体テストケース (15)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-116:
+    type: TC
+    title: 単体テストケース (16)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-117:
+    type: TC
+    title: 単体テストケース (17)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-118:
+    type: TC
+    title: 単体テストケース (18)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-119:
+    type: TC
+    title: 単体テストケース (19)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-120:
+    type: TC
+    title: 単体テストケース (20)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-121:
+    type: TC
+    title: 単体テストケース (21)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-122:
+    type: TC
+    title: 単体テストケース (22)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-123:
+    type: TC
+    title: 単体テストケース (23)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-124:
+    type: TC
+    title: 単体テストケース (24)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-125:
+    type: TC
+    title: 単体テストケース (25)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-126:
+    type: TC
+    title: 画面遷移・閉じるの確認 (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/TC-127:
+    type: TC
+    title: 画面遷移・閉じるの確認 (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/IT-101:
+    type: IT
+    title: 結合テストシナリオ (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/IT-102:
+    type: IT
+    title: 結合テストシナリオ (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/IT-103:
+    type: IT
+    title: 結合テストシナリオ (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/IT-104:
+    type: IT
+    title: 結合テストシナリオ (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/IT-105:
+    type: IT
+    title: 結合テストシナリオ (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/IT-106:
+    type: IT
+    title: 結合テストシナリオ (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/IT-107:
+    type: IT
+    title: 結合テストシナリオ (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/IT-108:
+    type: IT
+    title: 結合テストシナリオ (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Login/REL-101:
+    type: REL
+    title: リリース成果物 v1.0.0
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Login/release/REL.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-201:
+    type: R
+    title: 要件 (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-202:
+    type: R
+    title: 要件 (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-203:
+    type: R
+    title: 要件 (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-204:
+    type: R
+    title: 要件 (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-205:
+    type: R
+    title: 要件 (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-206:
+    type: R
+    title: 要件 (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-207:
+    type: R
+    title: 要件 (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-208:
+    type: R
+    title: 要件 (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-209:
+    type: R
+    title: 要件 (9)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-210:
+    type: R
+    title: 要件 (10)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-211:
+    type: R
+    title: 要件 (11)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-212:
+    type: R
+    title: 要件 (12)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-213:
+    type: R
+    title: 要件 (13)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/R-214:
+    type: R
+    title: 要件 (14)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/REQ.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/Q-201:
+    type: Q
+    title: 確認事項 (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/Q-202:
+    type: Q
+    title: 確認事項 (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/Q-203:
+    type: Q
+    title: 確認事項 (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/Q-204:
+    type: Q
+    title: 確認事項 (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/Q-205:
+    type: Q
+    title: 確認事項 (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/Q-206:
+    type: Q
+    title: 確認事項 (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/Q-207:
+    type: Q
+    title: 確認事項 (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/Q-208:
+    type: Q
+    title: 確認事項 (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/QST.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/ASM-201:
+    type: ASM
+    title: 前提 (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/ASM.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/ASM-202:
+    type: ASM
+    title: 前提 (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/ASM.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/ASM-203:
+    type: ASM
+    title: 前提 (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/ASM.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/ASM-204:
+    type: ASM
+    title: 前提 (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/ASM.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/ASM-205:
+    type: ASM
+    title: 前提 (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/ASM.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/ISS-201:
+    type: ISS
+    title: 未決事項 (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/ISS.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/ISS-202:
+    type: ISS
+    title: 未決事項 (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/requirements/ISS.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/F-201:
+    type: F
+    title: 機能一覧 (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/F-202:
+    type: F
+    title: 機能一覧 (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/F-203:
+    type: F
+    title: 機能一覧 (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/F-204:
+    type: F
+    title: 機能一覧 (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/F-205:
+    type: F
+    title: 機能一覧 (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/F-206:
+    type: F
+    title: 機能一覧 (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/F-207:
+    type: F
+    title: 機能一覧 (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/F-208:
+    type: F
+    title: 機能一覧 (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/F-209:
+    type: F
+    title: 機能一覧 (9)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/F-210:
+    type: F
+    title: 機能一覧 (10)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/F-211:
+    type: F
+    title: 機能一覧 (11)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/FNC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-201:
+    type: I
+    title: 画面項目 (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-202:
+    type: I
+    title: 画面項目 (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-203:
+    type: I
+    title: 画面項目 (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-204:
+    type: I
+    title: 画面項目 (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-205:
+    type: I
+    title: 画面項目 (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-206:
+    type: I
+    title: 画面項目 (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-207:
+    type: I
+    title: 画面項目 (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-208:
+    type: I
+    title: 画面項目 (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-209:
+    type: I
+    title: 画面項目 (9)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-210:
+    type: I
+    title: 画面項目 (10)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-211:
+    type: I
+    title: 画面項目 (11)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-212:
+    type: I
+    title: 画面項目 (12)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-213:
+    type: I
+    title: 画面項目 (13)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-214:
+    type: I
+    title: 画面項目 (14)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-215:
+    type: I
+    title: 画面項目 (15)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-216:
+    type: I
+    title: 画面項目 (16)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-217:
+    type: I
+    title: 画面項目 (17)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-218:
+    type: I
+    title: 画面項目 (18)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-219:
+    type: I
+    title: 画面項目 (19)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-220:
+    type: I
+    title: 画面項目 (20)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-221:
+    type: I
+    title: 画面項目 (21)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-222:
+    type: I
+    title: 画面項目 (22)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-223:
+    type: I
+    title: 画面項目 (23)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-224:
+    type: I
+    title: 画面項目 (24)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-225:
+    type: I
+    title: 画面項目 (25)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-226:
+    type: I
+    title: 画面項目 (26)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-227:
+    type: I
+    title: 画面項目 (27)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-228:
+    type: I
+    title: 画面項目 (28)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-229:
+    type: I
+    title: 画面項目 (29)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/I-230:
+    type: I
+    title: 画面項目 (30)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/basic/SCR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/D-201:
+    type: D
+    title: データモデル (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/DSN.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/D-202:
+    type: D
+    title: データモデル (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/DSN.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/D-203:
+    type: D
+    title: データモデル (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/DSN.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/L-201:
+    type: L
+    title: ロジック (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/L-202:
+    type: L
+    title: ロジック (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/L-203:
+    type: L
+    title: ロジック (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/L-204:
+    type: L
+    title: ロジック (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/L-205:
+    type: L
+    title: ロジック (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/L-206:
+    type: L
+    title: ロジック (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/L-207:
+    type: L
+    title: ロジック (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/L-208:
+    type: L
+    title: ロジック (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/L-209:
+    type: L
+    title: ロジック (9)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/L-210:
+    type: L
+    title: ロジック (10)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/E-201:
+    type: E
+    title: エラー (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/ERR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/E-202:
+    type: E
+    title: エラー (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/ERR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/E-203:
+    type: E
+    title: エラー (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/ERR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/E-204:
+    type: E
+    title: エラー (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/ERR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/E-205:
+    type: E
+    title: エラー (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/ERR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/E-206:
+    type: E
+    title: エラー (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/ERR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/E-207:
+    type: E
+    title: エラー (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/ERR.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/L-211:
+    type: L
+    title: REG_STS 再判定
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/designs/detail/LGC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-201:
+    type: TC
+    title: 単体テストケース (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-202:
+    type: TC
+    title: 単体テストケース (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-203:
+    type: TC
+    title: 単体テストケース (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-204:
+    type: TC
+    title: 単体テストケース (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-205:
+    type: TC
+    title: 単体テストケース (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-206:
+    type: TC
+    title: 単体テストケース (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-207:
+    type: TC
+    title: 単体テストケース (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-208:
+    type: TC
+    title: 単体テストケース (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-209:
+    type: TC
+    title: 単体テストケース (9)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-210:
+    type: TC
+    title: 単体テストケース (10)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-211:
+    type: TC
+    title: 単体テストケース (11)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-212:
+    type: TC
+    title: 単体テストケース (12)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-213:
+    type: TC
+    title: 単体テストケース (13)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-214:
+    type: TC
+    title: 単体テストケース (14)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-215:
+    type: TC
+    title: 単体テストケース (15)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-216:
+    type: TC
+    title: 単体テストケース (16)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-217:
+    type: TC
+    title: 単体テストケース (17)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-218:
+    type: TC
+    title: 単体テストケース (18)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-219:
+    type: TC
+    title: 単体テストケース (19)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-220:
+    type: TC
+    title: 単体テストケース (20)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-221:
+    type: TC
+    title: 単体テストケース (21)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-222:
+    type: TC
+    title: 単体テストケース (22)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-223:
+    type: TC
+    title: 単体テストケース (23)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-224:
+    type: TC
+    title: 単体テストケース (24)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-225:
+    type: TC
+    title: 単体テストケース (25)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-226:
+    type: TC
+    title: 単体テストケース (26)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-227:
+    type: TC
+    title: 単体テストケース (27)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-228:
+    type: TC
+    title: 単体テストケース (28)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-229:
+    type: TC
+    title: 単体テストケース (29)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-230:
+    type: TC
+    title: 単体テストケース (30)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-231:
+    type: TC
+    title: 単体テストケース (31)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-232:
+    type: TC
+    title: 単体テストケース (32)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-233:
+    type: TC
+    title: 単体テストケース (33)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-234:
+    type: TC
+    title: 単体テストケース (34)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-235:
+    type: TC
+    title: 単体テストケース (35)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/IT-201:
+    type: IT
+    title: 結合テストシナリオ (1)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/IT-202:
+    type: IT
+    title: 結合テストシナリオ (2)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/IT-203:
+    type: IT
+    title: 結合テストシナリオ (3)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/IT-204:
+    type: IT
+    title: 結合テストシナリオ (4)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/IT-205:
+    type: IT
+    title: 結合テストシナリオ (5)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/IT-206:
+    type: IT
+    title: 結合テストシナリオ (6)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/IT-207:
+    type: IT
+    title: 結合テストシナリオ (7)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/IT-208:
+    type: IT
+    title: 結合テストシナリオ (8)
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/integration/IT.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/REL-201:
+    type: REL
+    title: リリース成果物（検索系）
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/release/REL.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+  R60/R60Maker/TC-236:
+    type: TC
+    title: 検索条件部の表示切替
+    status: confirmed
+    version: '0.1'
+    artifact: cases/R60/R60Maker/tests/unit/TC.yaml
+    owner: SE-001
+    created_at: '2026-10-26'
+    updated_at: '2026-10-26'
+    note: ''
+management_docs:
+- doc: TECH_STACK
+  path: cases/R60/R60Maker/framework/TECH_STACK.yaml
+  title: 技術スタック宣言
+  status: confirmed
+  version: '0.1'
+  owner: SE-001
+  created_at: '2026-10-26'
+  updated_at: '2026-10-26'
+- doc: COMPONENTS
+  path: cases/R60/R60Maker/framework/COMPONENTS.yaml
+  title: 共通部品一覧
+  status: confirmed
+  version: '0.1'
+  owner: SE-001
+  created_at: '2026-10-26'
+  updated_at: '2026-10-26'
+- doc: TRACEABILITY
+  path: cases/R60/R60Login/src/TRACEABILITY.yaml
+  title: コード-設計 追溯対照表
+  status: confirmed
+  version: '0.1'
+  owner: SE-001
+  created_at: '2026-10-26'
+  updated_at: '2026-10-26'
+- doc: TECH_STACK
+  path: cases/R60/R60Login/framework/TECH_STACK.yaml
+  title: 技術スタック宣言
+  status: confirmed
+  version: '0.1'
+  owner: SE-001
+  created_at: '2026-10-26'
+  updated_at: '2026-10-26'
+- doc: COMPONENTS
+  path: cases/R60/R60Login/framework/COMPONENTS.yaml
+  title: 共通部品一覧
+  status: confirmed
+  version: '0.1'
+  owner: SE-001
+  created_at: '2026-10-26'
+  updated_at: '2026-10-26'
+- doc: TRACEABILITY
+  path: cases/R60/R60Maker/src/TRACEABILITY.yaml
+  title: コード-設計 追溯対照表
+  status: confirmed
+  version: '0.1'
+  owner: SE-001
+  created_at: '2026-10-26'
+  updated_at: '2026-10-26'
+changes: []

@@ -1,0 +1,202 @@
+id: I-101
+type: I
+title: 画面項目一覧（共通マスタログイン）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- I-101
+- I-102
+- I-103
+- I-104
+- I-105
+- I-106
+- I-107
+- I-108
+- I-109
+- I-110
+- I-111
+- I-112
+- F-101
+- F-102
+- F-103
+- F-104
+- F-105
+- F-106
+- F-107
+- F-108
+- F-109
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+items:
+- id: I-101
+  title: 画面タイトル
+  screen: 共通マスタログイン
+  kind: label
+  data_type: string
+  length: null
+  required: false
+  spec: 固定値「共通マスタ　ログイン」（全角空白を含む）
+  source_req: R-101
+  source_function: F-101
+  related_ids:
+  - I-101
+  - R-101
+  - F-101
+- id: I-102
+  title: システム日時
+  screen: 共通マスタログイン
+  kind: label
+  data_type: string
+  length: null
+  required: false
+  spec: YYYY/MM/DD hh:mm:ss
+  source_req: R-101
+  source_function: F-101
+  related_ids:
+  - I-102
+  - R-101
+  - F-101
+- id: I-103
+  title: ユーザーＩＤ
+  screen: 共通マスタログイン
+  kind: input
+  data_type: string
+  length: 7
+  required: true
+  spec: 社員コード。半角 7 桁・必須・初期値空白
+  source_req: R-102
+  source_function: F-102
+  related_ids:
+  - I-103
+  - R-102
+  - F-102
+- id: I-104
+  title: 起動区分
+  screen: 共通マスタログイン
+  kind: input
+  data_type: code
+  length: 1
+  required: false
+  spec: 1=本店 2=工場 3=システム管理者・初期値 3・ログイン可否に影響しない
+  source_req: R-101
+  source_function: F-101
+  related_ids:
+  - I-104
+  - R-101
+  - F-101
+- id: I-105
+  title: 説明文
+  screen: 共通マスタログイン
+  kind: label
+  data_type: string
+  length: null
+  required: false
+  spec: 「1：本店ユーザー、2：工場ユーザー、3：システム管理者」
+  source_req: R-101
+  source_function: F-101
+  related_ids:
+  - I-105
+  - R-101
+  - F-101
+- id: I-106
+  title: 画面
+  screen: 共通マスタログイン
+  kind: select
+  data_type: code
+  length: null
+  required: false
+  spec: 画面マスタから取得（全社共通）。初期値は先頭
+  source_req: R-101
+  source_function: F-101
+  related_ids:
+  - I-106
+  - R-101
+  - F-101
+- id: I-107
+  title: 権限区分
+  screen: 共通マスタログイン
+  kind: select
+  data_type: code
+  length: 1
+  required: false
+  spec: 更新あり／更新なし。初期値「更新あり」。遷移先へ引き継ぐ
+  source_req: R-101
+  source_function: F-101
+  related_ids:
+  - I-107
+  - R-101
+  - F-101
+- id: I-108
+  title: ログイン
+  screen: 共通マスタログイン
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: 初期状態は活性
+  source_req: R-103
+  source_function: F-103
+  related_ids:
+  - I-108
+  - R-103
+  - F-103
+- id: I-109
+  title: メニュー
+  screen: 共通マスタログイン
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: 初期状態は活性。起動区分を引き継ぐ
+  source_req: R-105
+  source_function: F-104
+  related_ids:
+  - I-109
+  - R-105
+  - F-104
+- id: I-110
+  title: URL
+  screen: 共通マスタログイン
+  kind: input
+  data_type: string
+  length: 150
+  required: false
+  spec: 半角。入力上限 150 文字・表示幅 120 文字。利用者が直接編集できる
+  source_req: R-106
+  source_function: F-105
+  related_ids:
+  - I-110
+  - R-106
+  - F-105
+- id: I-111
+  title: URL出力
+  screen: 共通マスタログイン
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: 初期状態は活性
+  source_req: R-106
+  source_function: F-105
+  related_ids:
+  - I-111
+  - R-106
+  - F-105
+- id: I-112
+  title: 閉じる
+  screen: 共通マスタログイン
+  kind: button
+  data_type: '-'
+  length: null
+  required: false
+  spec: 初期状態は活性。確認メッセージのうえ閉じる
+  source_req: R-108
+  source_function: F-106
+  related_ids:
+  - I-112
+  - R-108
+  - F-106

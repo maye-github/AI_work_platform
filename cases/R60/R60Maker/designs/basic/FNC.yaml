@@ -1,0 +1,246 @@
+id: F-201
+type: F
+title: 機能一覧（メーカーマスタメンテナンス）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- F-201
+- F-202
+- F-203
+- F-204
+- F-205
+- F-206
+- F-207
+- F-208
+- F-209
+- F-210
+- F-211
+- I-201
+- I-202
+- I-203
+- I-204
+- I-205
+- I-206
+- I-207
+- I-208
+- I-209
+- I-210
+- I-211
+- I-212
+- I-213
+- I-214
+- I-215
+- I-216
+- I-217
+- I-218
+- I-219
+- I-220
+- I-221
+- I-222
+- I-223
+- I-224
+- I-225
+- I-226
+- I-227
+- I-228
+- I-229
+- I-230
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+functions:
+- id: F-201
+  title: 初期表示
+  purpose: ユーザ情報・メッセージ・頁件数候補を取得して画面を初期化する。
+  req_ids:
+  - R-201
+  inputs:
+  - I-201
+  - I-202
+  - I-209
+  outputs:
+  - I-209
+  related_ids:
+  - F-201
+  - R-201
+  - I-201
+  - I-202
+  - I-209
+  - I-209
+- id: F-202
+  title: 検索条件チェック
+  purpose: コード（半角英数5）と日本語名（30Byte・禁止文字）を検証する。
+  req_ids:
+  - R-202
+  inputs:
+  - I-206
+  - I-207
+  outputs: []
+  related_ids:
+  - F-202
+  - R-202
+  - I-206
+  - I-207
+- id: F-203
+  title: 検索
+  purpose: 条件に一致するメーカーを取得する（仕掛表示は REG_STS 条件を追加）。
+  req_ids:
+  - R-203
+  inputs:
+  - I-206
+  - I-207
+  - I-208
+  - I-211
+  outputs:
+  - I-213
+  - I-214
+  - I-215
+  - I-216
+  - I-222
+  related_ids:
+  - F-203
+  - R-203
+  - I-206
+  - I-207
+  - I-208
+  - I-211
+  - I-213
+  - I-214
+  - I-215
+  - I-216
+  - I-222
+- id: F-204
+  title: ページング
+  purpose: 頁単位で明細を取得する。
+  req_ids:
+  - R-205
+  inputs:
+  - I-209
+  - I-222
+  outputs:
+  - I-213
+  related_ids:
+  - F-204
+  - R-205
+  - I-209
+  - I-222
+  - I-213
+- id: F-205
+  title: ソート
+  purpose: コード／日本語名の 2 項目で並び替える。
+  req_ids:
+  - R-207
+  inputs:
+  - I-213
+  - I-214
+  outputs:
+  - I-213
+  related_ids:
+  - F-205
+  - R-207
+  - I-213
+  - I-214
+  - I-213
+- id: F-206
+  title: 検索条件部の表示切替
+  purpose: 検索条件部の縮小／拡大を切り替える（画面制御のみ）。
+  req_ids:
+  - R-206
+  inputs:
+  - I-212
+  outputs: []
+  related_ids:
+  - F-206
+  - R-206
+  - I-212
+- id: F-207
+  title: マスタ画面の初期化
+  purpose: 新規／複製／修正のモードでマスタ画面を初期化する。
+  req_ids:
+  - R-208
+  inputs:
+  - I-223
+  - I-224
+  - I-225
+  - I-226
+  - I-227
+  outputs:
+  - I-223
+  related_ids:
+  - F-207
+  - R-208
+  - I-223
+  - I-224
+  - I-225
+  - I-226
+  - I-227
+  - I-223
+- id: F-208
+  title: 登録・更新
+  purpose: チェックを経て INSERT または UPDATE する。
+  req_ids:
+  - R-210
+  inputs:
+  - I-223
+  - I-224
+  - I-225
+  - I-226
+  - I-227
+  outputs:
+  - I-228
+  related_ids:
+  - F-208
+  - R-210
+  - I-223
+  - I-224
+  - I-225
+  - I-226
+  - I-227
+  - I-228
+- id: F-209
+  title: 削除
+  purpose: チェックを経て論理削除する（DEL_FLG='1'、REV_NO+1）。
+  req_ids:
+  - R-211
+  inputs:
+  - I-223
+  - I-227
+  outputs:
+  - I-229
+  related_ids:
+  - F-209
+  - R-211
+  - I-223
+  - I-227
+  - I-229
+- id: F-210
+  title: ダウンロード
+  purpose: 直前の検索条件で CSV を出力する。
+  req_ids:
+  - R-212
+  inputs:
+  - I-220
+  outputs: []
+  related_ids:
+  - F-210
+  - R-212
+  - I-220
+- id: F-211
+  title: 戻る・業務終了
+  purpose: 標準仕様に従って戻る／終了する。
+  req_ids:
+  - R-213
+  inputs:
+  - I-218
+  - I-219
+  - I-230
+  outputs: []
+  related_ids:
+  - F-211
+  - R-213
+  - I-218
+  - I-219
+  - I-230

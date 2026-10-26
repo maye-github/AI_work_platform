@@ -1,0 +1,71 @@
+id: E-101
+type: E
+title: エラー・メッセージ一覧
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- E-101
+- E-102
+- E-103
+- E-104
+- E-105
+- L-101
+- L-102
+- L-103
+- L-104
+- L-105
+- L-106
+- L-107
+- L-108
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+messages:
+- id: E-101
+  title: 社員コードの入力不正
+  condition: 未入力、または半角数字 7 桁でない
+  message: ユーザーＩＤは半角7桁で入力してください。
+  action: 入力し直す
+  severity: error
+  related_ids:
+  - E-101
+  - L-102
+- id: E-102
+  title: 社員が存在しない
+  condition: 復号後の社員コードに該当なし、または論理削除済み
+  message: 入力された社員コードではログインできません。
+  action: 入力し直す
+  severity: error
+  related_ids:
+  - E-102
+  - L-103
+- id: E-103
+  title: オンライン利用不可
+  condition: 稼働状態がオンライン不可
+  message: ただいまオンライン利用できません。時間をおいて再度お試しください。
+  action: 時間をおく
+  severity: error
+  related_ids:
+  - E-103
+  - L-107
+- id: E-104
+  title: 画面マスタの取得失敗
+  condition: 画面マスタの参照に失敗した
+  message: システムエラーが発生しました。
+  action: 管理者へ連絡
+  severity: error
+  related_ids:
+  - E-104
+  - L-101
+- id: E-105
+  title: 復号失敗
+  condition: 暗号化社員コードが不正で復号できない
+  message: 入力された社員コードではログインできません。
+  action: 入力し直す
+  severity: error
+  related_ids:
+  - E-105
+  - L-106

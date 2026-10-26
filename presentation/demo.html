@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 全链路软件工程平台 — 演示</title>
+<style>
+:root{
+  --fg:#111827; --muted:#6b7280; --line:#e5e7eb; --bg:#ffffff;
+  --accent:#1d4ed8; --accent2:#b45309; --ok:#047857; --bad:#b91c1c;
+  --mono:"Cascadia Mono",Consolas,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:#f3f4f6;color:var(--fg);
+  font-family:-apple-system,"Segoe UI","Microsoft YaHei",Meiryo,sans-serif}
+.slide{
+  position:fixed; inset:0; display:none; flex-direction:column; justify-content:center;
+  background:var(--bg); padding:6vh 8vw; overflow:hidden;
+}
+.slide.active{display:flex}
+h1{font-size:clamp(24px,3.4vw,42px); margin:0 0 14px; letter-spacing:.01em; line-height:1.25}
+h2{font-size:clamp(20px,2.7vw,34px); margin:0 0 18px; line-height:1.3}
+.claim{font-size:clamp(16px,2.1vw,26px); color:var(--accent); font-weight:700; margin:0 0 22px; line-height:1.5}
+.claim.warn{color:var(--accent2)}
+ul,ol{font-size:clamp(14px,1.6vw,20px); line-height:1.95; margin:0; padding-left:1.4em}
+li{margin:.3em 0}
+li b{color:var(--accent)}
+table{border-collapse:collapse; font-size:clamp(12px,1.35vw,17px); margin-top:8px; width:100%}
+th,td{border:1px solid var(--line); padding:.5em .7em; text-align:left; vertical-align:top}
+th{background:#eef2ff; font-weight:700}
+tbody tr:nth-child(even){background:#fafafa}
+code,.mono{font-family:var(--mono); font-size:.92em}
+pre{font-family:var(--mono); font-size:clamp(11px,1.15vw,14px); line-height:1.55;
+  background:#111827; color:#e5e7eb; padding:14px 16px; border-radius:8px; overflow:auto; margin:8px 0}
+pre .ok{color:#34d399} pre .bad{color:#f87171} pre .dim{color:#9ca3af}
+.src{position:absolute; left:8vw; right:8vw; bottom:3.2vh; font-size:clamp(10px,1.05vw,13px);
+  color:var(--muted); font-family:var(--mono); border-top:1px solid var(--line); padding-top:8px}
+.pageno{position:absolute; right:3vw; bottom:2.4vh; font-size:12px; color:#9ca3af; font-family:var(--mono)}
+.cards{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:10px}
+.card{border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:8px;
+  padding:16px 18px; background:#fbfcff}
+.card h3{margin:0 0 8px; font-size:clamp(15px,1.6vw,20px)}
+.card p{margin:0; font-size:clamp(12px,1.3vw,16px); line-height:1.7; color:#374151}
+.flow{display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin:18px 0 10px}
+.step{border:1px solid var(--line); background:#eef2ff; border-radius:999px;
+  padding:.45em .9em; font-size:clamp(11px,1.25vw,16px); white-space:nowrap}
+.gate{color:var(--muted); font-size:clamp(10px,1.1vw,13px)}
+.big{font-size:clamp(28px,4.6vw,64px); font-weight:800; color:var(--accent); line-height:1.1}
+.kv{display:flex; gap:38px; margin-top:6px; flex-wrap:wrap}
+.kv div{min-width:120px}
+.kv .n{font-size:clamp(24px,3.4vw,46px); font-weight:800; color:var(--accent)}
+.kv .l{font-size:clamp(11px,1.2vw,14px); color:var(--muted)}
+.note{margin-top:16px; font-size:clamp(12px,1.3vw,16px); color:#374151;
+  background:#fffbeb; border-left:4px solid #f59e0b; padding:10px 14px; border-radius:0 6px 6px 0}
+.cover{align-items:flex-start; justify-content:center; background:#0f172a; color:#f8fafc}
+.cover .kicker{color:#93c5fd; font-size:clamp(12px,1.3vw,16px); letter-spacing:.18em; margin-bottom:18px}
+.cover h1{font-size:clamp(30px,4.6vw,60px); margin-bottom:18px}
+.cover .claim{color:#fbbf24; font-size:clamp(20px,2.8vw,38px)}
+.cover .sub{color:#cbd5e1; font-size:clamp(13px,1.5vw,20px)}
+.cover .src,.cover .pageno{color:#64748b; border-color:#334155}
+#hint{position:fixed; left:50%; bottom:10px; transform:translateX(-50%);
+  font-size:12px; color:#9ca3af; font-family:var(--mono); pointer-events:none}
+@media print{
+  @page{size:A4 landscape; margin:0}
+  html,body{background:#fff}
+  .slide{position:static; display:flex !important; page-break-after:always;
+    height:100vh; width:100vw; border:0}
+  #hint{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<section class="slide cover">
+  <div class="kicker">对日软件交付 · 2026-10</div>
+  <h1>AI 全链路软件工程平台</h1>
+  <p class="claim">AI 执行，人拍板</p>
+  <p class="sub">8 工程闭环 · R60 案件两个模块的实跑报告</p>
+  <div class="src">本文所有数字均可在现场用 <code>python -m plat</code> 复现，出处见末页</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <h2>结论先行</h2>
+  <ol>
+    <li>不是让 AI 写代码，是把 <b>8 个工程串成一条可检查的流水线</b></li>
+    <li><b>人推不动流程，AI 也推不动</b> —— 三条机制守着，不是靠自觉</li>
+    <li>已用 R60 案件两个模块实跑：<b>235 个 ID 全链闭合</b>、6 道门常绿、24 份对外 Excel</li>
+  </ol>
+  <pre>[gate] gate1=PASS gate2=PASS gate3=PASS gate4=PASS gate5=PASS gate6=PASS
+       | ids=235 artifacts=24 orphans=0 hits=0        <span class="ok">← Exit 0</span></pre>
+  <div class="src">python -m plat gate</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <h2>传统 V 模型的四个断点</h2>
+  <table>
+    <tr><th>特征</th><th>表现</th><th>本质</th></tr>
+    <tr><td>严格分层</td><td>要件 → 设计 → 编码 → 测试，层层交付</td><td>层层割裂、人工流转</td></tr>
+    <tr><td>人力兜底</td><td>质量取决于参与者的经验</td><td>经验依赖型</td></tr>
+    <tr><td>流程固化</td><td>重文档、重合规、效率低</td><td>流程合规型</td></tr>
+    <tr><td>思维固定</td><td>人主导，工具只做辅助</td><td>人力密集型</td></tr>
+  </table>
+  <p class="claim" style="margin-top:22px">不是人不够努力，是流程按「人驱动」设计的。</p>
+  <div class="src">实施规格书 §1.1 / §1.2</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <h2>三个必须先统一的认知</h2>
+  <div class="cards">
+    <div class="card"><h3>不是 AI 笨</h3><p>是输入不适配 AI。写给「能脑补的人」看的文档，AI 读不了——需要结构化、无歧义的输入。</p></div>
+    <div class="card"><h3>不是训练 AI</h3><p>是训练人。人输出标准、闭环、可验证的输入，AI 自然稳定输出。</p></div>
+    <div class="card"><h3>不是分层的错</h3><p>是分层后靠人工衔接。同一上下文本该从需求一路流到测试。</p></div>
+  </div>
+  <div class="src">实施规格书 §2.1 / §2.2 / §2.3</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <h2>四个转变</h2>
+  <table>
+    <tr><th>从</th><th>到</th><th>含义</th></tr>
+    <tr><td>工具思维</td><td><b>范式思维</b></td><td>AI 不是辅助工具，是执行主体</td></tr>
+    <tr><td>人工经验兜底</td><td><b>标准规范兜底</b></td><td>放弃口语化、靠脑补的协作方式</td></tr>
+    <tr><td>分层割裂开发</td><td><b>全链路闭环</b></td><td>需求→测试同一条链，不断开</td></tr>
+    <tr><td>命令式使用 AI</td><td><b>结构化协作</b></td><td>给标准、给上下文，而不是使唤它</td></tr>
+  </table>
+  <div class="src">实施规格书 §3</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <h2>8 工程 · 每一步之间是人</h2>
+  <div class="flow">
+    <span class="step">要件理解</span><span class="gate">⇢ 人评审 ⇢</span>
+    <span class="step">基本设计</span><span class="gate">⇢ 人评审 ⇢</span>
+    <span class="step">详细设计</span><span class="gate">⇢ 人评审 ⇢</span>
+    <span class="step">框架构筑</span><span class="gate">⇢</span>
+    <span class="step">制造</span><span class="gate">⇢ 人评审 ⇢</span>
+    <span class="step">单元测试</span><span class="gate">⇢</span>
+    <span class="step">结合测试</span><span class="gate">⇢</span>
+    <span class="step">发布运维</span>
+  </div>
+  <ul style="margin-top:26px">
+    <li>每个工程 = <b>一条人工敲下的命令</b>，AI 不能自己进入下一工程</li>
+    <li>每个工程的产出先落成 <code>draft</code>，经人承认才变 <code>confirmed</code></li>
+    <li>「取込」（把日方 docx/xlsx 归一）放在工程 1 内部，不单独计数</li>
+  </ul>
+  <div class="src">实施规格书 §4.1 / §4.4；实装：.claude/skills/ 下 11 个命令</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <h2>平台分四层，每层都有实际文件</h2>
+  <table>
+    <tr><th>层</th><th>是什么</th><th>实际文件（58 个）</th></tr>
+    <tr><td><b>入口层</b></td><td>AI 与人的共同起点</td><td>README · 使用手册 · 规则 2 份</td></tr>
+    <tr><td><b>规则层</b></td><td>把「怎么做」写成可检查的条文</td><td>阶段表 · ID 体系 · 状态机 · 机密 13 项</td></tr>
+    <tr><td><b>执行层</b></td><td>一条命令干一个工程</td><td>11 个命令 · 9 个执行体 · 8 个输入模板</td></tr>
+    <tr><td><b>验证层</b></td><td>不用人眼判断的部分</td><td>6 道门 · 写盘钩子 · 採用率测定</td></tr>
+  </table>
+  <div class="note">四层源自规格书的「4 层知识模型」。缺任何一层，另外三层都会退化：没有验证层，规则就变成口号。</div>
+  <div class="src">实施规格书 §11.3；实装：plat/ 14 个模块 + .claude/</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <h2>三条硬约束 —— 这是代码，不是文档里的约定</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>① 人敲命令才能推进</h3>
+      <p><b>11 个命令全部</b>设了 <code>disable-model-invocation</code>。AI 无法自己进入下一工程——不是"不建议"，是"做不到"。</p>
+    </div>
+    <div class="card">
+      <h3>② 承认只能人填</h3>
+      <p>承认记录 <code>approved_by</code> 由 <code>/approve</code> 写入，且必须是<b>人的标识符</b>。AI 写承认栏 = 自己批自己。</p>
+    </div>
+    <div class="card">
+      <h3>③ 机检不过不许往下</h3>
+      <p>G4：上游成果物没被承认，下游成果物<b>根本不允许存在</b>。不是"提醒"，是"拦住"。</p>
+    </div>
+  </div>
+  <div class="note">这三条合起来才成立。只做①②，AI 绕过去写下游；只做③，人能跳过审查。三条都在，流程才真的由人控制节奏。</div>
+  <div class="src">实测：grep -c disable-model-invocation .claude/skills/*/SKILL.md → 11</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <h2>六道门，一条命令跑完</h2>
+  <table>
+    <tr><th>门</th><th>查什么</th><th>失败意味着</th></tr>
+    <tr><td>G1</td><td>ID 合法性：野号、跳号、复用、废号引用</td><td>台账被绕过</td></tr>
+    <tr><td>G2</td><td>追溯闭环：每条需求走得到测试，每个 ID 都能从需求追溯</td><td>断链、漏测</td></tr>
+    <tr><td>G3</td><td>成果物格式：必填字段、状态值、放置位置与类型相符</td><td>机器读不动</td></tr>
+    <tr><td><b>G4</b></td><td><b>人工卡点：上游未承认，下游成果物不许存在</b></td><td>跳过评审</td></tr>
+    <tr><td>G5</td><td>文档一致性：键名规范、管理文档已登记、手册里的命令真实存在</td><td>文档与实现脱节</td></tr>
+    <tr><td>G6</td><td>机密零命中：内部 IP、连接串、社内邮箱、密钥形态</td><td>泄露风险</td></tr>
+  </table>
+  <div class="src">python -m plat gate ／ 输出即第 2 页那一行</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <h2>ID 号段制：一条链，断一环就红</h2>
+  <div class="flow">
+    <span class="step">要件 R</span><span class="gate">→</span>
+    <span class="step">功能 F</span><span class="gate">→</span>
+    <span class="step">画面项目 I</span><span class="gate">→</span>
+    <span class="step">数据 D</span><span class="gate">→</span>
+    <span class="step">逻辑 L</span><span class="gate">→</span>
+    <span class="step">错误 E</span><span class="gate">→</span>
+    <span class="step">单测 TC</span><span class="gate">→</span>
+    <span class="step">结合 IT</span>
+  </div>
+  <ul style="margin-top:24px">
+    <li>格式 <code>R-101</code>；<b>模块按号段区分</b>：登录模块 <code>1xx</code>、厂商模块 <code>2xx</code></li>
+    <li>实测：两个模块各自落在自己的号段，<b>零串号</b></li>
+    <li>235 个 ID，<b>0 个孤立</b>——每个都能从某条需求追溯过去</li>
+  </ul>
+  <div class="src">registry/ids.yaml（唯一发号口，只许脚本写）／ plat gate G1·G2</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+  <h2>双形态：同一份内容，两种读者</h2>
+  <table>
+    <tr><th>形态</th><th>给谁</th><th>规矩</th></tr>
+    <tr><td>机读源（YAML / Markdown）</td><td>AI 与工具</td><td><b>唯一真源</b>，人只读不手改</td></tr>
+    <tr><td>对外正式版（Excel / Word）</td><td>客户</td><td>由脚本生成，<b>生成物不许手改</b></td></tr>
+    <tr><td>中文视图（HTML）</td><td>内部评审</td><td>同上；日文视图不生成，避免"哪份是正"</td></tr>
+  </table>
+  <div class="kv" style="margin-top:30px">
+    <div><div class="n">24</div><div class="l">份对外 Excel（本次实跑生成）</div></div>
+    <div><div class="n">0</div><div class="l">处手工修改（改了下次就被覆盖）</div></div>
+  </div>
+  <div class="src">python -m plat export --case R60 → export/*.xlsx</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 12 -->
+<section class="slide">
+  <h2>案例：R60 案件 · 两个模块 · 8 工程全走完</h2>
+  <table>
+    <tr><th>模块</th><th>ID</th><th>单测 TC</th><th>结合 IT</th><th>需求覆盖率</th><th>初稿採用率</th></tr>
+    <tr><td>共通マスタログイン</td><td>99</td><td>27（17 实跑通过）</td><td>8</td><td>10/10</td><td>92.3%</td></tr>
+    <tr><td>メーカーマスタメンテ</td><td>136</td><td>36（25 实跑通过）</td><td>8</td><td>14/14</td><td>93.1%</td></tr>
+    <tr><th>合计</th><th>235</th><th>63</th><th>16</th><th>24/24</th><th>—</th></tr>
+  </table>
+  <div class="note">两个模块同属一个案件、号段不同（1xx / 2xx），共用同一套平台与门禁——这不是两个演示，是同一台机器跑了两次。</div>
+  <div class="src">python -m plat status ／ plat kpi --module &lt;模块&gt;</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 13 -->
+<section class="slide">
+  <h2>门禁三次抓到真问题（不是我们自查出来的）</h2>
+  <pre><span class="bad">ERROR G2</span> R-108 から TC/IT/REL に届きません（網羅性が閉じない）
+        <span class="dim">→ 登录模块的「关闭画面」链条断在设计，一条测试都没有</span>
+
+<span class="bad">ERROR G2</span> 孤立: ASM-201 はどの要件からも辿れません
+        <span class="dim">→ 厂商模块的 7 条前提/未决事项没挂到任何需求上，全是孤岛</span>
+
+<span class="bad">ERROR G2</span> R-206 から TC/IT/REL に届きません（網羅性が閉じない）
+        <span class="dim">→ 「检索条件区展开/收起」无人覆盖</span></pre>
+  <p class="claim" style="margin-top:16px">三次都是门禁报红，我们才知道。</p>
+  <div class="src">python -m plat gate（三次原始输出，未美化）</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 14 -->
+<section class="slide">
+  <h2>KPI：能算的才算，算不出来的说算不出来</h2>
+  <table>
+    <tr><th>维度</th><th>指标</th><th>实测</th></tr>
+    <tr><td>生产性</td><td>各工程耗时</td><td>同日内完成（演示节奏，非真实工期）</td></tr>
+    <tr><td>品质</td><td>门禁命中 / 返工</td><td>最终 0 / 0（过程中门禁红过 3 次，已修）</td></tr>
+    <tr><td><b>AI 活用度</b></td><td><b>初稿採用率</b>（初稿原样活到承认版的比例）</td><td>92.3% / 93.1%</td></tr>
+    <tr><td>网罗性</td><td>需求覆盖率</td><td>24/24</td></tr>
+    <tr><td>知识资产</td><td>踩坑记录</td><td>11 条</td></tr>
+  </table>
+  <div class="note"><b>两处如实标注</b>：① 採用率只测到 4 份成果物（其余是"否认即承认"的批量承认，测了也是假数，标"未测定"）；② 我们没有实测的人月削减率，不编。</div>
+  <div class="src">python -m plat kpi ／ plat adopt</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 15 -->
+<section class="slide">
+  <h2>真代码、真测试（不是示意图）</h2>
+  <ul>
+    <li><b>39 个测试方法实跑通过</b>（登录模块 13 + 厂商模块 26），耗时 0.002 秒</li>
+    <li>其中一条是<b>安全观测点</b>：断言检索条件「值不进 SQL 语句，只走绑定变量」</li>
+    <li>厂商模块另有 11 条标 <code>skipped</code>：涉及登记/更新/删除，属次期范围——<b>没做就写没做</b></li>
+  </ul>
+  <pre>Ran 13 tests in 0.002s   <span class="ok">OK</span>      <span class="dim"># 登录模块</span>
+Ran 26 tests in 0.002s   <span class="ok">OK</span>      <span class="dim"># 厂商模块</span></pre>
+  <div class="src">python -m unittest discover -s tests/unit -t .（在各模块目录下）</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 16 -->
+<section class="slide">
+  <h2>变更影响：从任一 ID 逆推</h2>
+  <pre>■ 影響分析: R-103（R）
+下流（これを作り直す）: 65 件
+  F-101 … 初期表示 / F-103 … ログイン判定 / …
+上流（これを見直す）:  0 件
+作り直しの起点（候補）: 工程 2</pre>
+  <div class="note"><b>这是"候选与规模"，不是"批准"。</b>退回哪个工程由人决定——AI 只负责把面铺开。</div>
+  <div class="src">python -m plat impact R-103 --module R60Login</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 17 -->
+<section class="slide">
+  <h2>踩坑飞轮：一次踩坑，全队免疫</h2>
+  <div class="flow">
+    <span class="step">踩坑</span><span class="gate">→</span>
+    <span class="step">记一行</span><span class="gate">→</span>
+    <span class="step">能规则化就写进规则</span><span class="gate">→</span>
+    <span class="step">能机械检查就加一门</span><span class="gate">→</span>
+    <span class="step">全员下次自动避开</span>
+  </div>
+  <div class="kv" style="margin-top:30px">
+    <div><div class="n">11</div><div class="l">条踩坑记录（knowledge/traps.md）</div></div>
+    <div><div class="n">7</div><div class="l">条来自这两次实跑，已变成检查</div></div>
+  </div>
+  <div class="note">举例：管理文档曾按「文档名」登记，两个模块的 TECH_STACK 互相覆盖——静默丢数据。发现后改成按路径登记，并加了一项门禁检查。</div>
+  <div class="src">knowledge/traps.md ／ .claude/rules/00-platform.md §10</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 18 -->
+<section class="slide">
+  <h2>已知边界（主动摆出来）</h2>
+  <table>
+    <tr><th>#</th><th>没做到的事</th><th>现状</th></tr>
+    <tr><td>1</td><td>结合测试执行</td><td><b>16 个场景一条没跑</b>（无浏览器 / 无 Oracle 环境），全部标 not_run</td></tr>
+    <tr><td>2</td><td>厂商模块的实现范围</td><td>只到<b>检索系</b>；登记 / 更新 / 删除 / 排他属次期，逐条写在 unimplemented 里</td></tr>
+    <tr><td>3</td><td>知识库检索（RAG）</td><td>只留了目录与空命令，<b>未实现</b></td></tr>
+    <tr><td>4</td><td>採用率的样本</td><td>只测到 4 份成果物，其余标"未测定"</td></tr>
+    <tr><td>5</td><td>人月削减率</td><td><b>没有实测数据</b>，本次不放任何百分比</td></tr>
+  </table>
+  <div class="src">cases/*/*/src/TRACEABILITY.yaml 的 unimplemented／各 REL 的 criteria</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 19 -->
+<section class="slide">
+  <h2>落地路线：三个阶段，每阶段要能验收</h2>
+  <table>
+    <tr><th>阶段</th><th>做什么</th><th>验收标准</th></tr>
+    <tr><td><b>Phase 1</b><br>基盘准备</td><td>搭平台，选 1 个案件 1 个模块跑通</td><td>6 道门常绿 + 一条需求能追到测试</td></tr>
+    <tr><td><b>Phase 2</b><br>全工程展开</td><td>8 工程全接入，模板全落地</td><td>新模块能独立走完，不需要平台方陪同</td></tr>
+    <tr><td><b>Phase 3</b><br>全社展开</td><td>多案件并行，知识沉淀复用</td><td>踩坑记录跨案件复用，新人上手时间下降</td></tr>
+  </table>
+  <div class="note">原则：<b>每阶段确认"可测量的成果"再进入下一阶段</b>，不一次全铺开。</div>
+  <div class="src">实施规格书 §14.2〜§14.4</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 20 -->
+<section class="slide">
+  <h2>三种导入模型，建议从中间那档起步</h2>
+  <table>
+    <tr><th>模型</th><th>适合</th><th>投入</th></tr>
+    <tr><td>轻量导入</td><td>小规模案件、新团队</td><td>低（个人即可开始）</td></tr>
+    <tr><td><b>标准导入（建议）</b></td><td>中规模、标准交付案件</td><td>中（团队级整备）</td></tr>
+    <tr><td>全量活用</td><td>大规模、长期保守、品质要求高</td><td>高（组织级投入）</td></tr>
+  </table>
+  <div class="note">三种模型<b>向下兼容</b>：从标准导入起步，后续升到全量活用时，前面的资产全部可用，不会作废。</div>
+  <div class="src">实施规格书 §14.1</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 21 -->
+<section class="slide">
+  <h2>人的角色：从「写」变成「定·验·担」</h2>
+  <table>
+    <tr><th>拍板点</th><th>人决定什么</th><th>AI 提供什么</th></tr>
+    <tr><td>要件合意</td><td>要做什么、不要做什么</td><td>结构化需求 + 争议点清单</td></tr>
+    <tr><td>设计评审</td><td>技术选型、界面与逻辑的取舍</td><td>设计初稿 + 对照表</td></tr>
+    <tr><td>合否判定</td><td>测试结果是否接受</td><td>用例 + 实跑结果 + 未测清单</td></tr>
+    <tr><td>发布判定</td><td>能不能上线</td><td>判定条件逐条的现状</td></tr>
+  </table>
+  <p class="claim" style="margin-top:20px">AI 是执行主体，人是责任主体——这条不因技术进步而改变。</p>
+  <div class="src">实施规格书 §7 RACI / §8</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 22 -->
+<section class="slide">
+  <h2>风险与对策</h2>
+  <table>
+    <tr><th>风险</th><th>对策（已实装）</th></tr>
+    <tr><td>AI 会自信地写错</td><td>6 道门 + 人工承认；错的东西进不到下一工程</td></tr>
+    <tr><td>流程被跳过</td><td>11 个命令锁死，AI 无法自走；G4 拦上游未承认</td></tr>
+    <tr><td>数据外泄</td><td>脱敏对照表 + 机密形态扫描 + 原始素材不入库</td></tr>
+    <tr><td>只做了表面</td><td>KPI 可复算 + 已知边界清单；数字都能当场复现</td></tr>
+  </table>
+  <div class="src">.claude/rules/00-platform.md §11 ／ 01-security.md</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 23 -->
+<section class="slide">
+  <h2>一句话</h2>
+  <p class="big">命令是人敲的，活是 AI 干的，<br>检查是机器做的，责任是人担的。</p>
+  <div class="note" style="margin-top:34px">
+    <b>建议的下一步</b>：选一个真实案件的一个模块，按 Phase 1 跑一遍。
+    两周内我们给出三样东西：6 道门的状态、一条需求的完整追溯、该模块的初稿採用率。
+  </div>
+  <div class="src">—</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 24 -->
+<section class="slide">
+  <h2>附录：每个数字对应哪条命令</h2>
+  <table>
+    <tr><th>数字</th><th>命令</th></tr>
+    <tr><td>235 个 ID / 0 孤立 / 6 道门</td><td><code>python -m plat gate</code></td></tr>
+    <tr><td>8 工程各阶段进度</td><td><code>python -m plat status</code></td></tr>
+    <tr><td>KPI 六维 / 初稿採用率</td><td><code>python -m plat kpi</code> ・ <code>plat adopt</code></td></tr>
+    <tr><td>24 份对外 Excel</td><td><code>python -m plat export --case R60</code></td></tr>
+    <tr><td>变更影响面</td><td><code>python -m plat impact &lt;ID&gt;</code></td></tr>
+    <tr><td>11 条踩坑</td><td><code>knowledge/traps.md</code></td></tr>
+    <tr><td>39 个测试通过</td><td><code>python -m unittest discover -s tests/unit -t .</code></td></tr>
+  </table>
+  <div class="src">现场可逐条复现；复现不了的数字本稿不写</div>
+  <div class="pageno"></div>
+</section>
+
+<div id="hint">← → 翻页 ／ F 全屏 ／ Ctrl+P 存 PDF</div>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var i = 0;
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, k) { s.classList.toggle('active', k === i); });
+    var p = slides[i].querySelector('.pageno');
+    if (p) p.textContent = (i + 1) + ' / ' + slides.length;
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); show(i + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(i - 1); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+  document.addEventListener('click', function (e) {
+    if (e.clientX > window.innerWidth * 0.5) show(i + 1); else show(i - 1);
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>

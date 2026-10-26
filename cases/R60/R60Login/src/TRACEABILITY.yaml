@@ -1,0 +1,65 @@
+doc: TRACEABILITY
+title: コード-設計 追溯対照表（R60Login）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+human_review_required: true
+scope: 工程3 の L-101〜L-108 と、工程5 で実装したソースの対応
+traces:
+- design_id: D-102
+  logic_ids:
+  - L-101
+  source_files:
+  - src/backend/app/repository/masters.py
+  test_viewpoints: []
+- design_id: D-101
+  logic_ids:
+  - L-103
+  - L-104
+  source_files:
+  - src/backend/app/repository/masters.py
+  - src/backend/app/api/routers/login.py
+  test_viewpoints: []
+- design_id: D-101
+  logic_ids:
+  - L-106
+  source_files:
+  - src/backend/app/logic/stmt_cipher.py
+  test_viewpoints: []
+- design_id: D-102
+  logic_ids:
+  - L-105
+  source_files:
+  - src/backend/app/logic/url_builder.py
+  test_viewpoints: []
+- design_id: D-101
+  logic_ids:
+  - L-102
+  source_files:
+  - src/backend/app/logic/validate.py
+  test_viewpoints: []
+- design_id: D-103
+  logic_ids:
+  - L-107
+  source_files:
+  - src/backend/app/logic/operability.py
+  test_viewpoints: []
+- design_id: D-101
+  logic_ids:
+  - L-108
+  source_files:
+  - src/backend/app/core/errors.py
+  - src/backend/app/core/response.py
+  test_viewpoints: []
+unimplemented:
+- id: L-104
+  reason: Session 保存はサーバ側ストア未実装（セッション基盤は顧客の共通部品 Q-103 待ち）。
+- id: L-101
+  reason: 画面マスタの実 SELECT は接続層未実装。SQL 文とマッピングのみ用意（D-102）。
+- id: L-103
+  reason: 社員の存在確認は SQL 文とマッピングのみ。実接続は DB 環境が決まってから。
+extra: []

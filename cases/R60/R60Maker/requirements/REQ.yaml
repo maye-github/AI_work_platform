@@ -1,0 +1,224 @@
+id: R-201
+type: R
+title: 要件一覧（メーカーマスタメンテナンス）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- R-201
+- R-202
+- R-203
+- R-204
+- R-205
+- R-206
+- R-207
+- R-208
+- R-209
+- R-210
+- R-211
+- R-212
+- R-213
+- R-214
+- Q-201
+- Q-202
+- Q-203
+- Q-204
+- Q-205
+- Q-206
+- Q-207
+- Q-208
+- ASM-201
+- ASM-202
+- ASM-203
+- ASM-204
+- ASM-205
+- ISS-201
+- ISS-202
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+requirements:
+- id: R-201
+  title: 初期表示
+  statement: 画面起動時に、ユーザ情報・メッセージ・1 頁件数の候補を取得して表示できる。
+  inputs:
+  - ログインユーザ
+  outputs:
+  - ユーザ情報
+  - メッセージ
+  - 頁件数リスト
+  acceptance: 候補が揃い、検索条件は空・削除含むはオフで表示される。
+  source_ref: '`概要` / `イベント一覧` No1'
+  related_ids:
+  - R-201
+- id: R-202
+  title: 検索条件の入力チェック
+  statement: メーカーコード（半角英数 5 文字）とメーカー日本語名（30Byte・禁止文字）を検証できる。
+  inputs:
+  - メーカーコード
+  - メーカー日本語名
+  outputs:
+  - 妥当／不可
+  acceptance: コードは半角英数 5 文字のみ受理。日本語名は 30Byte 超と禁止文字を弾く。エラー時点で検索を中断する。
+  source_ref: '`14_業務処理説明` 5.2-1'
+  related_ids:
+  - R-202
+  - Q-208
+- id: R-203
+  title: 検索（表示）
+  statement: 検索条件に一致するメーカーを、指定の抽出項目で取得できる。
+  inputs:
+  - 検索条件
+  outputs:
+  - 検索結果一覧
+  - 件数
+  acceptance: コードは前方一致、日本語名は中間一致。削除含むオフなら削除済みを除く。並びは削除フラグ昇順→コード昇順。
+  source_ref: '`14_業務処理説明` 5.2-2/5'
+  related_ids:
+  - R-203
+  - ASM-201
+  - ASM-202
+  - Q-201
+  - Q-203
+  - ISS-202
+- id: R-204
+  title: 仕掛表示
+  statement: 仕掛表示ボタンでは、REG_STS が未完了のものだけに絞って検索できる。
+  inputs:
+  - 検索条件
+  outputs:
+  - 検索結果
+  acceptance: 表示ボタンの結果に `REG_STS='0'` の条件が加わる。
+  source_ref: '`イベント一覧` No3 / 5.2-2'
+  related_ids:
+  - R-204
+  - Q-205
+- id: R-205
+  title: ページング
+  statement: 検索結果を頁単位で表示できる。
+  inputs:
+  - 頁番号
+  - 1頁件数
+  outputs:
+  - その頁の明細
+  acceptance: 頁を移動しても条件が保持される。
+  source_ref: '`画面項目内容(検索)` No11/16-20/28-32'
+  related_ids:
+  - R-205
+  - Q-202
+- id: R-206
+  title: 検索条件部の表示切替
+  statement: 検索条件部の縮小／拡大を切り替えられる。
+  inputs:
+  - 切替ボタン
+  outputs:
+  - 表示状態
+  acceptance: 縮小・拡大が切り替わる（画面内の表示制御のみ）。
+  source_ref: '`イベント一覧` No4'
+  related_ids:
+  - R-206
+- id: R-207
+  title: 検索結果のソート
+  statement: コード・日本語名の 2 項目でソートできる。
+  inputs:
+  - ソート指定
+  outputs:
+  - 並び替えた一覧
+  acceptance: 指定できるのはコード／日本語名のみ。既定は削除フラグ昇順→コード昇順。
+  source_ref: '`画面項目内容(検索)` No24/25 / 5.2-5'
+  related_ids:
+  - R-207
+- id: R-208
+  title: 複製
+  statement: 一覧の行を複製して新規登録画面を開ける。
+  inputs:
+  - 選択行
+  outputs:
+  - 複製モードのマスタ画面
+  acceptance: コード・日本語名・カナ名が引き継がれ、緊急配信はオフ・削除はブランクで開く。
+  source_ref: '`イベント一覧` No5 / 5.3'
+  related_ids:
+  - R-208
+- id: R-209
+  title: 修正
+  statement: 一覧の行を選んで修正画面を開ける。
+  inputs:
+  - 選択行
+  outputs:
+  - 修正モードのマスタ画面
+  acceptance: 全項目が現行値で開く。
+  source_ref: '`イベント一覧` No6 / 5.3'
+  related_ids:
+  - R-209
+  - Q-206
+- id: R-210
+  title: 新規登録画面
+  statement: 新規ボタンで登録画面を開ける。
+  inputs:
+  - 新規ボタン
+  outputs:
+  - 新規モードのマスタ画面
+  acceptance: コード・名称は空、緊急配信オフ、削除ブランクで開く。
+  source_ref: '`イベント一覧` No7 / 5.3'
+  related_ids:
+  - R-210
+  - ASM-203
+  - ASM-205
+  - ISS-201
+- id: R-211
+  title: 登録・更新
+  statement: チェックを経てメーカーを登録または更新できる。
+  inputs:
+  - マスタ項目画面の入力
+  outputs:
+  - 登録／更新結果
+  - 完了メッセージ R60I0001
+  acceptance: 新規・複製は INSERT、修正は UPDATE。コード必須・形式、名称形式、キー重複、被参照、排他の各チェックを行う。
+  source_ref: '`14_業務処理説明` 5.5 / 5.7'
+  related_ids:
+  - R-211
+  - Q-204
+  - Q-206
+  - Q-207
+  - ASM-204
+  - ASM-205
+- id: R-212
+  title: 削除
+  statement: チェックを経てメーカーを論理削除できる。
+  inputs:
+  - 選択行
+  outputs:
+  - 削除結果
+  - 完了メッセージ R60I0002
+  acceptance: 削除確認のうえ、被参照が無く排他が一致する場合に削除フラグを立て、REV_NO を進める。
+  source_ref: '`14_業務処理説明` 5.4 / 5.7'
+  related_ids:
+  - R-212
+  - Q-204
+  - Q-206
+- id: R-213
+  title: ダウンロード
+  statement: 直前の検索条件で一覧を CSV 出力できる。
+  inputs:
+  - 直前の検索条件
+  outputs:
+  - CSV ファイル
+  acceptance: 直前の条件と同じ結果が CSV になる。検索成功後に活性。
+  source_ref: '`イベント一覧` No8'
+  related_ids:
+  - R-213
+  - Q-207
+- id: R-214
+  title: 戻る・業務終了
+  statement: 一覧／マスタ画面から戻る・業務終了できる。
+  inputs:
+  - 戻る／業務終了
+  outputs:
+  - 画面遷移／終了
+  acceptance: 標準仕様に従う。マスタ画面で変更がある場合は確認メッセージを出す。
+  source_ref: '`イベント一覧` No9/10/13'
+  related_ids:
+  - R-214
+  - Q-208

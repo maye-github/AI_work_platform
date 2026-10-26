@@ -1,0 +1,42 @@
+doc: COMPONENTS
+title: 共通部品一覧（メーカーマスタメンテ）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+human_review_required: true
+components:
+- key: response_wrapper
+  purpose: 応答外形（errorCode 必須）
+  used_by:
+  - F-201
+  - F-203
+- key: code_value_lookup
+  purpose: コード値明細（頁件数・削除フラグ・件数上限）の解決
+  used_by:
+  - F-201
+  - F-203
+- key: where_builder
+  purpose: 検索条件からバインド付き WHERE を組む
+  used_by:
+  - F-203
+- key: sort_whitelist
+  purpose: 許可ソート項目だけを通す
+  used_by:
+  - F-204
+- key: csv_writer
+  purpose: 一覧を CSV にする（文字コードは設定値）
+  used_by:
+  - F-210
+- key: exclusive_check
+  purpose: KSN_DAT による排他判定
+  used_by:
+  - F-208
+  - F-209
+- key: reference_check
+  purpose: 被参照（区分'1'/'2'）の有無判定
+  used_by:
+  - F-209

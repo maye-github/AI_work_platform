@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "_comment": "共有設定。deny だけで権限を制限し、何も自動承認しない。許可を増やす場合は各自 settings.local.json（gitignore 済み）へ。",
+  "permissions": {
+    "deny": [
+      "Read(./registry/MASK_MAP.yaml)",
+      "Read(./cases/*/*/raw/**)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/*.pem)",
+      "Read(./**/id_rsa)"
+    ]
+  },
+  "_comment_hooks": "フックは 1 本だけ。成果物（cases/**）を書いた直後に門番を回し、ERROR だけを表示する（exit 0 固定・作業を止めない）。",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/check_artifact.py\"",
+            "timeout": 60,
+            "statusMessage": "門番を確認中…"
+          }
+        ]
+      }
+    ]
+  }
+}

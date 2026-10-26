@@ -1,0 +1,31 @@
+doc: TECH_STACK
+title: 技術スタック宣言（メーカーマスタメンテ）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+human_review_required: true
+stack:
+  note: 同一システム（生産系共通マスタ）内のモジュールのため、スタックは R60Login と同一。
+  backend: Python 3.12 / FastAPI / SQLAlchemy Core（text のみ）/ oracledb Thin
+  frontend: TypeScript 5 / Vue 3 / Element Plus / Pinia / Vite
+  database: Oracle 19c（本画面は参照＋更新あり。R60Login と異なり DML を伴う）
+  test: pytest（純ロジックは unittest でも可）/ vitest
+  commands:
+    build: npm run build
+    test: python -m pytest tests/unit
+    lint: ruff check
+    run: uvicorn app.main:app --reload
+decisions:
+- topic: 動的 WHERE の組み立て
+  choice: 条件関数のリストを作り、値をバインド変数で渡す
+  why: 文字列連結を避け、SQL インジェクションの余地を残さない。
+- topic: ソート項目
+  choice: MAKER_CD / MAKER_NM の白名单のみ受理、以外は既定順
+  why: 設計書 5.2-5 の指定。白名单外を黙って通すと並び順が不定になる。
+- topic: CSV 文字コード
+  choice: 未確定（Q-207）。実装時に設定値として外に出す
+  why: 顧客の標準仕様が決まっていない。コードに埋め込まない。

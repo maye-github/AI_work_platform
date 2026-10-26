@@ -1,0 +1,48 @@
+id: ASM-101
+type: ASM
+title: 前提・仮定一覧
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- ASM-101
+- ASM-102
+- ASM-103
+- ASM-104
+- ASM-105
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+assumptions:
+- id: ASM-101
+  text: 社員マスタは論理削除フラグで管理されており、削除済みは業務上「存在しない」と同義である。
+  basis: §3.4 が「論理削除されていないこと」を条件に挙げている。
+  if_wrong: 削除済み社員がログインできてしまう、または正当な社員が締め出される。
+  related_ids:
+  - ASM-101
+- id: ASM-102
+  text: 画面マスタは有効フラグと表示順を持ち、本画面は有効なものだけを表示順に取得する。
+  basis: §4.2 が「有効なもののみ」「表示順はマスタの保守による」としている。
+  if_wrong: 候補の欠落・順序不同で初期表示の受入条件が満たせない。
+  related_ids:
+  - ASM-102
+- id: ASM-103
+  text: 社員コードの暗号化は、サーバとクライアントで同一の方式・同一の当日鍵を実装できる。
+  basis: §4.3 が暗号化済みを画面から送るとし、§4.5 が当日鍵を要求している。
+  if_wrong: /login の復号が成立せずログインできない。
+  related_ids:
+  - ASM-103
+- id: ASM-104
+  text: 稼働状態は共通基盤が保持し、本画面のサーバから参照できる。
+  basis: §3.7 が稼働状態チェックを要求しているが保持場所を定めていない。
+  if_wrong: 稼働不可の判定ができず、R-107 が実装できない。
+  related_ids:
+  - ASM-104
+- id: ASM-105
+  text: 遷移 URL の host/port は環境設定として外部から与えられる（コードに埋め込まない）。
+  basis: §3.6 が環境ごとに異なるとしている。
+  if_wrong: 環境間で URL が壊れる、または機密値がコードに混入する。
+  related_ids:
+  - ASM-105

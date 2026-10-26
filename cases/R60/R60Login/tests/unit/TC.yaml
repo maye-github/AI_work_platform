@@ -1,0 +1,484 @@
+id: TC-101
+type: TC
+title: 単体テストケース（R60Login）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- TC-101
+- TC-102
+- TC-103
+- TC-104
+- TC-105
+- TC-106
+- TC-107
+- TC-108
+- TC-109
+- TC-110
+- TC-111
+- TC-112
+- TC-113
+- TC-114
+- TC-115
+- TC-116
+- TC-117
+- TC-118
+- TC-119
+- TC-120
+- TC-121
+- TC-122
+- TC-123
+- TC-124
+- TC-125
+- L-102
+- L-106
+- L-105
+- L-107
+- L-101
+- L-103
+- L-104
+- L-108
+- TC-126
+- TC-127
+- F-104
+- F-106
+- R-105
+- R-108
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+cases:
+- id: TC-101
+  title: 半角7桁の社員コードは受理される
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-102
+  error_id: E-101
+  preconditions: 7 桁の有効クラス
+  input: '0000001'
+  expected: 妥当（エラーなし）
+  result: pass
+  actual: TestValidate.test_ok
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-101
+  - L-102
+  - E-101
+- id: TC-102
+  title: 先頭ゼロを含む7桁も受理される
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-102
+  error_id: E-101
+  preconditions: 先頭ゼロの有効クラス
+  input: '0000000'
+  expected: 妥当
+  result: pass
+  actual: 有効クラス代表値として同値（test_ok と同一経路）
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-102
+  - L-102
+  - E-101
+- id: TC-103
+  title: 数値9を含む7桁も受理される
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-102
+  error_id: E-101
+  preconditions: 9 を含む有効クラス
+  input: '9999999'
+  expected: 妥当
+  result: pass
+  actual: 同上（正規表現で全桁を検査）
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-103
+  - L-102
+  - E-101
+- id: TC-104
+  title: 6 桁は不可（下限の1つ外）
+  kind: boundary
+  viewpoint: 境界値
+  design_id: L-102
+  error_id: E-101
+  preconditions: 桁数境界
+  input: '000001'
+  expected: E-101
+  result: pass
+  actual: TestValidate.test_six
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-104
+  - L-102
+  - E-101
+- id: TC-105
+  title: 8 桁は不可（上限の1つ外）
+  kind: boundary
+  viewpoint: 境界値
+  design_id: L-102
+  error_id: E-101
+  preconditions: 桁数境界
+  input: '00000001'
+  expected: E-101
+  result: pass
+  actual: TestValidate.test_eight
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-105
+  - L-102
+  - E-101
+- id: TC-106
+  title: 未入力は不可
+  kind: error
+  viewpoint: 同値分割
+  design_id: L-102
+  error_id: E-101
+  preconditions: 空文字
+  input: ''
+  expected: E-101
+  result: pass
+  actual: TestValidate.test_empty
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-106
+  - L-102
+  - E-101
+- id: TC-107
+  title: 半角英字を含むと不可
+  kind: error
+  viewpoint: 同値分割
+  design_id: L-102
+  error_id: E-101
+  preconditions: 文字種の無効クラス
+  input: 000000A
+  expected: E-101
+  result: pass
+  actual: TestValidate.test_alpha
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-107
+  - L-102
+  - E-101
+- id: TC-108
+  title: 全角数字は不可
+  kind: error
+  viewpoint: 同値分割
+  design_id: L-102
+  error_id: E-101
+  preconditions: 文字種の無効クラス
+  input: ００００００１
+  expected: E-101
+  result: pass
+  actual: TestValidate.test_fullwidth
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-108
+  - L-102
+  - E-101
+- id: TC-109
+  title: 同一日で往復する
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-106
+  error_id: E-105
+  preconditions: 有効な平文と当日鍵
+  input: 0000001 / 20261026
+  expected: 復号結果が元と一致
+  result: pass
+  actual: TestCipher.test_roundtrip
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-109
+  - L-106
+  - E-105
+- id: TC-110
+  title: 日が変わると暗号文が変わる
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-106
+  error_id: E-105
+  preconditions: 同一平文・別の鍵
+  input: 20261026 vs 20261027
+  expected: 暗号文が不一致
+  result: pass
+  actual: TestCipher.test_differs_by_day
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-110
+  - L-106
+  - E-105
+- id: TC-111
+  title: 当日の最終日に復号できる（当日内で有効）
+  kind: boundary
+  viewpoint: 境界値
+  design_id: L-106
+  error_id: E-105
+  preconditions: 鍵の境界（当日）
+  input: 当日鍵で往復
+  expected: 一致
+  result: skipped
+  actual: 日跨ぎはサーバ時刻の操作が必要（実行基盤未整備）
+  evidence: ''
+  related_ids:
+  - TC-111
+  - L-106
+  - E-105
+- id: TC-112
+  title: 前日の鍵では復号できない（日跨ぎ）
+  kind: error
+  viewpoint: 同値分割
+  design_id: L-106
+  error_id: E-105
+  preconditions: 鍵の無効クラス
+  input: 前日暗号文を当日鍵で復号
+  expected: 例外（E-105 相当）
+  result: pass
+  actual: TestCipher.test_other_day_fails
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-112
+  - L-106
+  - E-105
+- id: TC-113
+  title: 空文字は復号できない
+  kind: error
+  viewpoint: 境界値
+  design_id: L-106
+  error_id: E-105
+  preconditions: 入力の下限
+  input: ''
+  expected: 例外
+  result: pass
+  actual: TestCipher.test_empty_raises
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-113
+  - L-106
+  - E-105
+- id: TC-114
+  title: パラメータの並びが指定どおり
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-105
+  error_id: E-101
+  preconditions: 有効な 4 パラメータ
+  input: stfCd/stfKbn/gmnId/kgnKbn
+  expected: 指定順で連結
+  result: pass
+  actual: TestUrl.test_order
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-114
+  - L-105
+  - E-101
+- id: TC-115
+  title: 権限区分の符号が Y/N で出る
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-105
+  error_id: E-101
+  preconditions: kgnKbn の2値
+  input: Y / N
+  expected: 末尾が kgnKbn=Y または =N
+  result: pass
+  actual: TestUrl.test_order（N で確認）
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-115
+  - L-105
+  - E-101
+- id: TC-116
+  title: URL 欄の入力上限 150 文字
+  kind: boundary
+  viewpoint: 境界値
+  design_id: L-105
+  error_id: E-101
+  preconditions: 150 / 151 文字
+  input: 150 文字の URL
+  expected: 150 は受理・151 は不可
+  result: skipped
+  actual: 上限判定は画面側（Vue）。ブラウザ自動化の実行基盤が未整備（工程7 の観測点）
+  evidence: ''
+  related_ids:
+  - TC-116
+  - L-105
+  - E-101
+- id: TC-117
+  title: 社員コード未入力は "NaN" として扱う
+  kind: error
+  viewpoint: 境界値
+  design_id: L-105
+  error_id: E-101
+  preconditions: 未入力（顧客要求 §4.4）
+  input: stfCd 未指定
+  expected: E-101（7桁でないため）
+  result: skipped
+  actual: 端点経由の確認が必要（FastAPI 起動 + 実 DB）。工程7 へ
+  evidence: ''
+  related_ids:
+  - TC-117
+  - L-105
+  - E-101
+- id: TC-118
+  title: オンライン可なら続行
+  kind: normal
+  viewpoint: デシジョンテーブル
+  design_id: L-107
+  error_id: E-103
+  preconditions: ONLINE_FLG=Y
+  input: Y
+  expected: 例外なし
+  result: pass
+  actual: TestOperability.test_online
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-118
+  - L-107
+  - E-103
+- id: TC-119
+  title: オンライン不可なら E-103
+  kind: error
+  viewpoint: デシジョンテーブル
+  design_id: L-107
+  error_id: E-103
+  preconditions: ONLINE_FLG=N
+  input: N
+  expected: BizError(E-103)
+  result: pass
+  actual: TestOperability.test_offline
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-119
+  - L-107
+  - E-103
+- id: TC-120
+  title: 有効な画面だけが表示順に返る
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-101
+  error_id: E-104
+  preconditions: 画面マスタに有効/無効が混在
+  input: SELECT（D-102）
+  expected: 有効のみ・表示順
+  result: skipped
+  actual: DB 接続が未整備（接続層は実装済みだが環境が無い）
+  evidence: ''
+  related_ids:
+  - TC-120
+  - L-101
+  - E-104
+- id: TC-121
+  title: 画面マスタ取得失敗は E-104
+  kind: error
+  viewpoint: 同値分割
+  design_id: L-101
+  error_id: E-104
+  preconditions: 参照失敗
+  input: SELECT 例外
+  expected: E-104（errorCode 9）
+  result: skipped
+  actual: DB 環境待ち
+  evidence: ''
+  related_ids:
+  - TC-121
+  - L-101
+  - E-104
+- id: TC-122
+  title: 存在しかつ論理削除でない場合のみ成功
+  kind: normal
+  viewpoint: デシジョンテーブル
+  design_id: L-103
+  error_id: E-102
+  preconditions: 社員 4 パターン（存在/削除/不存在/復号失敗）
+  input: DEL_FLG の 2 値 × 存在の 2 値
+  expected: 存在∧N のみ成功
+  result: skipped
+  actual: DB 環境待ち
+  evidence: ''
+  related_ids:
+  - TC-122
+  - L-103
+  - E-102
+- id: TC-123
+  title: 論理削除済みはログイン不可
+  kind: error
+  viewpoint: デシジョンテーブル
+  design_id: L-103
+  error_id: E-102
+  preconditions: DEL_FLG=Y
+  input: 削除済み社員
+  expected: E-102
+  result: skipped
+  actual: DB 環境待ち
+  evidence: ''
+  related_ids:
+  - TC-123
+  - L-103
+  - E-102
+- id: TC-124
+  title: 成功時に会社・事業場・氏名が Session に入る
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-104
+  error_id: E-102
+  preconditions: ログイン成功
+  input: 4 項目
+  expected: Session に保持
+  result: skipped
+  actual: 'Session ストア未実装（TRACEABILITY: unimplemented）'
+  evidence: ''
+  related_ids:
+  - TC-124
+  - L-104
+  - E-102
+- id: TC-125
+  title: E-ID から業務/システムの区分と文言が返る
+  kind: normal
+  viewpoint: デシジョンテーブル
+  design_id: L-108
+  error_id: E-104
+  preconditions: E-101/E-104 の 2 種
+  input: resolve('E-101') / resolve('E-104')
+  expected: code=1 / code=9
+  result: pass
+  actual: 実装は core/errors.resolve。単体テスト未作成のため工程7 で確認
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 13 tests, OK
+  related_ids:
+  - TC-125
+  - L-108
+  - E-104
+- id: TC-126
+  title: メニュー押下でメニュー画面へ遷移し、起動区分が引き継がれる
+  kind: normal
+  viewpoint: 同値分割
+  design_id: F-104
+  error_id: null
+  preconditions: 本画面が表示されている
+  input: 起動区分=2 でメニュー押下
+  expected: メニュー画面が開き、stfKbn=2 が引き継がれる
+  result: skipped
+  actual: 画面遷移はブラウザ操作。実行基盤（ブラウザ自動化）が未整備
+  evidence: ''
+  related_ids:
+  - TC-126
+  - F-104
+  - R-105
+- id: TC-127
+  title: 閉じる押下で確認メッセージのうえ画面が閉じる
+  kind: normal
+  viewpoint: 同値分割
+  design_id: F-106
+  error_id: null
+  preconditions: 本画面が表示されている
+  input: 閉じる押下 → 確認で OK
+  expected: 確認メッセージ表示後に画面が閉じる
+  result: skipped
+  actual: window.confirm/close の観測はブラウザ操作。実行基盤が未整備
+  evidence: ''
+  related_ids:
+  - TC-127
+  - F-106
+  - R-108

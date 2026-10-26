@@ -1,0 +1,103 @@
+id: Q-201
+type: Q
+title: 日方確認事項一覧（R60Maker）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- Q-201
+- Q-202
+- Q-203
+- Q-204
+- Q-205
+- Q-206
+- Q-207
+- Q-208
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+questions:
+- id: Q-201
+  question: 一覧の「送信」ラベルは列見出しか行ラベルか。
+  why: 表示位置が決まらず、画面項目の定義が確定しない。
+  options:
+  - 列見出し
+  - 行ラベル
+  impact: 画面項目 I の定義と、画面レイアウト。
+  status: open
+  answer: null
+  related_ids:
+  - Q-201
+- id: Q-202
+  question: 1 頁件数の初期値は何で決まるか（コード値明細 `000000488` の内容）。
+  why: 初期表示の既定値が決まらない。
+  options:
+  - 明細の提供
+  impact: 初期表示と、検索の既定件数。
+  status: open
+  answer: null
+  related_ids:
+  - Q-202
+- id: Q-203
+  question: 検索結果の件数上限の実値はいくつか（設計書の例は 3000）。
+  why: 上限超過時の挙動が確定しない。
+  options:
+  - 実値の提示
+  impact: 検索ロジックと、上限超過のエラー設計。
+  status: open
+  answer: null
+  related_ids:
+  - Q-203
+- id: Q-204
+  question: 削除は論理削除（DEL_FLG）で確定か。物理削除の要件は無いか。
+  why: 削除の実装方式が変わる。
+  options:
+  - 論理削除で確定
+  - 物理削除もあり
+  impact: 削除ロジックと、検索条件の既定。
+  status: open
+  answer: null
+  related_ids:
+  - Q-204
+- id: Q-205
+  question: REG_STS（登録ステータス）の判定基準は何か。設計書は「共通仕様参照」のみ。
+  why: 判定を実装できない。実装値を規則にすると設計外の仕様を持ち込むことになる。
+  options:
+  - 共通仕様の提供
+  impact: 登録・更新・削除のロジック。
+  status: open
+  answer: null
+  related_ids:
+  - Q-205
+- id: Q-206
+  question: 排他の基準（KSN_DAT）は誰がいつ更新するか。更新区分 '1' の意味は何か。
+  why: 排他の実装と試験の状態作りができない。
+  options:
+  - 共通仕様の提供
+  impact: 更新・削除ロジックと、排他のテスト。
+  status: open
+  answer: null
+  related_ids:
+  - Q-206
+- id: Q-207
+  question: CSV の文字コード・ヘッダ行・項目順は何か。
+  why: 出力仕様が決まらない。
+  options:
+  - 標準仕様の提供
+  impact: ダウンロードの実装と、受入条件。
+  status: open
+  answer: null
+  related_ids:
+  - Q-207
+- id: Q-208
+  question: 「標準仕様」の中身（戻る・業務終了・共通メッセージ `R60A0008` 等）は何か。
+  why: イベント No4/9/10/13 と各種メッセージの実装ができない。
+  options:
+  - 標準仕様の提供
+  impact: 画面遷移・メッセージ・テスト観点。
+  status: open
+  answer: null
+  related_ids:
+  - Q-208

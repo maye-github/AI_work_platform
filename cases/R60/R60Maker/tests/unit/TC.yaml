@@ -1,0 +1,619 @@
+id: TC-201
+type: TC
+title: 単体テストケース（メーカーマスタメンテ）
+status: confirmed
+approved_by: ["SE-001"]
+approved_at: "2026-10-26"
+version: '0.1'
+related_ids:
+- TC-201
+- TC-202
+- TC-203
+- TC-204
+- TC-205
+- TC-206
+- TC-207
+- TC-208
+- TC-209
+- TC-210
+- TC-211
+- TC-212
+- TC-213
+- TC-214
+- TC-215
+- TC-216
+- TC-217
+- TC-218
+- TC-219
+- TC-220
+- TC-221
+- TC-222
+- TC-223
+- TC-224
+- TC-225
+- TC-226
+- TC-227
+- TC-228
+- TC-229
+- TC-230
+- TC-231
+- TC-232
+- TC-233
+- TC-234
+- TC-235
+- L-201
+- L-202
+- L-203
+- L-204
+- L-211
+- L-210
+- L-205
+- L-206
+- L-207
+- L-208
+- L-209
+- TC-236
+- F-206
+- R-206
+owner: SE-001
+created_at: '2026-10-26'
+updated_at: '2026-10-26'
+sensitivity: internal
+cases:
+- id: TC-201
+  title: 半角英数5文字のコードを受理する
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-201
+  error_id: E-201
+  preconditions: 空でない
+  input: A1234
+  expected: 妥当
+  result: pass
+  actual: TestMakerCode.test_valid
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-201
+  - L-201
+  - E-201
+- id: TC-202
+  title: コード未入力は条件なしとして扱う
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-201
+  error_id: null
+  preconditions: 空
+  input: （未入力）
+  expected: 妥当（条件に加えない）
+  result: pass
+  actual: TestMakerCode.test_empty_allowed
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-202
+  - L-201
+- id: TC-203
+  title: 4文字は不可
+  kind: boundary
+  viewpoint: 境界値
+  design_id: L-201
+  error_id: E-201
+  preconditions: 桁数境界
+  input: A123
+  expected: E-201
+  result: pass
+  actual: TestMakerCode.test_short
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-203
+  - L-201
+  - E-201
+- id: TC-204
+  title: 6文字は不可
+  kind: boundary
+  viewpoint: 境界値
+  design_id: L-201
+  error_id: E-201
+  preconditions: 桁数境界
+  input: A12345
+  expected: E-201
+  result: pass
+  actual: TestMakerCode.test_long
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-204
+  - L-201
+  - E-201
+- id: TC-205
+  title: 全角英数は不可
+  kind: error
+  viewpoint: 同値分割
+  design_id: L-201
+  error_id: E-201
+  preconditions: 文字種の無効クラス
+  input: Ａ1234
+  expected: E-201
+  result: pass
+  actual: TestMakerCode.test_fullwidth
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-205
+  - L-201
+  - E-201
+- id: TC-206
+  title: 30バイトちょうどは受理
+  kind: normal
+  viewpoint: 境界値
+  design_id: L-201
+  error_id: E-202
+  preconditions: ASCII 30
+  input: a×30
+  expected: 妥当
+  result: pass
+  actual: TestMakerName.test_30_bytes
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-206
+  - L-201
+  - E-202
+- id: TC-207
+  title: 31バイトは不可
+  kind: boundary
+  viewpoint: 境界値
+  design_id: L-201
+  error_id: E-202
+  preconditions: 境界の1つ外
+  input: a×31
+  expected: E-202
+  result: pass
+  actual: TestMakerName.test_31_bytes
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-207
+  - L-201
+  - E-202
+- id: TC-208
+  title: 日本語10文字（UTF-8 30B）は受理、11文字は不可
+  kind: boundary
+  viewpoint: 境界値
+  design_id: L-201
+  error_id: E-202
+  preconditions: 多バイト境界
+  input: あ×10 / あ×11
+  expected: 受理 / E-202
+  result: pass
+  actual: TestMakerName.test_japanese_bytes
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-208
+  - L-201
+  - E-202
+- id: TC-209
+  title: 禁止文字を含むと不可
+  kind: error
+  viewpoint: 同値分割
+  design_id: L-201
+  error_id: E-202
+  preconditions: 禁止文字
+  input: A%B
+  expected: E-202
+  result: pass
+  actual: TestMakerName.test_forbidden
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-209
+  - L-201
+  - E-202
+- id: TC-210
+  title: コード条件は前方一致になる
+  kind: normal
+  viewpoint: デシジョンテーブル
+  design_id: L-202
+  error_id: null
+  preconditions: コードあり
+  input: A12
+  expected: MAKER_CD LIKE :maker_cd / 値 A12%
+  result: pass
+  actual: TestWhere.test_prefix_match
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-210
+  - L-202
+- id: TC-211
+  title: 日本語名条件は中間一致になる
+  kind: normal
+  viewpoint: デシジョンテーブル
+  design_id: L-202
+  error_id: null
+  preconditions: 名称あり
+  input: メーカー
+  expected: MAKER_NM LIKE :maker_nm / 値 %メーカー%
+  result: pass
+  actual: TestWhere.test_contains_match
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-211
+  - L-202
+- id: TC-212
+  title: 削除含むOFFならDEL_FLG条件が付く
+  kind: normal
+  viewpoint: デシジョンテーブル
+  design_id: L-202
+  error_id: null
+  preconditions: 削除含むOFF
+  input: includeDeleted=false
+  expected: DEL_FLG = '0'
+  result: pass
+  actual: TestWhere.test_default_excludes_deleted
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-212
+  - L-202
+- id: TC-213
+  title: 仕掛表示ならREG_STS='0'が付く
+  kind: normal
+  viewpoint: デシジョンテーブル
+  design_id: L-202
+  error_id: null
+  preconditions: 仕掛表示ON
+  input: pendingOnly=true
+  expected: REG_STS = '0'
+  result: pass
+  actual: TestWhere.test_pending_only
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-213
+  - L-202
+- id: TC-214
+  title: 条件が無ければWHEREは空
+  kind: boundary
+  viewpoint: 境界値
+  design_id: L-202
+  error_id: null
+  preconditions: 全条件なし
+  input: —
+  expected: 空文字・バインドなし
+  result: pass
+  actual: TestWhere.test_no_condition
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-214
+  - L-202
+- id: TC-215
+  title: 値はSQLに埋め込まれない（バインド）
+  kind: error
+  viewpoint: デシジョンテーブル
+  design_id: L-202
+  error_id: null
+  preconditions: インジェクション観点
+  input: A12
+  expected: WHERE 句に A12 が出ない
+  result: pass
+  actual: TestWhere.test_values_are_bound
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-215
+  - L-202
+- id: TC-216
+  title: 0件はE-203
+  kind: error
+  viewpoint: 境界値
+  design_id: L-203
+  error_id: E-203
+  preconditions: 該当なし
+  input: count=0
+  expected: E-203
+  result: pass
+  actual: TestCount.test_zero
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-216
+  - L-203
+  - E-203
+- id: TC-217
+  title: 上限ちょうどは受理
+  kind: boundary
+  viewpoint: 境界値
+  design_id: L-203
+  error_id: E-204
+  preconditions: 境界
+  input: count=3000, 上限3000
+  expected: 妥当
+  result: pass
+  actual: TestCount.test_at_limit
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-217
+  - L-203
+  - E-204
+- id: TC-218
+  title: 上限+1は不可
+  kind: boundary
+  viewpoint: 境界値
+  design_id: L-203
+  error_id: E-204
+  preconditions: 境界の1つ外
+  input: count=3001
+  expected: E-204
+  result: pass
+  actual: TestCount.test_over_limit
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-218
+  - L-203
+  - E-204
+- id: TC-219
+  title: 許可項目はソートに反映される
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-204
+  error_id: null
+  preconditions: 白名单内
+  input: MAKER_NM
+  expected: 既定順＋MAKER_NM
+  result: pass
+  actual: TestSort.test_allowed
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-219
+  - L-204
+- id: TC-220
+  title: 白名单外は既定順に戻る
+  kind: error
+  viewpoint: 同値分割
+  design_id: L-204
+  error_id: null
+  preconditions: 白名单外
+  input: MAKER_ANM
+  expected: 既定順
+  result: pass
+  actual: TestSort.test_not_allowed
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-220
+  - L-204
+- id: TC-221
+  title: 未指定は既定順
+  kind: boundary
+  viewpoint: 境界値
+  design_id: L-204
+  error_id: null
+  preconditions: 未指定
+  input: None
+  expected: 既定順
+  result: pass
+  actual: TestSort.test_empty
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-221
+  - L-204
+- id: TC-222
+  title: 3項目すべて非空なら'1'
+  kind: normal
+  viewpoint: デシジョンテーブル
+  design_id: L-211
+  error_id: null
+  preconditions: 全項目あり
+  input: A/B/C
+  expected: '1'
+  result: pass
+  actual: TestRegSts.test_all_filled
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-222
+  - L-211
+- id: TC-223
+  title: 1項目でも空なら'0'
+  kind: normal
+  viewpoint: デシジョンテーブル
+  design_id: L-211
+  error_id: null
+  preconditions: 1項目空
+  input: A/B/空
+  expected: '0'
+  result: pass
+  actual: TestRegSts.test_missing
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-223
+  - L-211
+- id: TC-224
+  title: ヘッダ行と明細が出る
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-210
+  error_id: null
+  preconditions: 1件
+  input: A1/テスト/テスト/0
+  expected: ヘッダ＋行
+  result: pass
+  actual: TestCsv.test_header_and_row
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-224
+  - L-210
+- id: TC-225
+  title: カンマを含む値は引用される
+  kind: error
+  viewpoint: 同値分割
+  design_id: L-210
+  error_id: null
+  preconditions: CSVエスケープ
+  input: A,B
+  expected: '"A,B"'
+  result: pass
+  actual: TestCsv.test_escape_comma
+  evidence: python -m unittest discover -s tests/unit -t . → Ran 26 tests, OK
+  related_ids:
+  - TC-225
+  - L-210
+- id: TC-226
+  title: 新規モードは空・緊急配信OFFで開く
+  kind: normal
+  viewpoint: デシジョンテーブル
+  design_id: L-205
+  error_id: null
+  preconditions: 新規
+  input: mode=1
+  expected: 空・OFF・削除ブランク
+  result: skipped
+  actual: 'マスタ画面の実装は次期スコープ（TRACEABILITY: unimplemented）'
+  evidence: ''
+  related_ids:
+  - TC-226
+  - L-205
+- id: TC-227
+  title: 複製モードはコード・名称を引き継ぐ
+  kind: normal
+  viewpoint: デシジョンテーブル
+  design_id: L-205
+  error_id: null
+  preconditions: 複製
+  input: mode=2
+  expected: コード/日本語名/カナ名を引継ぎ
+  result: skipped
+  actual: 同上
+  evidence: ''
+  related_ids:
+  - TC-227
+  - L-205
+- id: TC-228
+  title: 修正モードは全項目を現行値で埋める
+  kind: normal
+  viewpoint: デシジョンテーブル
+  design_id: L-205
+  error_id: null
+  preconditions: 修正
+  input: mode=3
+  expected: 現行値
+  result: skipped
+  actual: 同上
+  evidence: ''
+  related_ids:
+  - TC-228
+  - L-205
+- id: TC-229
+  title: キー重複はE-205
+  kind: error
+  viewpoint: デシジョンテーブル
+  design_id: L-206
+  error_id: E-205
+  preconditions: 既存コード
+  input: 登録
+  expected: E-205
+  result: skipped
+  actual: DML 未実装（ISS-201 共通仕様待ち）
+  evidence: ''
+  related_ids:
+  - TC-229
+  - L-206
+  - E-205
+- id: TC-230
+  title: KSN_DAT不一致はE-207
+  kind: error
+  viewpoint: デシジョンテーブル
+  design_id: L-206
+  error_id: E-207
+  preconditions: 競合
+  input: 更新
+  expected: E-207
+  result: skipped
+  actual: 排他の実装は未（Q-206）
+  evidence: ''
+  related_ids:
+  - TC-230
+  - L-206
+  - E-207
+- id: TC-231
+  title: 新規はINSERT・修正はUPDATE
+  kind: normal
+  viewpoint: デシジョンテーブル
+  design_id: L-206
+  error_id: null
+  preconditions: モード別
+  input: mode=1/3
+  expected: INSERT / UPDATE
+  result: skipped
+  actual: DML 未実装
+  evidence: ''
+  related_ids:
+  - TC-231
+  - L-206
+- id: TC-232
+  title: 被参照ありはE-206
+  kind: error
+  viewpoint: デシジョンテーブル
+  design_id: L-207
+  error_id: E-206
+  preconditions: 参照あり
+  input: 削除
+  expected: E-206
+  result: skipped
+  actual: 被参照チェック未実装
+  evidence: ''
+  related_ids:
+  - TC-232
+  - L-207
+  - E-206
+- id: TC-233
+  title: 削除は論理削除（DEL_FLG=1・REV_NO+1）
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-207
+  error_id: null
+  preconditions: 削除可
+  input: 削除
+  expected: DEL_FLG=1
+  result: skipped
+  actual: DML 未実装
+  evidence: ''
+  related_ids:
+  - TC-233
+  - L-207
+- id: TC-234
+  title: 区分'1'/'2'の被参照を数える
+  kind: normal
+  viewpoint: 同値分割
+  design_id: L-208
+  error_id: E-206
+  preconditions: 参照なし
+  input: MAKER_CD
+  expected: 参照0件
+  result: skipped
+  actual: 被参照先の接続が未確定（ASM-204）
+  evidence: ''
+  related_ids:
+  - TC-234
+  - L-208
+  - E-206
+- id: TC-235
+  title: KSN_DAT一致なら更新できる
+  kind: boundary
+  viewpoint: 同値分割
+  design_id: L-209
+  error_id: E-207
+  preconditions: 一致
+  input: 更新
+  expected: 更新成功
+  result: skipped
+  actual: 排他の実装は未（Q-206）
+  evidence: ''
+  related_ids:
+  - TC-235
+  - L-209
+  - E-207
+- id: TC-236
+  title: 検索条件部の縮小／拡大が切り替わる
+  kind: normal
+  viewpoint: 同値分割
+  design_id: F-206
+  error_id: null
+  preconditions: 検索画面が表示されている
+  input: 検索条件(非)表示ボタン押下
+  expected: 条件部が縮小し、再押下で拡大する
+  result: skipped
+  actual: 画面制御のみ（端点なし）。ブラウザ自動化の実行基盤が未整備
+  evidence: ''
+  related_ids:
+  - TC-236
+  - F-206
+  - R-206
