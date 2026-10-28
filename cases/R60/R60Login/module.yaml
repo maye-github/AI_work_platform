@@ -4,7 +4,27 @@ title: 共通マスタログイン
 owner: SE-001
 status: draft
 version: '0.1'
-created_at: '2026-10-26'
-updated_at: '2026-10-26'
-note: module.yaml は人が書く。plat init がひな形を作る
-approval_note: 工程2〜8 は 2026-10-26 の一括承認。ユーザー発話「承認，并一路跑完 8 个工程」。各工程の門番出力と産出は提示済み。工程1 は 26 件、阻塞項は弊社提案（顧客確認中）で解除。
+created_at: '2026-10-27'
+updated_at: '2026-10-27'
+note: 模擬プロジェクト。工程1〜工程3 の承認者は SE-001。Q/ISS の回答は【模拟】。
+known_issues:
+- F-108（ログイン成功時の画面遷移）は素材 §3.5 由来だが、上流 R-103 に明記が無い。工程2/3 では note として記録し、上流変更時に R を補う。
+- Q-111（暗号方式）は「実装フェーズで確定」の模拟回答。工程3 時点でも具体方式が未定で、L-106/L-108/L-117 の単体試験前提は未固定。
+- `kind: select` / `data_type: '-'` は basic-design の schema 列挙に無いが、既承認の R60Maker と同じ書き方。schema 改訂は未実施。
+- 台帳 title と成果物 title の不一致（F-103/F-110）。plat に title 更新コマンドが無いため未修正。
+- 清空重来の CR 記録なし（意図的な再構築）。現時点で未コミット。
+- 工程3: inputs/outputs の API データ項（stfCd/errorCode/userInfo/mngInfo/pageList/kbnList）は I-ID 未定義のため文字列名で表現。schema 改訂が必要。
+- 工程3: DSN の model 级 note は schema 外の運用注記。項目レベルの note は schema 内。
+- 工程3: E-108（遷移先未選択）は派生ルール。素材に明記が無く、要顧客確認。
+- 工程3: D-103 の供給元（マスタ／固定値）、D-104 の Session 有効期限、mngInfo の内容は未確定（ISS-101/ISS-102）。
+- 工程3: ボタン I-108/109/111/112 はトリガーのため L の inputs に含めない（F→L の連結は F の trigger で担保）。
+simulated_decisions:
+- Q-111 暗号方式: 【模拟】AES-128-CBC、鍵=yyyymmdd の SHA-256 先頭 16 バイト、IV=固定（全ゼロ）、暗号文は Base64URL。
+- E-108 遷移先未選択: 【模拟】業務エラーとして扱い、セッションエラー画面へ送る。
+- F-108 上流 R 缺口: 【模拟】R-103 の解釈に含める（ログイン成功＝選択画面を開く）。上流変更は行わない。
+- D-103 権限区分の供給元: 【模拟】固定値（Y=更新あり / N=更新なし）。マスタは使わない。
+- D-104 Session 有効期限: 【模拟】30 分（アイドルタイムアウト）。mngInfo は「利用可能メニュー ID 一覧」。
+- E-102 と E-104 の文面: 【模拟】別文面を許容（R-102 の「同じ扱い」はログイン可否のみ）。
+- message_id: 【模拟】R60W=業務エラー / R60E=システムエラー / R60I=情報 の暫定規則。
+- API データ項: 【模拟】I-ID を新設せず、L の inputs/outputs は文字列名で確定（schema 改訂待ち）。
+- DSN model 级 note: 【模拟】schema 外の運用注記として残す。

@@ -1,52 +1,43 @@
 doc: COMPONENTS
-title: 共通部品一覧（R60Login）
+title: 共通部品一覧（共通マスタログイン）
 status: confirmed
 approved_by: ["SE-001"]
-approved_at: "2026-10-26"
+approved_at: "2026-10-27"
 version: '0.1'
 owner: SE-001
-created_at: '2026-10-26'
-updated_at: '2026-10-26'
+created_at: '2026-10-27'
+updated_at: '2026-10-27'
 human_review_required: true
 components:
 - key: response_wrapper
-  purpose: 応答の外形（errorCode を必ず含める）を 1 箇所に集約
-  interface: ok(payload) -> dict / err(code, message_id=None) -> dict
+  purpose: 応答外形（errorCode 必須、業務エラーは messageId）
   used_by:
   - F-101
-  - F-103
   - F-105
-- key: error_resolver
-  purpose: E-ID から利用者向け文言を解決（設計 ERR を唯一の出所にする）
-  interface: 'resolve(error_id: str) -> {code, message}'
+  - F-110
+- key: operability_check
+  purpose: 稼働状態（ONLINE_FLG）の判定
   used_by:
-  - F-108
+  - F-111
 - key: stmt_cipher
-  purpose: 社員コードの当日鍵暗号化・復号（サーバとクライアントで同一方式）
-  interface: encrypt(plain, ymd) / decrypt(cipher, ymd)
+  purpose: 社員コードの暗号化・復号（当日鍵）
   used_by:
-  - F-109
-  - F-103
-  - F-105
-- key: operability_guard
-  purpose: 3 端点の前処理として稼働状態を判定
-  interface: ensure_online() -> raises
+  - F-104
+  - F-106
+  - F-114
+- key: session_store
+  purpose: Session への利用者情報保存・参照
   used_by:
   - F-107
-- key: session_store
-  purpose: ログイン後の利用者情報の保持
-  interface: save(user) / get() / clear()
+- key: error_classifier
+  purpose: errorCode/messageId から業務エラー/システムエラーを判定し遷移
   used_by:
-  - F-103
-  - F-104
-- key: submit_guard
-  purpose: 二重送信の抑止（画面側）
-  interface: guard(fn)
+  - F-113
+- key: url_builder
+  purpose: 遷移 URL の組立（パラメータ順固定）
   used_by:
-  - F-103
-  - F-105
-- key: session_error_nav
-  purpose: 業務エラー時にセッションエラー画面へ遷移させる
-  interface: navigate(reason)
+  - F-114
+- key: code_value_lookup
+  purpose: 権限区分・画面候補の解決
   used_by:
-  - F-108
+  - F-101

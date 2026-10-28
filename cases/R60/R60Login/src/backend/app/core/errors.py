@@ -1,36 +1,31 @@
-"""エラー区分とコード解決。E-ID を唯一の出所にする（設計 ERR と 1 対 1）。"""
+"""エラー定義（E-101〜E-111）。message は利用者に見せる業務の言葉。"""
 from __future__ import annotations
 
-from dataclasses import dataclass
-
-# 暫定の区分値（ISS-101。顧客の標準規約が来たらここだけ差し替える）
-CODE_OK = "0"
-CODE_BIZ = "1"
-CODE_SYS = "9"
-
-_MESSAGES: dict[str, str] = {
-    "E-101": "ユーザーＩＤは半角7桁で入力してください。",
-    "E-102": "入力された社員コードではログインできません。",
-    "E-103": "ただいまオンライン利用できません。時間をおいて再度お試しください。",
-    "E-104": "システムエラーが発生しました。",
-    "E-105": "入力された社員コードではログインできません。",
+ERRORS: dict[str, dict] = {
+    "E-101": {"code": "1", "message_id": "R60W0101",
+              "message": "ユーザーＩＤを入力してください。"},
+    "E-102": {"code": "1", "message_id": "R60W0102",
+              "message": "ユーザーＩＤは半角 7 桁で入力してください。"},
+    "E-103": {"code": "1", "message_id": "R60W0103",
+              "message": "起動区分は 1、2、3 のいずれかを指定してください。"},
+    "E-104": {"code": "1", "message_id": "R60W0104",
+              "message": "入力されたユーザーＩＤの社員が見つかりません。"},
+    "E-105": {"code": "1", "message_id": "R60W0105",
+              "message": "現在オンライン利用が許可されていません。時間をおいて再度お試しください。"},
+    "E-106": {"code": "1", "message_id": "R60W0106",
+              "message": "ログイン情報を確認できませんでした。画面を開き直してください。"},
+    "E-107": {"code": "9", "message_id": "R60E0101",
+              "message": "画面一覧を取得できませんでした。システム管理者に連絡してください。"},
+    "E-108": {"code": "1", "message_id": "R60W0107",
+              "message": "遷移先の画面を選択してください。"},
+    "E-109": {"code": "1", "message_id": "R60W0108",
+              "message": "遷移用 URL が長すぎるため生成できません。入力内容を確認してください。"},
+    "E-110": {"code": "0", "message_id": "R60I0101",
+              "message": "画面を閉じてもよろしいですか？"},
+    "E-111": {"code": "9", "message_id": "R60E0102",
+              "message": "システムエラーが発生しました。システム管理者に連絡してください。"},
 }
 
 
-@dataclass(frozen=True)
-class BizError(Exception):
-    """業務エラー（利用者に文言を見せる）。"""
-
-    error_id: str
-
-
-class SysError(Exception):
-    """システムエラー（汎用文言のみ返す）。"""
-
-
 def resolve(error_id: str) -> dict:
-    """E-ID から応答用のコードと文言を返す。未知の ID はシステムエラーに倒す。"""
-    if error_id not in _MESSAGES:
-        return {"code": CODE_SYS, "message": _MESSAGES["E-104"]}
-    code = CODE_SYS if error_id == "E-104" else CODE_BIZ
-    return {"code": code, "message": _MESSAGES[error_id]}
+    return ERRORS[error_id]

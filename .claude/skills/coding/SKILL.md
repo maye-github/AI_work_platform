@@ -29,6 +29,9 @@ python -m plat gate
 4. **写对应表**：`src/TRACEABILITY.yaml` —— `design_id → logic_ids → test_viewpoints → source_files`。
 5. **自查**：`python -m plat gate`（G5 查键名分区；G2 查追溯）。
 
+> **人読版**：成果物を書いたら `python -m plat md --module <模块> --html` を実行する。
+> `readable/*.md`（日文・人読）と `*.zh.html`（中文ビュー）は**生成物**。手で編集しない。
+
 ## 产出（`src/`）
 源码（后端/前端）＋ `src/TRACEABILITY.yaml`（管理文書）
 

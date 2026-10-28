@@ -1,14 +1,16 @@
 id: D-101
 type: D
-title: データモデル（参照テーブルのみ・更新なし）
+title: データモデル（共通マスタログイン）
 status: confirmed
 approved_by: ["SE-001"]
-approved_at: "2026-10-26"
+approved_at: "2026-10-27"
 version: '0.1'
 related_ids:
 - D-101
 - D-102
 - D-103
+- D-104
+- D-105
 - L-101
 - L-102
 - L-103
@@ -17,14 +19,70 @@ related_ids:
 - L-106
 - L-107
 - L-108
+- L-109
+- L-110
+- L-111
+- L-112
+- L-113
+- L-114
+- L-115
+- L-116
+- L-117
+- F-101
+- F-102
+- F-103
+- F-104
+- F-105
+- F-106
+- F-107
+- F-108
+- F-109
+- F-110
+- F-111
+- F-112
+- F-113
+- F-114
+- R-101
+- R-102
+- R-103
+- R-104
+- R-105
+- R-106
+- R-107
+- R-108
+- R-109
+- R-110
+- Q-101
+- Q-102
+- Q-103
+- Q-104
+- Q-105
+- Q-106
+- Q-107
+- Q-108
+- Q-109
+- Q-110
+- Q-111
+- Q-112
+- ASM-101
+- ASM-102
+- ASM-103
+- ASM-104
+- ASM-105
+- ASM-106
+- ASM-107
+- ASM-108
+- ISS-101
+- ISS-102
+- ISS-103
 owner: SE-001
-created_at: '2026-10-26'
-updated_at: '2026-10-26'
+created_at: '2026-10-27'
+updated_at: '2026-10-27'
 sensitivity: internal
 models:
 - id: D-101
   title: 社員マスタ（参照）
-  table_name: R60_STF_M_TBL
+  table_name: R60_EMP_M_TBL
   entity: 社員
   key:
   - STF_CD
@@ -34,36 +92,41 @@ models:
     type: string
     length: 7
     required: true
-    note: 半角7桁。当日鍵で暗号化されて送られる
+    note: 主キー。半角 7 桁
   - name: CMP_CD
     logical: 会社コード
     type: string
-    length: null
-    required: true
-    note: 画面遷移後も保持（Session）
-  - name: JIG_CD
+    length: 4
+    required: false
+    note: 暫定桁（ISS-102）
+  - name: JGY_CD
     logical: 事業場コード
     type: string
-    length: null
-    required: true
-    note: 画面遷移後も保持（Session）
+    length: 4
+    required: false
+    note: 暫定桁（ISS-102）
   - name: STF_NM
     logical: 氏名
     type: string
-    length: null
-    required: true
-    note: 画面遷移後も保持（Session）
+    length: 40
+    required: false
+    note: 暫定桁（ISS-102）
   - name: DEL_FLG
-    logical: 論理削除
-    type: code
+    logical: 論理削除フラグ
+    type: string
     length: 1
     required: true
-    note: Y/N。N のみ有効
+    note: 0=有効 / 1=論理削除（ASM-101）
+  note: 参照のみ。更新しないため排他制御・更新日時は不要。物理名・桁は暫定（ISS-102）。
   related_ids:
-  - D-101
-  - F-103
-  - L-103
-  - L-104
+  - F-106
+  - F-107
+  - R-103
+  - R-104
+  - Q-106
+  - ASM-101
+  - ASM-108
+  - ISS-102
 - id: D-102
   title: 画面マスタ（参照）
   table_name: R60_GMN_M_TBL
@@ -74,51 +137,121 @@ models:
   - name: GMN_ID
     logical: 画面ID
     type: string
-    length: null
+    length: 10
     required: true
-    note: 遷移URL の gmnId に用いる
+    note: 主キー
   - name: GMN_NM
     logical: 画面名
     type: string
-    length: null
+    length: 60
     required: true
-    note: 候補のラベル。末尾にシミュレーション区分が付く場合がある
-  - name: VALID_FLG
+    note: 末尾にシミュレーション区分が付く場合がある
+  - name: YUKO_FLG
     logical: 有効フラグ
-    type: code
+    type: string
     length: 1
     required: true
-    note: 有効なもののみ候補に出す
-  - name: DSP_ORD
+    note: 1=有効 / 0=無効
+  - name: HYOJI_JUN
     logical: 表示順
     type: number
     length: 3
     required: true
-    note: 表示順はマスタ保守による
+    note: 昇順で表示
+  note: 参照のみ。有効なものを表示順昇順で取得（ASM-102）。シミュレーション版もそのまま表示（ASM-106）。排他制御・更新日時は不要。
   related_ids:
-  - D-102
   - F-101
-  - L-101
+  - R-101
+  - Q-104
+  - ASM-102
+  - ASM-106
+  - ISS-102
 - id: D-103
-  title: 稼働状態（参照）
-  table_name: R60_OPR_STS
-  entity: 稼働状態
+  title: 権限区分コード
+  table_name: R60_KGN_KBN_TBL
+  entity: 権限区分
   key:
-  - STS_KEY
+  - KGN_KBN
   columns:
-  - name: STS_KEY
-    logical: 状態キー
+  - name: KGN_KBN
+    logical: 権限区分
     type: string
-    length: null
-    required: true
-    note: 単一レコードを想定
-  - name: ONLINE_FLG
-    logical: オンライン可否
-    type: code
     length: 1
     required: true
-    note: N のとき 3 端点は業務エラー
+    note: Y=更新あり / N=更新なし
+  - name: KGN_NM
+    logical: 権限区分名
+    type: string
+    length: 10
+    required: true
+    note: 画面表示名
+  note: 画面の権限区分候補の根拠。URL の kgnKbn と同じ符号。【模拟】供給元は固定値（Y=更新あり / N=更新なし）として実装する。マスタは使わない。物理名は暫定。
   related_ids:
-  - D-103
+  - F-101
+  - F-108
+  - F-110
+  - R-101
+  - R-106
+  - ISS-101
+- id: D-104
+  title: セッション情報
+  table_name: R60_SESSION
+  entity: ログイン利用者情報
+  key:
+  - STF_CD
+  columns:
+  - name: STF_CD
+    logical: 社員コード
+    type: string
+    length: 7
+    required: true
+    note: Session キー
+  - name: CMP_CD
+    logical: 会社コード
+    type: string
+    length: 4
+    required: false
+    note: 後続画面から参照
+  - name: JGY_CD
+    logical: 事業場コード
+    type: string
+    length: 4
+    required: false
+    note: 後続画面から参照
+  - name: STF_NM
+    logical: 氏名
+    type: string
+    length: 40
+    required: false
+    note: 後続画面から参照
+  note: Session ストア（物理表ではない）。【模拟】有効期限は 30 分（アイドルタイムアウト）。mngInfo は「利用可能メニュー ID 一覧」として扱う。排他制御は不要（利用者ごとに独立）。物理名・桁は暫定。
+  related_ids:
   - F-107
-  - L-107
+  - R-104
+  - Q-106
+  - ISS-102
+- id: D-105
+  title: 稼働状態（参照）
+  table_name: R60_OPERATION_TBL
+  entity: 稼働状態
+  key:
+  - SYS_ID
+  columns:
+  - name: SYS_ID
+    logical: システムID
+    type: string
+    length: 10
+    required: true
+    note: 主キー
+  - name: ONLINE_FLG
+    logical: オンライン利用可否
+    type: string
+    length: 1
+    required: true
+    note: 1=可 / 0=不可
+  note: 参照のみ。3 端点のサーバ側前処理で参照する（Q-105 / ASM-104）。排他制御・更新日時は不要。SYS_ID は単一フラグを 1 行で保持するための暫定キー。
+  related_ids:
+  - F-111
+  - R-107
+  - Q-105
+  - ASM-104

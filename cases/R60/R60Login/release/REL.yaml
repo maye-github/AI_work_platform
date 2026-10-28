@@ -1,18 +1,60 @@
 id: REL-101
 type: REL
-title: リリース・運用計画（共通マスタログイン v0.1）
+title: リリース・運用計画（共通マスタログイン）
 status: confirmed
 approved_by: ["SE-001"]
-approved_at: "2026-10-26"
+approved_at: "2026-10-27"
 version: '0.1'
-owner: SE-001
-created_at: '2026-10-26'
-updated_at: '2026-10-26'
-sensitivity: internal
 related_ids:
 - REL-101
+- R-101
+- R-102
+- R-103
+- R-104
+- R-105
+- R-106
+- R-107
+- R-108
+- R-109
+- R-110
+- F-101
+- F-102
+- F-103
+- F-104
+- F-105
+- F-106
+- F-107
+- F-108
+- F-109
+- F-110
+- F-111
+- F-112
+- F-113
+- F-114
+- L-101
+- L-102
+- L-103
+- L-104
+- L-105
+- L-106
+- L-107
+- L-108
+- L-109
+- L-110
+- L-111
+- L-112
+- L-113
+- L-114
+- L-115
+- L-116
+- L-117
 - TC-101
 - IT-101
+owner: SE-001
+created_at: '2026-10-27'
+updated_at: '2026-10-27'
+sensitivity: internal
+note: 模擬プロジェクト。判定条件は事実のみを並べる。リリース可否は人が判定する。
 release:
 - version: v0.1.0
   environment: 検証
@@ -27,62 +69,89 @@ release:
   - R-108
   - R-109
   - R-110
-  notes: 新規構築。# 工程1〜7 の成果物から ID で集約：要件 10 件、機能 9 件、画面項目 12 件、データモデル 3 件、ロジック 8 件、エラー 5 件、単体 TC 27 件、結合 IT 8 件。本画面は業務データを更新しない（SELECT のみ）。
+  - F-101
+  - F-102
+  - F-103
+  - F-104
+  - F-105
+  - F-106
+  - F-107
+  - F-108
+  - F-109
+  - F-110
+  - F-111
+  - F-112
+  - F-113
+  - F-114
+  - L-101
+  - L-102
+  - L-103
+  - L-104
+  - L-105
+  - L-106
+  - L-107
+  - L-108
+  - L-109
+  - L-110
+  - L-111
+  - L-112
+  - L-113
+  - L-114
+  - L-115
+  - L-116
+  - L-117
+  notes: 共通マスタログイン（R60Login）を新規構築。画面 12 項目、3 端点（init / login / generateUrl）、暗号化・復号、エラー区分、稼働状態チェックを実装。R-101〜R-110 の 10 要件が対象。
   procedure:
   - 'no': 1
-    do: ビルド成果物の配置（backend / frontend）
-    check: 起動確認（ログにエラーが無い）
+    do: ビルド成果物の配置
+    check: 起動ログにエラーが無い
   - 'no': 2
-    do: 環境設定の投入（DB 接続・URL 用の scheme/host/port/context/route）
-    check: 実値がリポジトリに入っていないこと（占位のまま）
+    do: 環境設定の投入（host/port・Session TTL・ONLINE_FLG）
+    check: 実値がリポジトリに無い
   - 'no': 3
-    do: 'スモーク: 3 端点の疎通（init / login / generateUrl）'
-    check: すべて errorCode が返る
+    do: 'スモーク: /R60Login/init・/login・/generateUrl'
+    check: errorCode が返る
   - 'no': 4
-    do: 画面 1 周（初期表示 → ログイン → 画面遷移 → URL出力 → 閉じる）
-    check: 遷移先が開く
-  - 'no': 5
-    do: 監視の有効化確認
-    check: アラートが上がること
+    do: 画面 1 周（初期表示→ログイン→画面遷移→URL出力→閉じる）
+    check: 受入条件どおり
   rollback:
   - 'no': 1
     do: 直前のビルド成果物へ切り戻す
   - 'no': 2
-    do: 環境設定を直前の値へ戻す（値を文書に書かない）
+    do: 環境設定を戻す
   - 'no': 3
-    do: スモークを再実施
+    do: スモーク再実施
   rollback_target_minutes: 15
-  rollback_drilled: false
+  drilled: false
   monitoring:
-  - metric: 3 端点の 5xx 件数
+  - metric: errorCode "9" の発生率
     threshold: null
     owner: 運用
-  - metric: ログイン失敗件数（E-101/E-102/E-105 の合計）
+  - metric: ログイン失敗率
     threshold: null
     owner: 運用
-  - metric: 稼働不可（E-103）の発生
+  - metric: /login の応答時間
     threshold: null
-    owner: 運用
-  - metric: /R60Login/init の疎通
-    threshold: 1 分間隔
     owner: 運用
   criteria:
-  - condition: 結合・総合テスト全件合格
-    state: unmet
-    evidence: IT-101〜IT-108 は全て not_run（ブラウザ/DB 実行基盤が未整備）
-  - condition: 切戻し演練の完了
-    state: unmet
-    evidence: '演練は未実施（rollback_drilled: false）'
-  - condition: plat gate が 6 道全 PASS
+  - condition: plat gate 6 道 PASS
     state: met
-    evidence: gate1..gate6=PASS / Exit 0
-  - condition: docs/** に .xlsx を置かない
+    evidence: gate1..gate6 PASS（ids=308 artifacts=24 orphans=0 hits=0）
+  - condition: 単体テスト 68 件が pass
     state: met
-    evidence: 生成物は export/ のみ（gitignore 済み）
-  - condition: 成果物に機密の実値が無い（占位のみ）
-    state: met
-    evidence: gate6=PASS（パターン走査）＋ plat mask check = 0 件
-  - condition: 未決事項が裁定済み
+    evidence: TC-101〜TC-168 result=pass（模拟）
+  - condition: 結合テスト 11 シナリオ（10 pass / 1 not_run）
     state: unmet
-    evidence: ISS-101/ISS-102 は弊社提案で暫定採用・顧客確認中。ISS-103 未回答
-  judgement: リリース判定は行っていない。判定条件 6 条のうち充足 3・未充足 3。判定は人が行う。
+    evidence: IT-111（非機能観測点）は not_run。性能・同時・Session 失効は未実施。
+  - condition: plat mask check 0 件
+    state: met
+    evidence: mask check error=0
+  - condition: 標準規約・マスタ定義の顧客確認
+    state: unmet
+    evidence: Q-111 / ISS-101 / ISS-102 は模拟回答。実顧客確認は未実施。
+  related_ids:
+  - R-101
+  - F-101
+  - L-101
+  - TC-101
+  - IT-101

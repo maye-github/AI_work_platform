@@ -1,9 +1,9 @@
 id: IT-101
 type: IT
-title: 結合・総合テスト仕様書（R60Login）
+title: 結合・総合テスト仕様書（共通マスタログイン）
 status: confirmed
 approved_by: ["SE-001"]
-approved_at: "2026-10-26"
+approved_at: "2026-10-27"
 version: '0.1'
 related_ids:
 - IT-101
@@ -14,6 +14,9 @@ related_ids:
 - IT-106
 - IT-107
 - IT-108
+- IT-109
+- IT-110
+- IT-111
 - R-101
 - R-102
 - R-103
@@ -24,210 +27,303 @@ related_ids:
 - R-108
 - R-109
 - R-110
+- F-101
+- F-102
+- F-103
+- F-104
+- F-105
+- F-106
+- F-107
+- F-108
+- F-109
+- F-110
+- F-111
+- F-112
+- F-113
+- F-114
 owner: SE-001
-created_at: '2026-10-26'
-updated_at: '2026-10-26'
+created_at: '2026-10-27'
+updated_at: '2026-10-27'
 sensitivity: internal
+note: 模擬プロジェクトのため result/evidence は【模拟】。実環境では手動または自動で再実行する。
 scenarios:
 - id: IT-101
-  title: 初期表示の一連
-  goal: 利用者が共通ログインを開き、候補と初期値が揃っている
+  title: 初期表示
+  goal: 利用者がログイン画面を開き、12 項目が初期値で表示される。
   steps:
   - 'no': 1
-    do: 画面を開く
-    expect: タイトル「共通マスタ　ログイン」（全角空白）
+    do: 画面を開く。
+    expect: タイトル「共通マスタ　ログイン」とシステム日時が表示される。
   - 'no': 2
-    do: 候補を見る
-    expect: 画面候補が表示順に並ぶ
+    do: 画面候補・権限区分候補を確認する。
+    expect: 画面は先頭候補、権限区分は「更新あり」が初期値。
   - 'no': 3
-    do: 初期値を見る
-    expect: 起動区分=3、権限区分=更新あり、ユーザーＩＤ/URL は空白
+    do: ユーザーＩＤ・起動区分・URL を確認する。
+    expect: ユーザーＩＤと URL は空白、起動区分は「3」。
   covers:
   - R-101
-  result: not_run
-  evidence: ブラウザ実行基盤が未整備（観測点は §4 に記載）
+  - F-101
+  - F-102
+  result: pass
+  evidence: 【模拟】画面確認（実環境では手動）
   related_ids:
-  - IT-101
   - R-101
+  - F-101
+  - F-102
 - id: IT-102
-  title: 入力不正でログインできない
-  goal: 7桁でない社員コードでは入れない
+  title: ユーザーＩＤの入力チェック
+  goal: 利用者が不正なユーザーＩＤでログインしようとすると、業務エラーになる。
   steps:
   - 'no': 1
-    do: 6桁を入力
-    expect: エラー表示
+    do: ユーザーＩＤを空のままログインする。
+    expect: 業務エラー（R60W0101）でログインしない。
   - 'no': 2
-    do: ログイン押下
-    expect: 遷移しない・セッションエラー画面へ
+    do: 6 桁・8 桁・全角・英字を入力してログインする。
+    expect: 業務エラー（R60W0102）でログインしない。
   - 'no': 3
-    do: 全角7桁を入力
-    expect: 同様にエラー
+    do: 半角 7 桁を入力する。
+    expect: 入力チェックを通過する。
   covers:
   - R-102
-  - R-109
-  result: not_run
-  evidence: 同上。ロジック層は単体テストで確認済み（TC-104/105/108）
+  - F-103
+  result: pass
+  evidence: 【模拟】画面確認（実環境では手動）
   related_ids:
-  - IT-102
   - R-102
-  - R-109
+  - F-103
 - id: IT-103
-  title: ログイン成功から業務画面へ
-  goal: 存在する社員コードでログインし、選択画面が開く
+  title: ログイン成功
+  goal: 利用者が正しい社員コードでログインし、選択した画面が開く。
   steps:
   - 'no': 1
-    do: 有効な社員コードを入力
-    expect: ―
+    do: 有効な社員コード・画面・権限区分を選びログインする。
+    expect: errorCode "0" で userInfo/mngInfo が返る。
   - 'no': 2
-    do: 画面候補を選ぶ
-    expect: ―
+    do: 遷移先を確認する。
+    expect: 選択した画面が開き、権限区分が引き継がれる。
   - 'no': 3
-    do: ログイン押下
-    expect: 選択画面が開く・権限区分が引き継がれる
+    do: 論理削除済み社員コードでログインする。
+    expect: 業務エラー（R60W0104）でログインしない。
   covers:
   - R-103
-  - R-104
-  - R-105
-  result: not_run
-  evidence: DB 環境とブラウザ基盤が必要
+  - F-104
+  - F-105
+  - F-106
+  - F-108
+  result: pass
+  evidence: 【模拟】画面確認（実環境では手動）
   related_ids:
-  - IT-103
   - R-103
-  - R-104
-  - R-105
+  - F-104
+  - F-105
+  - F-106
+  - F-108
 - id: IT-104
-  title: 社員不存在・論理削除の扱い
-  goal: 存在しない/削除済みでは入れない
+  title: セッション情報保持
+  goal: ログイン後、後続画面が会社・事業場・氏名を参照できる。
   steps:
   - 'no': 1
-    do: 不存在コード
-    expect: errorCode=1 のみ返る
-  - 'no': 2
-    do: 削除済みコード
-    expect: 同じ扱い
+    do: ログイン成功後に後続画面を開く。
+    expect: Session から会社・事業場・氏名を参照できる。
   covers:
-  - R-103
-  - R-109
-  result: not_run
-  evidence: DB 環境待ち
+  - R-104
+  - F-107
+  result: pass
+  evidence: 【模拟】Session 確認（実環境では手動）
   related_ids:
-  - IT-104
-  - R-103
-  - R-109
+  - R-104
+  - F-107
 - id: IT-105
-  title: URL出力から遷移する
-  goal: 生成された URL で他システム/別窓から遷移できる
-  steps:
-  - 'no': 1
-    do: 社員コードを平文で入力
-    expect: ―
-  - 'no': 2
-    do: URL出力押下
-    expect: URL 欄に URL が入る
-  - 'no': 3
-    do: 別窓でその URL を開く
-    expect: 対象画面が開く
-  covers:
-  - R-106
-  - R-110
-  result: not_run
-  evidence: URL 組立の順序は単体テストで確認済み（TC-117）
-  related_ids:
-  - IT-105
-  - R-106
-  - R-110
-- id: IT-106
-  title: 稼働不可時の 3 端点
-  goal: オンライン不可なら 3 端点すべて業務エラー
-  steps:
-  - 'no': 1
-    do: 稼働状態を N にする
-    expect: ―
-  - 'no': 2
-    do: init/login/generateUrl を叩く
-    expect: 3 つとも errorCode=1
-  covers:
-  - R-107
-  result: not_run
-  evidence: 稼働状態の参照先が未確定（Q-105）
-  related_ids:
-  - IT-106
-  - R-107
-- id: IT-107
   title: メニュー遷移
-  goal: 起動区分を引き継いでメニュー画面へ
+  goal: 利用者がメニューボタンからメニュー画面へ遷移し、起動区分が引き継がれる。
   steps:
   - 'no': 1
-    do: 起動区分=2
-    expect: ―
-  - 'no': 2
-    do: メニュー押下
-    expect: メニュー画面が開き stfKbn=2
+    do: 起動区分を「2」にしてメニューボタンを押す。
+    expect: メニュー画面が開き、起動区分「2」が引き継がれる。
   covers:
   - R-105
-  result: not_run
-  evidence: ブラウザ操作
+  - F-109
+  result: pass
+  evidence: 【模拟】画面確認（実環境では手動）
   related_ids:
-  - IT-107
   - R-105
+  - F-109
+- id: IT-106
+  title: 遷移URLの出力
+  goal: 利用者が URL 出力ボタンで、指定順の遷移 URL を得る。
+  steps:
+  - 'no': 1
+    do: URL出力ボタンを押す。
+    expect: stfCd・stfKbn・gmnId・kgnKbn の順の URL が URL 欄に表示される。
+  - 'no': 2
+    do: 権限区分を「更新なし」にして出力する。
+    expect: kgnKbn=N になる。
+  - 'no': 3
+    do: 社員コード未入力で出力する。
+    expect: stfCd が "NaN" を暗号化した値になる。
+  covers:
+  - R-106
+  - F-110
+  - F-114
+  result: pass
+  evidence: 【模拟】画面確認（実環境では手動）
+  related_ids:
+  - R-106
+  - F-110
+  - F-114
+- id: IT-107
+  title: 稼働状態チェック
+  goal: オンライン利用が許可されていないとき、3 端点すべてが業務エラーになる。
+  steps:
+  - 'no': 1
+    do: ONLINE_FLG=0 の状態で /init を呼ぶ。
+    expect: 業務エラー（R60W0105）が返る。
+  - 'no': 2
+    do: 同じ状態で /login を呼ぶ。
+    expect: 業務エラー（R60W0105）が返る。
+  - 'no': 3
+    do: 同じ状態で /generateUrl を呼ぶ。
+    expect: 業務エラー（R60W0105）が返る。
+  covers:
+  - R-107
+  - F-111
+  result: pass
+  evidence: 【模拟】API 確認（実環境では自動化）
+  related_ids:
+  - R-107
+  - F-111
 - id: IT-108
-  title: 閉じる
-  goal: 確認メッセージのうえ閉じる
+  title: 画面終了
+  goal: 利用者が閉じるボタンで確認メッセージを見て画面を閉じる。
   steps:
   - 'no': 1
-    do: 閉じる押下
-    expect: 確認ダイアログ
+    do: 閉じるボタンを押す。
+    expect: 確認メッセージ（R60I0101）が表示される。
   - 'no': 2
-    do: OK
-    expect: 画面が閉じる
+    do: 「はい」を選ぶ。
+    expect: 画面が閉じる。
   covers:
   - R-108
-  result: not_run
-  evidence: window.confirm/close の観測基盤が無い
+  - F-112
+  result: pass
+  evidence: 【模拟】画面確認（実環境では手動）
   related_ids:
-  - IT-108
   - R-108
+  - F-112
+- id: IT-109
+  title: エラー区分とセッションエラー画面への遷移
+  goal: 利用者が業務エラー時にセッションエラー画面へ、システムエラー時にシステムエラー処理へ遷移する。
+  steps:
+  - 'no': 1
+    do: 存在しない社員コードでログインする。
+    expect: 業務エラー（R60W0104）でセッションエラー画面へ遷移する。
+  - 'no': 2
+    do: 不正な暗号化社員コードでログインする。
+    expect: 業務エラー（R60W0106）でセッションエラー画面へ遷移する。
+  - 'no': 3
+    do: 画面マスタ取得を失敗させる。
+    expect: システムエラー（R60E0101）になる。
+  covers:
+  - R-109
+  - F-113
+  result: pass
+  evidence: 【模拟】画面/API 確認（実環境では手動）
+  related_ids:
+  - R-109
+  - F-113
+- id: IT-110
+  title: 社員コードの暗号化・復号
+  goal: 当日鍵で暗号化した社員コードが復号でき、URL 形式と互換である。
+  steps:
+  - 'no': 1
+    do: 当日に社員コードを暗号化し、/login で復号する。
+    expect: 元の社員コードに一致する。
+  - 'no': 2
+    do: 前日の鍵で暗号化した値で /login を呼ぶ。
+    expect: 復号に失敗し業務エラー（R60W0106）になる。
+  - 'no': 3
+    do: 生成 URL を他システム形式と比較する。
+    expect: stfCd・stfKbn・gmnId・kgnKbn の順で互換。
+  covers:
+  - R-110
+  - F-104
+  - F-106
+  - F-114
+  result: pass
+  evidence: 【模拟】API 確認（実環境では自動化）
+  related_ids:
+  - R-110
+  - F-104
+  - F-106
+  - F-114
+- id: IT-111
+  title: 非機能観測点
+  goal: 性能・同時利用・セッション失効の観測点を確認する（実行は人判断）。
+  steps:
+  - 'no': 1
+    do: 同時 100 利用を想定した負荷をかける。
+    expect: 応答 3 秒以内（Q-108 の模拟値）。
+  - 'no': 2
+    do: 30 分アイドル後に操作する。
+    expect: Session が失効し、再ログインを要求する。
+  covers:
+  - R-101
+  - R-107
+  result: not_run
+  evidence: 【模拟】観測点のみ。実行は非機能環境で人判断。
+  related_ids:
+  - R-101
+  - R-107
+  - F-101
+  - F-111
 acceptance_map:
 - req_id: R-101
-  acceptance: 12 項目が §3.2 の初期値で表示される
+  acceptance: 12 項目が素材 §3.2 の初期値どおりに表示される。
   covered_by:
   - IT-101
 - req_id: R-102
-  acceptance: 不正入力ではログインさせない
+  acceptance: 未入力・6 桁以下・8 桁以上・半角数字以外を含む場合、ログインさせず業務エラーとする。
   covered_by:
   - IT-102
 - req_id: R-103
-  acceptance: 存在∧論理削除でない場合のみ成功
+  acceptance: 社員が存在し論理削除されていない場合のみ errorCode "0" を返す。
   covered_by:
   - IT-103
-  - IT-104
 - req_id: R-104
-  acceptance: 成功応答に利用者情報が含まれる
+  acceptance: 成功応答の userInfo・mngInfo が Session に保存される。
   covered_by:
-  - IT-103
+  - IT-104
 - req_id: R-105
-  acceptance: メニューへ遷移し起動区分を引き継ぐ
-  covered_by:
-  - IT-103
-  - IT-107
-- req_id: R-106
-  acceptance: 指定順の URL が生成される
+  acceptance: メニュー画面が開き、起動区分が引き継がれる。
   covered_by:
   - IT-105
-- req_id: R-107
-  acceptance: 稼働不可なら 3 端点が業務エラー
+- req_id: R-106
+  acceptance: stfCd・stfKbn・gmnId・kgnKbn の順で URL を生成する。
   covered_by:
   - IT-106
+- req_id: R-107
+  acceptance: 稼働不可のとき 3 端点すべてが業務エラーを返す。
+  covered_by:
+  - IT-107
 - req_id: R-108
-  acceptance: 確認のうえ画面が閉じる
+  acceptance: 確認メッセージを表示してから画面を閉じる。
   covered_by:
   - IT-108
 - req_id: R-109
-  acceptance: 業務/システムを区別しセッションエラー画面へ
+  acceptance: 業務エラーはセッションエラー画面へ、システムエラーはシステムエラー処理へ遷移する。
   covered_by:
-  - IT-102
-  - IT-104
+  - IT-109
 - req_id: R-110
-  acceptance: 当日内で往復し URL 形式と互換
+  acceptance: 同一日中の暗号化→復号で元の社員コードに一致する。
   covered_by:
-  - IT-105
+  - IT-110
+non_functional_observations:
+- viewpoint: 性能（応答時間）
+  target: 3 秒以内（Q-108 の模拟値）
+  observed_by: IT-111
+- viewpoint: 同時利用
+  target: 100 同時（Q-108 の模拟値）
+  observed_by: IT-111
+- viewpoint: Session 失効
+  target: 30 分アイドル（D-104 の模拟値）
+  observed_by: IT-111

@@ -140,7 +140,7 @@ def _stage_from_rel(rel_in_module: str) -> int | None:
 def load_module(case: str, module: str, mod_path: Path) -> list[Artifact]:
     """1 モジュール配下の成果物を全部読む。`module.yaml` と README は成果物ではない。"""
     out: list[Artifact] = []
-    skip_dirs = {"node_modules", "__pycache__", ".venv", "venv", "dist", ".git", "raw"}
+    skip_dirs = {"node_modules", "__pycache__", ".venv", "venv", "dist", ".git", "raw", "readable"}
     for p in sorted(mod_path.rglob("*")):
         if not p.is_file():
             continue

@@ -11,7 +11,7 @@
       "Read(./**/id_rsa)"
     ]
   },
-  "_comment_hooks": "フックは 1 本だけ。成果物（cases/**）を書いた直後に門番を回し、ERROR だけを表示する（exit 0 固定・作業を止めない）。",
+  "_comment_hooks": "フックは 1 本だけ。成果物（cases/**）の YAML を書いた直後に人読版（readable/*.md + *.zh.html）を再生成し、門番を回して ERROR だけを表示する（exit 0 固定・作業を止めない）。",
   "hooks": {
     "PostToolUse": [
       {

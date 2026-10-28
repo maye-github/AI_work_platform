@@ -30,6 +30,9 @@ python -m plat gate
 5. **执行**：能自动化的写脚本；不能的在 `result` 里写 `manual` 并记实测。
 6. **自查**：`python -m plat gate`。
 
+> **人読版**：成果物を書いたら `python -m plat md --module <模块> --html` を実行する。
+> `readable/*.md`（日文・人読）と `*.zh.html`（中文ビュー）は**生成物**。手で編集しない。
+
 ## 产出（`tests/integration/`）
 `IT.yaml`（IT）＋ 受入条件对照（同文件 `acceptance_map:` 段）
 

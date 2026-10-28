@@ -3,7 +3,7 @@ type: F
 title: 機能一覧（共通マスタログイン）
 status: confirmed
 approved_by: ["SE-001"]
-approved_at: "2026-10-26"
+approved_at: "2026-10-27"
 version: '0.1'
 related_ids:
 - F-101
@@ -15,6 +15,11 @@ related_ids:
 - F-107
 - F-108
 - F-109
+- F-110
+- F-111
+- F-112
+- F-113
+- F-114
 - I-101
 - I-102
 - I-103
@@ -27,22 +32,89 @@ related_ids:
 - I-110
 - I-111
 - I-112
+- R-101
+- R-102
+- R-103
+- R-104
+- R-105
+- R-106
+- R-107
+- R-108
+- R-109
+- R-110
+- Q-101
+- Q-102
+- Q-103
+- Q-104
+- Q-105
+- Q-106
+- Q-107
+- Q-108
+- Q-109
+- Q-110
+- Q-111
+- Q-112
+- ASM-101
+- ASM-102
+- ASM-103
+- ASM-104
+- ASM-105
+- ASM-106
+- ASM-107
+- ASM-108
+- ISS-101
+- ISS-102
+- ISS-103
 owner: SE-001
-created_at: '2026-10-26'
-updated_at: '2026-10-26'
+created_at: '2026-10-27'
+updated_at: '2026-10-27'
 sensitivity: internal
 functions:
 - id: F-101
-  title: 初期表示
-  purpose: 画面を開いたとき、候補と初期値を揃えて表示する。
+  title: 初期表示データ取得
+  purpose: 画面を開いたときに初期表示用の画面候補と権限区分候補を取得する。
   req_ids:
   - R-101
-  inputs:
-  - 画面起動
-  outputs:
-  - 候補が揃った画面
+  trigger: 画面を開いたとき（イベント1）
+  preconditions:
+  - 稼働状態が利用可であること（F-111）
+  postconditions:
+  - 画面候補（有効のみ・表示順）と権限区分候補を保持している。
+  inputs: []
+  outputs: []
+  spec: /init を呼び出し、pageList（有効のみ・表示順）と kbnList を取得して保持する。画面への表示は F-102 が行う。
   related_ids:
-  - F-101
+  - R-101
+  - I-106
+  - I-107
+  - Q-104
+  - ASM-102
+- id: F-102
+  title: 画面初期化
+  purpose: 取得した候補と固定値で 12 項目の初期表示を行う。
+  req_ids:
+  - R-101
+  trigger: F-101 の完了後
+  preconditions:
+  - F-101 が成功している。
+  postconditions:
+  - タイトル・日時・説明文・初期値・ボタン活性が表示されている。
+  inputs: []
+  outputs:
+  - I-101
+  - I-102
+  - I-103
+  - I-104
+  - I-105
+  - I-106
+  - I-107
+  - I-108
+  - I-109
+  - I-110
+  - I-111
+  - I-112
+  spec: F-101 が保持した候補を用いる。システム日時は YYYY/MM/DD hh:mm:ss。画面候補は先頭、権限区分は「更新あり」、起動区分は「3」、ユーザーＩＤと URL は空白。
+  related_ids:
   - R-101
   - I-101
   - I-102
@@ -51,116 +123,252 @@ functions:
   - I-105
   - I-106
   - I-107
-  - I-110
-- id: F-102
-  title: ユーザーＩＤの入力チェック
-  purpose: 必須・半角 7 桁を判定する。
-  req_ids:
-  - R-102
-  inputs:
-  - I-103
-  outputs:
-  - 妥当／不可
-  related_ids:
-  - F-102
-  - R-102
-  - I-103
-- id: F-103
-  title: ログイン判定
-  purpose: 暗号化社員コードを復号し、存在と論理削除非該当を確認し、成功時に利用者情報を返す。
-  req_ids:
-  - R-103
-  inputs:
-  - I-103
-  - I-104
-  - I-106
-  - I-107
-  outputs:
-  - ログイン可否
-  - 利用者情報
-  related_ids:
-  - F-103
-  - R-103
-  - I-103
-  - I-106
-  - I-107
-- id: F-104
-  title: メニュー遷移
-  purpose: メニュー画面へ遷移し、起動区分を引き継ぐ。
-  req_ids:
-  - R-105
-  inputs:
-  - I-104
+  - I-108
   - I-109
-  outputs:
-  - 遷移
-  related_ids:
-  - F-104
-  - R-105
-  - I-104
-  - I-109
-- id: F-105
-  title: 遷移 URL の生成
-  purpose: 指定形式の遷移用 URL を組み立てて返す。
-  req_ids:
-  - R-106
-  inputs:
-  - I-103
-  - I-104
-  - I-106
-  - I-107
-  outputs:
-  - 遷移用 URL
-  related_ids:
-  - F-105
-  - R-106
   - I-110
   - I-111
+  - I-112
+  - Q-108
+  - ASM-106
+- id: F-103
+  title: ユーザーＩＤ・起動区分の入力チェック
+  purpose: ログイン実行前に、ユーザーＩＤが必須・半角 7 桁であること、起動区分が 1／2／3 のいずれかであることを検証する。
+  req_ids:
+  - R-102
+  trigger: ログインボタン押下時
+  preconditions: []
+  postconditions:
+  - 妥当なら F-104 へ進み、不正なら F-113 の業務エラー処理へ渡す。
+  inputs:
+  - I-103
+  - I-104
+  outputs: []
+  spec: ユーザーＩＤの桁数・文字種不正は「存在しない社員コード」と同じ扱い。起動区分は Q-110 により 1／2／3 のみ許可。
+  related_ids:
+  - R-102
+  - I-103
+  - I-104
+  - Q-110
+  - R-109
+- id: F-104
+  title: 社員コード暗号化（画面側）
+  purpose: 入力された社員コードを当日鍵で暗号化し、ログイン API に渡す。
+  req_ids:
+  - R-110
+  trigger: F-103 の入力チェック通過後
+  preconditions:
+  - F-103 が妥当と判定している。
+  postconditions:
+  - 暗号化済み社員コードを保持している。
+  inputs:
+  - I-103
+  outputs: []
+  spec: 当日の日付（yyyymmdd）を鍵の材料に用いる。方式は Q-111 の合意に従う。
+  related_ids:
+  - R-110
+  - I-103
+  - ASM-103
+  - Q-111
+- id: F-105
+  title: ログインAPI呼び出し
+  purpose: 暗号化済み社員コードと選択値をログイン API へ送り、判定結果を得る。
+  req_ids:
+  - R-103
+  trigger: F-104 の完了後
+  preconditions:
+  - 暗号化済み社員コードを保持している。
+  postconditions:
+  - errorCode と userInfo・mngInfo を保持している。
+  inputs:
+  - I-103
+  - I-104
+  - I-106
+  - I-107
+  outputs: []
+  spec: Request {stfCd(暗号化済み), stfKbn, gmnId, kgnKbn}。Response 成功 {errorCode:"0", userInfo, mngInfo}、該当なし {errorCode:"1"} のみ。システムエラー {errorCode:"9"} は F-113 で処理する。
+  related_ids:
+  - R-103
+  - R-104
+  - I-103
+  - I-104
+  - I-106
+  - I-107
+  - Q-109
 - id: F-106
-  title: 画面を閉じる
-  purpose: 確認メッセージを表示して本画面を閉じる。
+  title: 社員コード復号・社員存在確認（サーバ側）
+  purpose: 受信した暗号化社員コードを復号し、社員が存在し論理削除されていないか確認する。
   req_ids:
-  - R-108
-  inputs:
-  - I-112
-  outputs:
-  - 画面終了
+  - R-103
+  - R-110
+  trigger: ログイン API の受信時
+  preconditions:
+  - 稼働状態が利用可であること（F-111）
+  postconditions:
+  - 存在すれば userInfo・mngInfo を返し、存在しなければ errorCode "1" のみ返す。
+  inputs: []
+  outputs: []
+  spec: 復号はサーバ側。判定に用いるのは社員コードの存在と論理削除のみで、所属・権限・有効期限は用いない。
   related_ids:
-  - F-106
-  - R-108
-  - I-112
+  - R-103
+  - R-110
+  - ASM-101
+  - ASM-103
+  - ASM-108
+  - Q-111
 - id: F-107
-  title: 稼働状態チェック
-  purpose: 3 端点の前処理として稼働状態を判定する。
+  title: セッション情報保存
+  purpose: ログイン成功時に会社・事業場・氏名等を Session に保存する。
   req_ids:
-  - R-107
+  - R-104
+  trigger: F-105 が成功（errorCode "0"）したとき
+  preconditions:
+  - userInfo・mngInfo を取得済みである。
+  postconditions:
+  - Session に利用者情報が保存されている。
   inputs: []
-  outputs:
-  - 可／不可
+  outputs: []
+  spec: 保存項目は社員マスタ定義（Q-106 / ISS-102）に従う。
   related_ids:
-  - F-107
-  - R-107
+  - R-104
+  - Q-106
+  - ISS-102
 - id: F-108
-  title: エラー区分と遷移
-  purpose: 正常／業務／システムを区別し、業務エラー時はセッションエラー画面へ遷移させる。
+  title: ログイン成功時の画面遷移
+  purpose: 選択された業務画面を開き、権限区分を引き継ぐ。遷移方式は Q-101 に従う。
   req_ids:
-  - R-109
-  inputs: []
-  outputs:
-  - 区分されたエラー
-  related_ids:
-  - F-108
-  - R-109
-- id: F-109
-  title: 社員コードの暗号化・復号
-  purpose: 当日鍵（yyyymmdd）で往復する暗号化・復号。
-  req_ids:
-  - R-110
+  - R-103
+  trigger: F-107 の完了後
+  preconditions:
+  - ログインに成功している。
+  postconditions:
+  - 遷移先画面が開き、権限区分が引き継がれている。
   inputs:
-  - 平文社員コード
-  outputs:
-  - 暗号化社員コード
-  - 復号結果
+  - I-106
+  - I-107
+  - I-108
+  outputs: []
+  note: 登录成功时的画面迁移与权限区分引き継ぎ来自素材 §3.5 / Q-101；上游 R-103 未明记该行为，作为已知追溯缺口记录，待上游变更时补 R。
   related_ids:
-  - F-109
+  - R-103
+  - I-106
+  - I-107
+  - I-108
+  - Q-101
+- id: F-109
+  title: メニュー画面への遷移
+  purpose: メニュー画面を開き、起動区分を引き継ぐ。遷移方式は Q-101 に従う。
+  req_ids:
+  - R-105
+  trigger: メニューボタン押下時
+  preconditions: []
+  postconditions:
+  - メニュー画面が開き、起動区分が引き継がれている。
+  inputs:
+  - I-104
+  - I-109
+  outputs: []
+  related_ids:
+  - R-105
+  - I-104
+  - I-109
+  - Q-101
+  - Q-109
+- id: F-110
+  title: 遷移URL生成要求（画面側）
+  purpose: URL出力ボタン押下時に URL 生成 API を呼び、応答 URL を URL 欄に表示する。生成 URL が 150 文字を超える場合は業務エラーとする。
+  req_ids:
+  - R-106
+  trigger: URL出力ボタン押下時
+  preconditions:
+  - 稼働状態が利用可であること（F-111）
+  postconditions:
+  - URL 欄に生成 URL が表示されている、または業務エラーになっている。
+  inputs:
+  - I-103
+  - I-104
+  - I-106
+  - I-107
+  - I-111
+  outputs:
+  - I-110
+  spec: 社員コードは平文で送る（暗号化は F-114 のサーバ側）。起動区分は 1／2／3 のみ許可（Q-110）。URL 欄は入力上限 150 文字・表示幅 120 文字（Q-112）。
+  related_ids:
+  - R-106
+  - I-103
+  - I-104
+  - I-106
+  - I-107
+  - I-110
+  - I-111
+  - Q-110
+  - Q-112
+- id: F-111
+  title: 稼働状態チェック
+  purpose: 3 端点の前処理としてオンライン利用の可否を判定する。
+  req_ids:
+  - R-107
+  trigger: 初期表示・ログイン・URL生成の各 API 受信時
+  preconditions: []
+  postconditions:
+  - 利用不可なら業務エラーを返す。
+  inputs: []
+  outputs: []
+  related_ids:
+  - R-107
+  - Q-105
+  - ASM-104
+- id: F-112
+  title: 画面終了
+  purpose: 確認メッセージを表示したうえで本画面を閉じる。
+  req_ids:
+  - R-108
+  trigger: 閉じるボタン押下時
+  preconditions: []
+  postconditions:
+  - 確認メッセージの表示後に画面が閉じている。
+  inputs:
+  - I-112
+  outputs: []
+  related_ids:
+  - R-108
+  - I-112
+  - Q-102
+- id: F-113
+  title: エラー区分・セッションエラー画面遷移
+  purpose: 正常／業務エラー／システムエラーを区別し、業務エラー時にセッションエラー画面へ遷移する。
+  req_ids:
+  - R-109
+  trigger: 各処理でエラーが発生したとき
+  preconditions: []
+  postconditions:
+  - エラー区分に応じた応答と遷移が行われている。
+  inputs: []
+  outputs: []
+  related_ids:
+  - R-109
+  - Q-102
+  - Q-103
+  - ISS-101
+- id: F-114
+  title: 遷移URL組立（サーバ側）
+  purpose: URL 生成 API を受信し、平文の社員コードを当日鍵で暗号化して、指定形式の URL を組み立てて返す。
+  req_ids:
+  - R-106
   - R-110
+  trigger: URL 生成 API の受信時
+  preconditions:
+  - 稼働状態が利用可であること（F-111）
+  postconditions:
+  - stfCd・stfKbn・gmnId・kgnKbn の順の遷移 URL を返している。
+  inputs: []
+  outputs: []
+  spec: stfCd は平文で受ける（/login と逆）。社員コード未入力は "NaN" を社員コードとして暗号化して扱う。stfKbn は 1／2／3 のみ受け付ける（Q-110）。host／port は環境設定から取得する（Q-107）。URL エンコードは ASM-107 に従う。
+  related_ids:
+  - R-106
+  - R-110
+  - Q-107
+  - Q-110
+  - Q-111
+  - ASM-103
+  - ASM-105
+  - ASM-107

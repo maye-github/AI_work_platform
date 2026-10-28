@@ -1,0 +1,327 @@
+schema: '1'
+updated_at: '2026-10-27'
+scope: 两份 PPT（「落地篇」/「基于统一 AI 平台的全生命周期软件工程方案 v1」）与当前平台实现的差距。
+note: BL-xxx 是 backlog 本地编号，不进 registry/ids.yaml、不占平台号段、不参与 plat gate。确认要做时，再升格为 CR 或正式任务。
+status_values:
+- not_started
+- in_progress
+- done
+priority_values:
+- P0
+- P1
+- P2
+items:
+- id: BL-001
+  title: plat search 最小版（全文/关键词检索）
+  ppt_refs:
+  - 落地篇 slide 26 知識層 / slide 27 ④ナレッジベース（RAG）
+  - 统一方案 slide 12 知识库层
+  why: knowledge/README.md 明确写「RAG はこの版では実装していない」，目前只有 search 空命令。
+  acceptance:
+  - python -m plat search "<query>" 能在 cases/ 与 knowledge/ 中检索，返回文件路径与命中行。
+  - 结果按相关度排序；空结果返回 0 并给出提示。
+  - 不读取 raw/、registry/MASK_MAP.yaml、.env。
+  priority: P0
+  size: M
+  depends_on: []
+  status: not_started
+- id: BL-002
+  title: CI 中强制执行 plat gate
+  ppt_refs:
+  - 落地篇 slide 28 自動検査 / CI-CD
+  - 统一方案 slide 12 人工校验节点
+  why: 目前 gate 只能手动跑，没有 .github/workflows；PPT 要求「未通过不可合并」。
+  acceptance:
+  - PR 触发 CI，运行 python -m plat gate；FAIL 时阻止合并。
+  - 输出 gate 的 6 行结果与 ERROR 明细。
+  - 允许按模块/案件选择检查范围。
+  priority: P0
+  size: S
+  depends_on:
+  - BL-005
+  status: not_started
+- id: BL-003
+  title: 审计日志（谁生成/谁修改/谁承认）
+  ppt_refs:
+  - 落地篇 slide 26 統制・ガバナンス層 / slide 27 ⑤評価・ガバナンス
+  - 统一方案 slide 12 权限与审计
+  why: 目前只有 git、approved_by/approved_at 和 ID 台账，缺少独立的、不可篡改的审计记录。
+  acceptance:
+  - status 变更、承认、退版、gate 运行都追加一条审计记录（时间/人/对象/前后状态）。
+  - 记录只追加，不覆盖；可按 ID、案件、人检索。
+  - 与 registry/ids.yaml 的状态一致。
+  priority: P0
+  size: M
+  depends_on: []
+  status: not_started
+- id: BL-004
+  title: 术语词典与 patterns.md
+  ppt_refs:
+  - 落地篇 slide 26 知識層（用語辞書・設計パターン）
+  - 统一方案 slide 6/7 业务术语词典
+  why: knowledge/ 目前只有 traps.md；README 提到的 patterns.md 尚未建立，也没有术语词典。
+  acceptance:
+  - knowledge/glossary.yaml 收录案件术语（日文/中文/含义/出处）。
+  - knowledge/patterns.md 收录可复用的设计与写法。
+  - 新案件能引用已有术语与 patterns。
+  priority: P0
+  size: S
+  depends_on: []
+  status: not_started
+- id: BL-005
+  title: 静态解析集成（ruff / eslint / bandit）
+  ppt_refs:
+  - 落地篇 slide 28 自動検査
+  - 统一方案 slide 12 输出质量初筛
+  why: TECH_STACK 声明了 ruff check，但 plat 与 CI 没有接入；没有依赖/安全检查。
+  acceptance:
+  - plat gate 或独立命令能运行 ruff/eslint/bandit，并把结果纳入门禁。
+  - 可按模块配置开关与严重度阈值。
+  - 失败时输出文件:行号。
+  priority: P0
+  size: M
+  depends_on: []
+  status: not_started
+- id: BL-006
+  title: 测试执行与覆盖率回填
+  ppt_refs:
+  - 落地篇 slide 4/29（単体テスト実行・カバレッジ）
+  - 统一方案 slide 8 质量度量
+  why: 目前 TC 的 result 是手工/模拟填写，没有真正执行测试，也没有覆盖率数据。
+  acceptance:
+  - 按 TECH_STACK.commands.test 执行 pytest/vitest，回填 TC 的 result/actual。
+  - 生成覆盖率报告，并把覆盖率写入 KPI。
+  - FAIL 的 TC 能自动登记 BUG。
+  priority: P0
+  size: L
+  depends_on: []
+  status: not_started
+- id: BL-007
+  title: OpenAPI / DDL 生成
+  ppt_refs:
+  - 落地篇 slide 4 詳細設計（API・項目定義・SQL）
+  - 统一方案 slide 6 詳細設計（OpenAPI・DB 表構造）
+  why: 目前 DSN/LGC 是 YAML，但没有生成 OpenAPI 与建表 SQL。
+  acceptance:
+  - 从 LGC 的端点与入出力生成 OpenAPI 3.x。
+  - 从 DSN 生成建表 DDL（含主键/桁/必須）。
+  - 生成物不手改，重跑可覆盖。
+  priority: P1
+  size: M
+  depends_on: []
+  status: not_started
+- id: BL-008
+  title: 脚手架生成器
+  ppt_refs:
+  - 落地篇 slide 4 框架・環境構築
+  - 统一方案 slide 6 编码开发（项目脚手架）
+  why: 框架工程只产出 TECH_STACK/COMPONENTS，没有自动生成目录骨架与 CI 配置。
+  acceptance:
+  - 按 TECH_STACK 生成后端/前端目录、依赖清单、CI 配置。
+  - 生成物可编译/可启动；不覆盖已有代码。
+  priority: P1
+  size: M
+  depends_on:
+  - BL-002
+  status: not_started
+- id: BL-009
+  title: 模型网关（本地/云端路由 + 外部送信控制）
+  ppt_refs:
+  - 落地篇 slide 26 能力層 / slide 27 ①モデルゲートウェイ / slide 28 LLM
+  - 统一方案 slide 12 模型网关层
+  why: 目前没有模型网关，也没有按机密度选择本地/云端的机制。
+  acceptance:
+  - 按任务类型/机密度路由到不同模型（高精度/高速/本地）。
+  - 机密等级 L2/L3 不出外部；调用前做脱敏与拦截。
+  - 记录模型、token、耗时、成本。
+  priority: P1
+  size: L
+  depends_on:
+  - BL-012
+  status: not_started
+- id: BL-010
+  title: SSO / 角色权限
+  ppt_refs:
+  - 落地篇 slide 26 統制・ガバナンス層 / slide 28 ガバナンス
+  - 统一方案 slide 12 权限管理
+  why: 目前只有 Claude Code 的文件读取 deny，没有角色/项目级权限与 SSO。
+  acceptance:
+  - 按角色（SE/PG/テスター/管理者）控制可访问的案件、成果物与操作。
+  - 承认操作只能由有权限的人执行。
+  - 支持 SSO 登录与权限变更审计。
+  priority: P1
+  size: L
+  depends_on:
+  - BL-003
+  status: not_started
+- id: BL-011
+  title: Context Hub（按要件 ID 组装上下文）
+  ppt_refs:
+  - 落地篇 slide 26 データ・コンテキスト層 / slide 27 ③コンテキストハブ
+  - 统一方案 slide 12 前后产出自动作为后序输入
+  why: 目前 agent 直接读文件，没有按要件 ID 组装“必要且充分”上下文的服务。
+  acceptance:
+  - 输入一个 R/F/L ID，返回其上下游成果物、关联 Q/ASM/ISS、相关源码与测试。
+  - 输出可直接注入 agent 的上下文包（含来源路径）。
+  - 不把无关案件的内容混入。
+  priority: P1
+  size: L
+  depends_on:
+  - BL-001
+  status: not_started
+- id: BL-012
+  title: Token/成本记录与分摊
+  ppt_refs:
+  - 落地篇 slide 26 統制層（コスト管理）/ slide 28 ガバナンス
+  - 统一方案 slide 12 Token 用量统计与成本分摊
+  why: 目前没有成本数据，无法回答“AI 用了多少钱/省了多少”。
+  acceptance:
+  - 每次 agent/生成记录 token、模型、费用。
+  - 可按案件/模块/人汇总。
+  - 与 KPI 的生产性指标联动。
+  priority: P1
+  size: M
+  depends_on:
+  - BL-009
+  status: not_started
+- id: BL-013
+  title: IF.yaml（外部接口）与非功能成果物
+  ppt_refs:
+  - 落地篇 slide 4 基本設計（入出力一覧）/ slide 26
+  - 统一方案 slide 6 概要設計（外部接口清单・非機能）
+  why: 目前 F/I 只有画面項目，没有独立的 IF.yaml 与非功能需求成果物。
+  acceptance:
+  - 工程2 可产出 IF.yaml（端点/方向/协议/入出力）。
+  - 非功能需求有独立成果物或在 R/ASM 中有明确段落。
+  - gate 能检查 IF 与 F 的关联。
+  priority: P1
+  size: S
+  depends_on: []
+  status: not_started
+- id: BL-014
+  title: RACI 矩阵成果物
+  ppt_refs:
+  - 落地篇 slide 4/9-17 役割の再構築・人機分工マトリクス
+  why: 规则写清了 AI/人的边界，但没有可交付的 RACI 矩阵。
+  acceptance:
+  - 按工程输出 R/A/C/I 矩阵（AI/SE/PG/テスター/顧客）。
+  - 与 /approve、gate、agent 的职责一致。
+  priority: P1
+  size: S
+  depends_on: []
+  status: not_started
+- id: BL-015
+  title: 工数基线（生产性 KPI）
+  ppt_refs:
+  - 落地篇 slide 29 生産性（工程別工数削減率）
+  why: plat kpi 目前用日期差算天数，没有工数/基线，算不出“削减率”。
+  acceptance:
+  - 记录每工程的计划/实绩工数。
+  - 与パイロット基线对比，输出削减率。
+  - 数据可按案件/模块汇总。
+  priority: P1
+  size: M
+  depends_on: []
+  status: not_started
+- id: BL-016
+  title: RAG 向量库与 embedding 管线
+  ppt_refs:
+  - 落地篇 slide 26 知識層 / slide 27 ④RAG / slide 28 RAG 基盤
+  - 统一方案 slide 12 知识库层（RAG）
+  why: BL-001 只是关键词/全文检索；PPT 要求跨案件、术语、规范的语义检索。
+  acceptance:
+  - 成果物与知识资产可向量化并增量更新。
+  - 检索结果带出处与相似度。
+  - 支持按案件/模块过滤。
+  priority: P1
+  size: L
+  depends_on:
+  - BL-001
+  - BL-004
+  status: not_started
+- id: BL-017
+  title: Web 平台画面（进度/门禁/KPI）
+  ppt_refs:
+  - 落地篇 slide 26 利用層（Web 画面）
+  - 统一方案 slide 12 统一入口
+  why: 目前只有 CLI 与聊天；presentation/demo.html 只是静态演示，不是平台 UI。
+  acceptance:
+  - 浏览器查看模块进度、门禁、KPI、待承认项。
+  - 可触发 /approve、/next 等操作（带权限）。
+  - 数据来自 registry 与成果物，不另存一份。
+  priority: P2
+  size: L
+  depends_on:
+  - BL-010
+  status: not_started
+- id: BL-018
+  title: 专用 IDE 插件
+  ppt_refs:
+  - 落地篇 slide 26 利用層（IDE プラグイン）/ slide 28 IDE 連携
+  why: 目前在 VSCode 的 Claude Code 里跑，不是平台自己的插件。
+  acceptance:
+  - VSCode 插件内可看到当前模块/阶段/门禁，并能执行下一步。
+  - 与 CLI 共用同一份 registry 与成果物。
+  priority: P2
+  size: L
+  depends_on:
+  - BL-017
+  status: not_started
+- id: BL-019
+  title: Jira/Redmine/Excel 集成
+  ppt_refs:
+  - 落地篇 slide 28 業務連携
+  why: 目前没有与课题管理/Excel 设计书工具的对接。
+  acceptance:
+  - ID 与 Jira/Redmine 的 issue 双向关联。
+  - Excel 管理表可导入/导出，保留审批栏与合并单元格。
+  priority: P2
+  size: L
+  depends_on:
+  - BL-007
+  status: not_started
+- id: BL-020
+  title: 闭域/本地部署（GPU・认证基盤）
+  ppt_refs:
+  - 落地篇 slide 26 基盤層 / slide 28 ガバナンス
+  - 统一方案 slide 12 模型网关层
+  why: 目前在本地工作站运行，没有闭域网、GPU、认证基盤的部署方案。
+  acceptance:
+  - 提供闭域部署清单（模型、向量库、CI、认证）。
+  - 机密数据不出闭域。
+  - 有可复现的部署脚本。
+  priority: P2
+  size: L
+  depends_on:
+  - BL-009
+  - BL-010
+  status: not_started
+- id: BL-021
+  title: 多案件 KPI 看板与 RAG 命中率
+  ppt_refs:
+  - 落地篇 slide 29 知識資産（RAG 検索ヒット率・再利用率）
+  why: 当前 KPI 只看单模块，没有多案件对比与知识再利用率。
+  acceptance:
+  - 跨案件汇总覆盖率、采用率、手戻り、リードタイム。
+  - 记录 RAG 命中率与过去资产再利用率。
+  - 可按期间/团队筛选。
+  priority: P2
+  size: M
+  depends_on:
+  - BL-016
+  - BL-015
+  status: not_started
+- id: BL-022
+  title: 管理表 Excel 回写（审批栏/合并单元格）
+  ppt_refs:
+  - 统一方案 slide 7 双轨制（含审批栏、管理编号、合并单元格的 Excel）
+  why: 目前 plat export 只能导出 xlsx，不能回写审批栏/合并单元格的管理表。
+  acceptance:
+  - 支持指定 Excel 模板导出与回写。
+  - 审批栏、管理编号、合并单元格保持不变。
+  - 回写前做冲突检测。
+  priority: P2
+  size: M
+  depends_on:
+  - BL-019
+  status: not_started

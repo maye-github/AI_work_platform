@@ -3,7 +3,7 @@ type: R
 title: 要件一覧（共通マスタログイン）
 status: confirmed
 approved_by: ["SE-001"]
-approved_at: "2026-10-26"
+approved_at: "2026-10-27"
 version: '0.1'
 related_ids:
 - R-101
@@ -24,76 +24,110 @@ related_ids:
 - Q-106
 - Q-107
 - Q-108
+- Q-109
+- Q-110
+- Q-111
+- Q-112
 - ASM-101
 - ASM-102
 - ASM-103
 - ASM-104
 - ASM-105
+- ASM-106
+- ASM-107
+- ASM-108
 - ISS-101
 - ISS-102
 - ISS-103
 owner: SE-001
-created_at: '2026-10-26'
-updated_at: '2026-10-26'
+created_at: '2026-10-27'
+updated_at: '2026-10-27'
 sensitivity: internal
 requirements:
 - id: R-101
   title: 初期表示
-  statement: 利用者が本画面を開いたとき、画面タイトル・画面候補・権限区分候補・各項目の初期値を表示できる。
+  statement: 利用者が本画面を開いたとき、画面タイトル・システム日時・画面候補・権限区分候補・起動区分の説明文・各項目の初期値を表示できる。
   inputs:
-  - 画面マスタの候補（全社共通）
-  - 権限区分の候補
+  - 画面マスタの有効な画面候補（全社共通）
+  - 権限区分の候補（更新あり／更新なし）
   outputs:
   - 画面タイトル「共通マスタ　ログイン」
-  - 画面候補（初期値は先頭）
+  - システム日時（YYYY/MM/DD hh:mm:ss）
+  - 画面候補（初期値は先頭の候補）
   - 権限区分候補（初期値「更新あり」）
-  - ユーザーＩＤ＝空白
-  - 起動区分＝3
-  - URL＝空白
-  acceptance: 12 項目すべてが §3.2 の初期値で表示される。画面候補が 0 件でも画面は表示される。
-  source_ref: §3.2 / §3.3 イベント1 / §4.2
+  - 起動区分の説明文「1：本店ユーザー、2：工場ユーザー、3：システム管理者」
+  - ユーザーＩＤ＝空白、起動区分＝3、URL＝空白
+  - ログイン／メニュー／URL出力／閉じる＝活性
+  acceptance:
+  - 12 項目が素材 §3.2 の初期値どおりに表示される。
+  - システム日時が YYYY/MM/DD hh:mm:ss 形式で表示される。
+  - 画面候補が 0 件でも画面は表示され、初期値は先頭候補（0 件時は未選択）となる。
+  - 画面候補・権限区分候補は利用者ごとに絞り込まない。
+  source_ref: "raw/raw_requirements.md#4. 画面項目"
   related_ids:
-  - R-101
   - Q-104
-  - ASM-102
   - Q-108
+  - Q-110
+  - ASM-102
+  - ASM-106
   - ISS-102
   - ISS-103
 - id: R-102
   title: ユーザーＩＤの入力チェック
   statement: ログイン実行時、ユーザーＩＤが必須かつ半角 7 桁であることを検証できる。
   inputs:
-  - ユーザーＩＤ
+  - ユーザーＩＤ（社員コード）
   outputs:
-  - 妥当／不可の判定
-  acceptance: 未入力・6 桁以下・8 桁以上・半角数字以外を含む場合、ログインさせず業務エラーとして扱う。
-  source_ref: '§3.2 #3 / §3.4 入力チェック / §5'
+  - 入力の妥当／不可の判定
+  acceptance:
+  - 未入力・6 桁以下・8 桁以上・半角数字以外を含む場合、ログインさせず業務エラーとする。
+  - 入力不正は「存在しない社員コード」と同じ扱いとし、セッションエラー画面へ遷移する。
+  - 半角 7 桁の社員コードは入力チェックを通過する。
+  source_ref: "raw/raw_requirements.md#6. ログインの判定"
   related_ids:
-  - R-102
+  - Q-102
+  - R-109
 - id: R-103
   title: ログイン判定
-  statement: 暗号化された社員コードを復号し、社員が存在し論理削除されていない場合にログインを許可できる。
+  statement: 画面側で暗号化された社員コードをサーバ側で復号し、社員が存在しかつ論理削除されていない場合に限りログインを許可できる。
   inputs:
-  - stfCd（暗号化済み）
+  - stfCd（暗号化済みの社員コード）
+  - stfKbn（起動区分）
+  - gmnId（画面 ID）
+  - kgnKbn（権限区分）
   outputs:
   - ログイン可否
   - errorCode
-  acceptance: 存在しかつ論理削除されていない場合のみ成功。所属・権限・有効期限は判定に用いない。
-  source_ref: §3.4 / §4.3 / §5
+  - userInfo
+  - mngInfo
+  acceptance:
+  - 社員が存在し論理削除されていない場合のみ errorCode "0" と userInfo・mngInfo を返す。
+  - 所属・権限・有効期限はログイン可否の判定に用いない。
+  - 該当なしの場合は errorCode "1" のみを返し、他のフィールドを返さない。
+  - 復号に失敗した場合は業務エラーとして扱う。
+  source_ref: "raw/raw_requirements.md#6. ログインの判定"
   related_ids:
-  - R-103
+  - Q-106
+  - Q-109
   - ASM-101
+  - ASM-108
+  - R-104
+  - R-109
+  - R-110
 - id: R-104
   title: ログイン成功時のセッション情報保持
-  statement: ログイン成功時、会社・事業場・氏名等を Session に保存し、後続の業務画面から参照できるようにする。
+  statement: ログイン成功時、会社・事業場・氏名等の利用者情報を Session に保存し、後続の業務画面から参照できるようにする。
   inputs:
   - 社員コード
+  - 社員マスタの利用者情報
   outputs:
   - Session に保持する利用者情報
-  acceptance: 成功応答に利用者情報が含まれ、後続画面から参照できる。
-  source_ref: §3.4
+  acceptance:
+  - 成功応答に含まれる userInfo・mngInfo が Session に保存される。
+  - 後続の業務画面から会社・事業場・氏名等を参照できる。
+  - 保存項目の物理名・桁は社員マスタ定義（Q-106 / ISS-102）に従う。
+  source_ref: "raw/raw_requirements.md#6. ログインの判定"
   related_ids:
-  - R-104
   - Q-106
   - ISS-102
 - id: R-105
@@ -102,13 +136,18 @@ requirements:
   inputs:
   - 起動区分
   outputs:
-  - 遷移（メニュー画面へ）
-  - 引き継ぎ値
-  acceptance: 遷移先が開き、起動区分が引き継がれる。本イベントは端点を持たない（クライアント側で遷移）。
-  source_ref: §3.3 イベント3 / §3.5
+  - メニュー画面への遷移
+  - 引き継ぎ値（起動区分）
+  acceptance:
+  - メニュー画面が開く。
+  - 起動区分（1／2／3）が遷移先へ引き継がれる。
+  - 本イベントは端点を持たず、クライアント側で遷移する。
+  - 遷移方式は標準規約（Q-101 / ISS-101）に従う。
+  source_ref: "raw/raw_requirements.md#7. 画面遷移"
   related_ids:
-  - R-105
   - Q-101
+  - Q-103
+  - Q-109
   - ISS-101
 - id: R-106
   title: 遷移 URL の生成
@@ -120,12 +159,23 @@ requirements:
   - 権限区分
   outputs:
   - 遷移用 URL
-  acceptance: '`stfCd`=暗号化社員コード、`stfKbn`=1/2/3、`gmnId`=画面 ID、`kgnKbn`=Y/N の順で並ぶ。パラメータ順が指定どおりであること。'
-  source_ref: §3.6 / §4.4
+  - URL 欄の表示値
+  acceptance:
+  - "http://<host>:<port>/R60/Pages/index.jsp?stfCd=<暗号化された社員コード>&stfKbn=<1|2|3>&gmnId=画面ID&kgnKbn=<Y|N> の順で生成する。"
+  - kgnKbn は 更新あり＝Y／更新なし＝N とする。
+  - 社員コードが未入力の場合は "NaN" を社員コードとして扱う。
+  - URL 欄は半角・入力上限 150 文字・表示幅 120 文字で、生成値を利用者が直接編集できる。
+  - host／port は環境設定から取得し、コードに埋め込まない。
+  source_ref: "raw/raw_requirements.md#8. 遷移 URL の出力"
   related_ids:
-  - R-106
   - Q-107
+  - Q-110
+  - Q-111
+  - Q-112
   - ASM-105
+  - ASM-107
+  - R-109
+  - R-110
 - id: R-107
   title: 稼働状態のチェック
   statement: オンライン利用が許可されていない状態では、ログインさせず業務エラーとして扱える。
@@ -133,10 +183,12 @@ requirements:
   - 稼働状態
   outputs:
   - エラー応答
-  acceptance: 稼働不可のとき、3 端点すべてが業務エラーを返しログインさせない。
-  source_ref: §3.7 / §5
+  acceptance:
+  - /init・/login・/generateUrl の 3 端点すべてが前処理で稼働状態を判定する。
+  - 稼働不可のとき業務エラーを返し、ログインさせない。
+  - 判定方式は標準規約（Q-105 / ASM-104）に従う。
+  source_ref: "raw/raw_requirements.md#9. 稼働状態のチェック"
   related_ids:
-  - R-107
   - Q-105
   - ASM-104
 - id: R-108
@@ -144,11 +196,16 @@ requirements:
   statement: 閉じるボタン押下時、確認メッセージを表示したうえで本画面を閉じられる。
   inputs: []
   outputs:
+  - 確認メッセージ
   - 画面の終了
-  acceptance: 確認メッセージの文面は標準規約による。本イベントは端点を持たない。
-  source_ref: §3.3 イベント5
+  acceptance:
+  - 確認メッセージを表示してから画面を閉じる。
+  - メッセージの文面は標準規約（Q-102 / ISS-101）による。
+  - 本イベントは端点を持たない。
+  source_ref: "raw/raw_requirements.md#5. イベント"
   related_ids:
-  - R-108
+  - Q-102
+  - ISS-101
 - id: R-109
   title: エラー区分とセッションエラー画面への遷移
   statement: 正常／業務エラー／システムエラーを区別でき、業務エラー時はセッションエラー画面へ遷移できる。
@@ -156,11 +213,14 @@ requirements:
   - エラー事象
   outputs:
   - 区分されたエラー応答
-  - 遷移
-  acceptance: 社員不存在・入力不正・稼働不可・復号失敗は業務エラーでセッションエラー画面へ。画面マスタ取得失敗はシステムエラー。
-  source_ref: §5 / §3.8
+  - セッションエラー画面への遷移
+  acceptance:
+  - 社員不存在・入力不正・稼働不可・復号失敗は業務エラーとし、セッションエラー画面へ遷移する。
+  - 画面マスタの取得失敗はシステムエラーとする。
+  - 応答の errorCode で正常／業務エラー／システムエラーを判別できる（値は標準規約 Q-102 による）。
+  - Session エラー画面は共通部品を呼び出し、本件で新規作成しない。
+  source_ref: "raw/raw_requirements.md#13. エラー処理"
   related_ids:
-  - R-109
   - Q-102
   - Q-103
   - ISS-101
@@ -172,8 +232,16 @@ requirements:
   outputs:
   - 暗号化された社員コード
   - 復号結果
-  acceptance: 当日内で往復が一致する。§3.6 の URL 形式と互換であること。方式は貴方の提案による。
-  source_ref: §4.5
+  acceptance:
+  - 同一日中の暗号化→復号で元の社員コードに一致する。
+  - 日付が変わると前日の暗号化値は復号できない（当日内のみ有効）。
+  - 素材 §3.6 の遷移 URL 形式と互換である。
+  - /login は暗号化済み、/generateUrl は平文の社員コードを受け取る。
+  - 暗号化方式・鍵の運用は提案による（Q-111）。
+  source_ref: "raw/raw_requirements.md#12. 社員コードの暗号化"
   related_ids:
-  - R-110
+  - Q-111
   - ASM-103
+  - ASM-107
+  - R-103
+  - R-106

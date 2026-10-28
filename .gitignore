@@ -3,6 +3,7 @@
 # ==============================================================
 registry/MASK_MAP.yaml
 cases/*/*/raw/
+cases/*/*/requirements/raw/
 .env
 .env.*
 
@@ -10,6 +11,7 @@ cases/*/*/raw/
 # 生成物（再生成できる）
 # ==============================================================
 export/
+cases/*/*/readable/
 *.zh.html
 **/__pycache__/
 *.py[cod]
@@ -21,6 +23,8 @@ htmlcov/
 node_modules/
 dist/
 .vite/
+.npm-cache/
+.tmp/
 
 # エディタ / OS
 .vscode/

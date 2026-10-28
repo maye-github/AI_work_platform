@@ -3,7 +3,7 @@ type: Q
 title: 日方確認事項一覧
 status: confirmed
 approved_by: ["SE-001"]
-approved_at: "2026-10-26"
+approved_at: "2026-10-27"
 version: '0.1'
 related_ids:
 - Q-101
@@ -14,9 +14,13 @@ related_ids:
 - Q-106
 - Q-107
 - Q-108
+- Q-109
+- Q-110
+- Q-111
+- Q-112
 owner: SE-001
-created_at: '2026-10-26'
-updated_at: '2026-10-26'
+created_at: '2026-10-27'
+updated_at: '2026-10-27'
 sensitivity: internal
 questions:
 - id: Q-101
@@ -26,77 +30,129 @@ questions:
   - 同一ウィンドウ
   - 別ウィンドウ／新規タブ
   impact: ログイン成功時・メニュー遷移時の実装と、テスト観点。
-  status: open
-  answer: null
+  status: answered
+  answer: 【模拟】別ウィンドウ／新規タブで開く。ブラウザ設定で開けない場合は同一ウィンドウで開く。
   related_ids:
-  - Q-101
+  - R-105
 - id: Q-102
   question: 標準規約のエラーコード体系と、正常／業務エラー／システムエラーの区分値は何か。
   why: 本画面の応答に載せる errorCode の値が決まらない。
   options:
   - 標準規約の値一覧の提供
   impact: 3 端点の応答仕様と、エラー一覧の設計。
-  status: open
-  answer: null
+  status: answered
+  answer: 【模拟】"0"=正常 / "1"=業務エラー / "9"=システムエラー。業務エラー時は messageId を併せて返す。
   related_ids:
-  - Q-102
+  - R-102
+  - R-108
+  - R-109
 - id: Q-103
   question: セッションエラー画面・メニューヘッダの遷移先 URL と提供オリジン（同一／別オリジン）は何か。
   why: 遷移先が決まらず、認証情報の受け渡し方式（Cookie 属性・CORS）も決まらない。
   options:
   - URL の提供
   impact: 業務エラー時の遷移実装、非機能（セキュリティ）。
-  status: open
-  answer: null
+  status: answered
+  answer: 【模拟】Session エラー画面・メニューヘッダは同一オリジンの共通部品。具体 URL は環境設定で提供する。
   related_ids:
-  - Q-103
+  - R-105
+  - R-109
 - id: Q-104
   question: 画面マスタの提供内容（項目定義・有効判定の条件・並び順の決まり方）は何か。
   why: 画面候補の取得条件と表示順が決まらない。
   options:
   - マスタ定義書の提供
   impact: 初期表示と /init の SQL・応答項目。
-  status: open
-  answer: null
+  status: answered
+  answer: 【模拟】画面マスタ定義書を提供。有効フラグ=1 のみ、表示順列の昇順で返す。
   related_ids:
-  - Q-104
+  - R-101
 - id: Q-105
   question: 「オンライン利用が許可されていない状態」をどう判定するか（参照先・値・更新頻度）。
   why: 稼働状態チェックの実装が決まらない。
   options:
   - 標準規約の該当箇所の提供
   impact: 3 端点の前処理と、テストでの状態作り分け。
-  status: open
-  answer: null
+  status: answered
+  answer: 【模拟】共通基盤の稼働フラグ（1=可 / 0=不可）を参照する。
   related_ids:
-  - Q-105
+  - R-107
 - id: Q-106
   question: 社員マスタの項目（会社・事業場・氏名等の物理名・桁）と論理削除の表現は何か。
   why: Session に保存する項目と SQL の SELECT 列が決まらない。
   options:
   - マスタ定義書の提供
   impact: ログイン判定の SQL、Session の保持項目。
-  status: open
-  answer: null
+  status: answered
+  answer: 【模拟】社員コード(半角7) / 会社コード / 事業場コード / 氏名 / 論理削除フラグ(0=有効, 1=削除)。
   related_ids:
-  - Q-106
+  - R-103
+  - R-104
 - id: Q-107
   question: 遷移 URL の host/port は環境ごとに異なるとのこと。設定値の受渡し方法は何か。
   why: URL 組立の設定の持ち方が決まらない。
   options:
   - 環境設定の受渡し方法の指定
   impact: 設定ファイル設計と、環境別のテスト。
-  status: open
-  answer: null
+  status: answered
+  answer: 【模拟】環境変数または環境別設定ファイルで host/port を渡す。
   related_ids:
-  - Q-107
+  - R-106
 - id: Q-108
   question: 非機能要件（対応ブラウザ・画面解像度・同時利用数・性能目標）の具体値は何か。
   why: 性能・同時実行の受け入れ条件が書けない。
   options:
   - 標準規約の該当箇所の提供
   impact: 結合テストの非機能観点と、リリース判定条件。
-  status: open
-  answer: null
+  status: answered
+  answer: 【模拟】Chrome/Edge 最新版、解像度 1280x768 以上、同時利用 100、応答 3 秒以内。
   related_ids:
-  - Q-108
+  - R-101
+- id: Q-109
+  question: 素材 §4.1 は /login の対応イベントを「イベント 2・3」とする一方、同節の注記は「イベント 3（メニュー）は端点を持たない」としている。メニュー押下時に /login を呼ぶのか、クライアント側のみで遷移するのか。
+  why: 素材内で記述が矛盾しており、端点の呼び出し有無が決まらない。
+  options:
+  - クライアント側のみで遷移する（注記を優先）
+  - メニュー押下時にも /login を呼ぶ（表を優先）
+  impact: メニュー遷移の実装、/login の呼び出し回数、結合テストのシナリオ。
+  status: answered
+  answer: 【模拟】注記を優先。メニュー押下はクライアント側のみで遷移し、/login は呼ばない。
+  related_ids:
+  - R-103
+  - R-105
+- id: Q-110
+  question: 起動区分はテキストボックスで初期値「3」だが、1／2／3 以外の入力を受け付けるか。受け付ける場合、遷移 URL の stfKbn にそのまま載せるのか。
+  why: 入力制約と異常値時の扱いが素材に明記されていない。
+  options:
+  - 1／2／3 のみ許可し、それ以外は入力エラーとする
+  - 自由入力を受け付け、stfKbn にそのまま載せる
+  impact: 入力チェック仕様、URL 生成、テスト観点。
+  status: answered
+  answer: 【模拟】1／2／3 のみ許可。それ以外は入力エラーとし、ログインさせない。
+  related_ids:
+  - R-101
+  - R-106
+- id: Q-111
+  question: 遷移 URL は他システムも組み立てるため、暗号化方式と当日鍵の生成・共有方法をどこで合意するか。本件の提案を他システム側の実装へ反映する責任範囲はどこまでか。
+  why: 方式は貴方提案とされているが、互換性の担保主体と合意手順が未記載。
+  options:
+  - 本件で方式を提案し、他システム側は同一実装を採用する
+  - 共通の暗号化ライブラリ／仕様書を顧客が提供する
+  impact: 暗号化方式の設計、他システム起点の遷移を含む結合テスト、リリース調整。
+  status: answered
+  answer: 【模拟】AES-128-CBC。鍵は当日日付 yyyymmdd を SHA-256 でハッシュした先頭 16 バイト、IV は固定値（全ゼロ）。暗号文は Base64URL で URL に載せる。他システムも同一実装を採用する。
+  related_ids:
+  - R-106
+  - R-110
+- id: Q-112
+  question: URL 欄の入力上限は 150 文字（値として受け付ける上限）だが、生成した遷移 URL が 150 文字を超える場合、切り詰めるのか、エラーとするのか、上限を超えて表示するのか。
+  why: 生成値と入力上限の関係が素材に明記されていない。
+  options:
+  - 生成値が 150 文字を超えたら業務エラーとする
+  - 値は 150 文字まで受け付け、表示のみ 120 文字幅でスクロールする
+  - 上限を超えても生成値をそのまま表示する
+  impact: URL 生成の受入条件、入力チェック、テスト観点。
+  status: answered
+  answer: 【模拟】値は 150 文字まで受け付け、表示は 120 文字幅でスクロール。生成値が 150 文字を超える場合は業務エラーとする。
+  related_ids:
+  - R-106

@@ -1,9 +1,9 @@
 id: E-101
 type: E
-title: エラー・メッセージ一覧
+title: エラー・メッセージ一覧（共通マスタログイン）
 status: confirmed
 approved_by: ["SE-001"]
-approved_at: "2026-10-26"
+approved_at: "2026-10-27"
 version: '0.1'
 related_ids:
 - E-101
@@ -11,6 +11,12 @@ related_ids:
 - E-103
 - E-104
 - E-105
+- E-106
+- E-107
+- E-108
+- E-109
+- E-110
+- E-111
 - L-101
 - L-102
 - L-103
@@ -19,53 +25,197 @@ related_ids:
 - L-106
 - L-107
 - L-108
+- L-109
+- L-110
+- L-111
+- L-112
+- L-113
+- L-114
+- L-115
+- L-116
+- L-117
+- F-101
+- F-102
+- F-103
+- F-104
+- F-105
+- F-106
+- F-107
+- F-108
+- F-109
+- F-110
+- F-111
+- F-112
+- F-113
+- F-114
+- R-101
+- R-102
+- R-103
+- R-104
+- R-105
+- R-106
+- R-107
+- R-108
+- R-109
+- R-110
+- Q-101
+- Q-102
+- Q-103
+- Q-104
+- Q-105
+- Q-106
+- Q-107
+- Q-108
+- Q-109
+- Q-110
+- Q-111
+- Q-112
+- ASM-101
+- ASM-102
+- ASM-103
+- ASM-104
+- ASM-105
+- ASM-106
+- ASM-107
+- ASM-108
+- ISS-101
+- ISS-102
+- ISS-103
 owner: SE-001
-created_at: '2026-10-26'
-updated_at: '2026-10-26'
+created_at: '2026-10-27'
+updated_at: '2026-10-27'
 sensitivity: internal
+note: message_id は暫定採番（R60W=業務エラー / R60E=システムエラー / R60I=情報）。標準規約 Q-102 の体系提供後に差し替える。
 messages:
 - id: E-101
-  title: 社員コードの入力不正
-  condition: 未入力、または半角数字 7 桁でない
-  message: ユーザーＩＤは半角7桁で入力してください。
-  action: 入力し直す
+  title: ユーザーＩＤ未入力
+  condition: ログイン実行時にユーザーＩＤが空である。
+  message_id: R60W0101
+  message: ユーザーＩＤを入力してください。
+  action: 半角 7 桁の社員コードを入力してください。
   severity: error
   related_ids:
-  - E-101
-  - L-102
+  - L-104
+  - F-103
+  - R-102
 - id: E-102
-  title: 社員が存在しない
-  condition: 復号後の社員コードに該当なし、または論理削除済み
-  message: 入力された社員コードではログインできません。
-  action: 入力し直す
+  title: ユーザーＩＤ形式不正
+  condition: ユーザーＩＤが半角数字 7 桁でない。
+  message_id: R60W0102
+  message: ユーザーＩＤは半角 7 桁で入力してください。
+  action: 社員コードを確認してください。
   severity: error
+  note: 【模拟】R-102 の「存在しない社員コードと同じ扱い」はログイン可否の扱いを指す。メッセージは区別する。
   related_ids:
-  - E-102
-  - L-103
+  - L-104
+  - F-103
+  - R-102
 - id: E-103
-  title: オンライン利用不可
-  condition: 稼働状態がオンライン不可
-  message: ただいまオンライン利用できません。時間をおいて再度お試しください。
-  action: 時間をおく
+  title: 起動区分不正
+  condition: 起動区分が 1／2／3 のいずれでもない。
+  message_id: R60W0103
+  message: 起動区分は 1、2、3 のいずれかを指定してください。
+  action: 起動区分を選び直してください。
   severity: error
   related_ids:
-  - E-103
-  - L-107
+  - L-105
+  - L-113
+  - L-117
+  - F-103
+  - Q-110
 - id: E-104
-  title: 画面マスタの取得失敗
-  condition: 画面マスタの参照に失敗した
-  message: システムエラーが発生しました。
-  action: 管理者へ連絡
+  title: 社員不存在
+  condition: 社員が存在しない、または論理削除されている。
+  message_id: R60W0104
+  message: 入力されたユーザーＩＤの社員が見つかりません。
+  action: 社員コードを確認してください。
   severity: error
   related_ids:
-  - E-104
-  - L-101
+  - L-107
+  - L-109
+  - F-106
+  - R-103
 - id: E-105
-  title: 復号失敗
-  condition: 暗号化社員コードが不正で復号できない
-  message: 入力された社員コードではログインできません。
-  action: 入力し直す
+  title: オンライン利用不可
+  condition: 稼働状態がオンライン利用不可（ONLINE_FLG=0）である。
+  message_id: R60W0105
+  message: 現在オンライン利用が許可されていません。時間をおいて再度お試しください。
+  action: しばらく待ってから再実行してください。
   severity: error
   related_ids:
-  - E-105
-  - L-106
+  - L-101
+  - L-107
+  - L-113
+  - L-114
+  - F-111
+  - R-107
+- id: E-106
+  title: 復号失敗
+  condition: 暗号化された社員コードの復号に失敗した。
+  message_id: R60W0106
+  message: ログイン情報を確認できませんでした。画面を開き直してください。
+  action: 画面を開き直してください。
+  severity: error
+  related_ids:
+  - L-108
+  - F-106
+  - R-110
+- id: E-107
+  title: 画面マスタ取得失敗
+  condition: 初期表示 API で pageList または kbnList の取得に失敗した。
+  message_id: R60E0101
+  message: 画面一覧を取得できませんでした。システム管理者に連絡してください。
+  action: システム管理者に連絡してください。
+  severity: error
+  related_ids:
+  - L-101
+  - F-101
+  - R-101
+- id: E-108
+  title: 遷移先未選択
+  condition: ログイン実行時に遷移先の画面が選択されていない。
+  message_id: R60W0107
+  message: 遷移先の画面を選択してください。
+  action: 画面を選択してからログインしてください。
+  severity: error
+  note: 【模拟】業務エラーとして扱い、セッションエラー画面へ送る。派生ルール（素材に明記なし）。Session 保存前に L-107 で判定する。
+  related_ids:
+  - L-107
+  - F-105
+  - R-103
+- id: E-109
+  title: URL長超過
+  condition: 生成した遷移 URL が 150 文字を超える。
+  message_id: R60W0108
+  message: 遷移用 URL が長すぎるため生成できません。入力内容を確認してください。
+  action: 入力内容を確認してください。
+  severity: error
+  related_ids:
+  - L-113
+  - F-110
+  - R-106
+  - Q-112
+- id: E-110
+  title: 閉じる確認
+  condition: 閉じるボタンが押下された。
+  message_id: R60I0101
+  message: 画面を閉じてもよろしいですか？
+  action: 「はい」で閉じる、「いいえ」で画面に戻る。
+  severity: info
+  related_ids:
+  - L-115
+  - F-112
+  - R-108
+- id: E-111
+  title: システムエラー
+  condition: 想定外のシステム障害が発生した。
+  message_id: R60E0102
+  message: システムエラーが発生しました。システム管理者に連絡してください。
+  action: システム管理者に連絡してください。
+  severity: error
+  related_ids:
+  - L-107
+  - L-113
+  - L-116
+  - F-113
+  - R-109

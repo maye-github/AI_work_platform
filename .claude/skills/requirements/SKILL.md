@@ -42,6 +42,9 @@ python -m plat gate            # 现有内容必须是 6 道全 PASS
 7. **写成果物** → `references/schema.md` の形。`status: draft`、`related_ids` 必填。
 8. **自查**：`python -m plat gate` 全 PASS。
 
+> **人読版**：成果物を書いたら `python -m plat md --module <模块> --html` を実行する。
+> `readable/*.md`（日文・人読）と `*.zh.html`（中文ビュー）は**生成物**。手で編集しない。
+
 ## 产出（`cases/<案件>/<模块>/requirements/`）
 | 文件 | 内容 | 类型 |
 |---|---|---|

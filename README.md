@@ -27,6 +27,22 @@ python -m plat gate          # 六道门：一条命令全查
 
 横切命令：`/approve` 承认 · `/change` 变更 · `/next` 问路
 
+## 怎么跑起来
+
+源码不集中到一个 `src/`：每个模块自带 `src/`，可独立构建/部署。根目录的 `Makefile` / `docker-compose.yml` 提供“一条命令”的体验。
+
+```bash
+# 本地开发（R60Login）
+make dev-login-backend     # 后端 :8080
+make dev-login-frontend    # 前端 :5173
+
+# Docker（前后端一起起）
+make up                    # 前端 http://localhost:8081 / 后端 http://localhost:8080/docs
+make down
+```
+
+代码索引见 [`CODE_INDEX.md`](CODE_INDEX.md)。
+
 ## 三条硬约束（机制，不是口号）
 
 1. **推进只能靠人敲命令** —— 11 个 skill 全部设了 `disable-model-invocation: true`。
@@ -41,7 +57,14 @@ plat/          核心 CLI（发号・门禁・度量・导出・脱敏・视图�
 templates/     8 个阶段的输入模板（人填）
 registry/      ID 台账（唯一发号口，只许脚本写）
 knowledge/     踩坑记录（进化的起点）
-cases/         ← 空。客户案件由平台生成
+cases/         客户案件成果（每个模块自带 requirements/designs/src/tests/release）
+backlog/       待办池（未排期，不进 ID 台账）
+presentation/  给领导演示的 PPT 稿 + HTML
+export/        生成的 Excel / Word（gitignore）
+CODE_INDEX.md  模块 → 代码路径 → 启动命令
+Makefile       一条命令 gate / status / md / test / dev / up
+docker-compose.yml  前端 + 后端一键启动
+env.example    环境变量样例（复制成 .env）
 ```
 
 ## 需要装什么

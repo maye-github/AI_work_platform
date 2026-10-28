@@ -243,6 +243,13 @@ def cmd_view(a) -> int:
     return 0
 
 
+def cmd_md(a) -> int:
+    from . import render_md
+    n = render_md.render(module=a.module, case=a.case, html=a.html)
+    print(f"[md] {n} 件を readable/ に生成" + ("（.zh.html も生成）" if a.html else ""))
+    return 0
+
+
 # ---------------------------------------------------------------- 入口
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
@@ -323,6 +330,13 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("source")
     s.add_argument("-o", "--out")
     s.set_defaults(func=cmd_view)
+
+    s = sub.add_parser("md", help="機読源 YAML → 人読 Markdown（readable/ に生成）")
+    s.add_argument("--module")
+    s.add_argument("--case")
+    s.add_argument("--html", action="store_true",
+                   help="人読 MD から中国語ビュー .zh.html も生成する")
+    s.set_defaults(func=cmd_md)
 
     return p
 

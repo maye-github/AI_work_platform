@@ -1,0 +1,23 @@
+services:
+  login-backend:
+    build:
+      context: ./cases/R60/R60Login/src/backend
+    environment:
+      R60_HOST: localhost
+      R60_PORT: "8080"
+      R60_SESSION_TTL_MIN: "30"
+      R60_CORS_ORIGINS: "http://localhost:5173,http://localhost:8081"
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  login-frontend:
+    build:
+      context: ./cases/R60/R60Login/src/frontend
+      args:
+        VITE_API_BASE: ""
+    ports:
+      - "8081:80"
+    depends_on:
+      - login-backend
+    restart: unless-stopped

@@ -31,6 +31,9 @@ python -m plat gate       # 必须 6 道全 PASS
 5. **書く** → `references/schema.md`。`status: draft`。
 6. **自查**：`python -m plat gate`。
 
+> **人読版**：成果物を書いたら `python -m plat md --module <模块> --html` を実行する。
+> `readable/*.md`（日文・人読）と `*.zh.html`（中文ビュー）は**生成物**。手で編集しない。
+
 ## 产出（`designs/basic/`）
 `FNC.yaml`（機能一覧 F）／`SCR.yaml`（画面項目 I）／必要なら `IF.yaml`（外部接口，附着在 F 上）
 

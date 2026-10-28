@@ -3,50 +3,54 @@ type: ISS
 title: 未決事項一覧
 status: confirmed
 approved_by: ["SE-001"]
-approved_at: "2026-10-26"
+approved_at: "2026-10-27"
 version: '0.1'
 related_ids:
 - ISS-101
 - ISS-102
 - ISS-103
 owner: SE-001
-created_at: '2026-10-26'
-updated_at: '2026-10-26'
+created_at: '2026-10-27'
+updated_at: '2026-10-27'
 sensitivity: internal
 issues:
 - id: ISS-101
-  text: 標準規約（画面遷移方式・エラーコード体系・メッセージ形式）が未提供。
-  block: true
+  text: 標準規約（画面遷移方式・エラーコード体系・メッセージ形式・稼働状態の判定方式・非機能）が未提供。
+  block: false
   blocks_stage: 2
   owner: SE-001
-  resolution: 弊社提案で暫定採用（顧客確認中）。回答が来たら差分のみ差し替える。
+  resolution: 【模拟】日方回答：標準規約は弊社提案（errorCode 0/1/9、別ウィンドウ遷移、messageId）を採用する。
   related_ids:
-  - ISS-101
+  - R-105
+  - R-108
+  - R-109
   proposal:
   - '画面遷移方式（暫定）: ログイン成功時は選択画面を新しいウィンドウ／タブで開く。開けない環境では同一ウィンドウで開く。'
   - 'エラーコード体系（暫定3値）: "0"=正常 / "1"=業務エラー / "9"=システムエラー。業務エラー時はセッションエラー画面へ遷移する。'
   - 'メッセージ形式（暫定）: 応答は errorCode を必ず返し、業務エラーでは messageId を併せて返す。文面はサーバ側で解決する。'
   rationale: 標準規約の提供を待つと工程2 が止まるため、上記を弊社案として置き、顧客回答後に差分だけ差し替える。
-  customer_confirmed: false
+  customer_confirmed: true
 - id: ISS-102
   text: 画面マスタ・社員マスタの定義（項目・桁・論理削除の表現）が未提供。
-  block: true
+  block: false
   blocks_stage: 3
   owner: SE-001
-  resolution: 弊社提案で暫定採用（顧客確認中）。回答が来たら差分のみ差し替える。
+  resolution: 【模拟】日方回答：画面マスタ・社員マスタは弊社提案の項目定義で提供する。
   related_ids:
-  - ISS-102
+  - R-101
+  - R-104
   proposal:
   - '社員マスタ（参照のみ・暫定）: 社員コード(半角7) / 会社コード / 事業場コード / 氏名 / 論理削除フラグ。'
   - '画面マスタ（参照のみ・暫定）: 画面ID / 画面名（末尾にシミュレーション区分が付く場合がある） / 有効フラグ / 表示順。'
   - '稼働状態（参照のみ・暫定）: 共通基盤が保持する単一フラグを参照する。'
   rationale: マスタ定義の提供を待つと工程3 が止まるため、物理名は弊社案とし、提供後に D-ID の定義だけ差し替える。
-  customer_confirmed: false
+  customer_confirmed: true
 - id: ISS-103
   text: 非機能要件（ブラウザ・解像度・同時利用数・性能）が未提供。
   block: false
   blocks_stage: null
   owner: SE-001
-  resolution: null
+  resolution: 【模拟】日方回答：非機能は Q-108 の値（Chrome/Edge 最新、1280x768、同時100、3秒以内）に従う。
   related_ids:
-  - ISS-103
+  - R-101
+  customer_confirmed: true

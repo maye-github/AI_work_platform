@@ -29,6 +29,9 @@ python -m plat gate
 4. **定命令**：build / test / lint / run。**写进 `TECH_STACK.yaml`，后面所有工程照着跑。**
 5. **写管理文書**：`TECH_STACK`（栈）与 `COMPONENTS`（共通部品）。**它们是管理文档，不占 ID 号段**，登记到台账 `management_docs`。
 
+> **人読版**：成果物を書いたら `python -m plat md --module <模块> --html` を実行する。
+> `readable/*.md`（日文・人読）と `*.zh.html`（中文ビュー）は**生成物**。手で編集しない。
+
 ## 产出（`framework/`）
 `TECH_STACK.yaml`／`COMPONENTS.yaml`（**都没有 ID**，靠 `doc:` 字段标识）
 

@@ -2,7 +2,7 @@ results:
   R60/R60Login/ASM-101:
     added: 0
     added_items: []
-    approved_at: '2026-10-26'
+    approved_at: '2026-10-27'
     measurable: true
     modified: 0
     modified_items: []
@@ -10,45 +10,50 @@ results:
     removed: 0
     removed_items: []
     stage: 1
-    total: 5
-    unchanged: 5
+    total: 8
+    unchanged: 8
   R60/R60Login/D-101:
-    added: 3
-    added_items:
+    added: 0
+    added_items: []
+    approved_at: '2026-10-27'
+    measurable: true
+    modified: 5
+    modified_items:
     - models/D-101
     - models/D-102
     - models/D-103
-    approved_at: '2026-10-26'
-    measurable: false
-    modified: 0
-    modified_items: []
-    reasons: {}
-    removed: 0
-    removed_items: []
-    stage: 3
-    total: 3
-    unchanged: 0
-  R60/R60Login/E-101:
-    added: 5
-    added_items:
-    - messages/E-101
-    - messages/E-102
-    - messages/E-103
-    - messages/E-104
-    - messages/E-105
-    approved_at: '2026-10-26'
-    measurable: false
-    modified: 0
-    modified_items: []
+    - models/D-104
+    - models/D-105
     reasons: {}
     removed: 0
     removed_items: []
     stage: 3
     total: 5
     unchanged: 0
+  R60/R60Login/E-101:
+    added: 0
+    added_items: []
+    approved_at: '2026-10-27'
+    measurable: true
+    modified: 3
+    modified_items:
+    - messages/E-102
+    - messages/E-107
+    - messages/E-108
+    reasons: {}
+    removed: 0
+    removed_items: []
+    stage: 3
+    total: 11
+    unchanged: 8
   R60/R60Login/F-101:
-    added: 9
+    added: 1
     added_items:
+    - functions/F-114
+    approved_at: '2026-10-27'
+    measurable: true
+    modified: 10
+    modified_items:
     - functions/F-101
     - functions/F-102
     - functions/F-103
@@ -58,19 +63,20 @@ results:
     - functions/F-107
     - functions/F-108
     - functions/F-109
-    approved_at: '2026-10-26'
-    measurable: false
-    modified: 0
-    modified_items: []
+    - functions/F-110
     reasons: {}
     removed: 0
     removed_items: []
     stage: 2
-    total: 9
-    unchanged: 0
+    total: 14
+    unchanged: 3
   R60/R60Login/I-101:
-    added: 12
-    added_items:
+    added: 0
+    added_items: []
+    approved_at: '2026-10-27'
+    measurable: true
+    modified: 12
+    modified_items:
     - items/I-101
     - items/I-102
     - items/I-103
@@ -83,10 +89,6 @@ results:
     - items/I-110
     - items/I-111
     - items/I-112
-    approved_at: '2026-10-26'
-    measurable: false
-    modified: 0
-    modified_items: []
     reasons: {}
     removed: 0
     removed_items: []
@@ -96,88 +98,99 @@ results:
   R60/R60Login/ISS-101:
     added: 0
     added_items: []
-    approved_at: '2026-10-26'
+    approved_at: '2026-10-27'
     measurable: true
-    modified: 2
+    modified: 3
     modified_items:
     - issues/ISS-101
     - issues/ISS-102
+    - issues/ISS-103
     reasons: {}
     removed: 0
     removed_items: []
     stage: 1
     total: 3
-    unchanged: 1
+    unchanged: 0
   R60/R60Login/IT-101:
-    added: 18
-    added_items:
-    - scenarios/IT-101
-    - scenarios/IT-102
-    - scenarios/IT-103
-    - scenarios/IT-104
-    - scenarios/IT-105
-    - scenarios/IT-106
-    - scenarios/IT-107
-    - scenarios/IT-108
-    - acceptance_map/#1
-    - acceptance_map/#2
-    - acceptance_map/#3
-    - acceptance_map/#4
-    - acceptance_map/#5
-    - acceptance_map/#6
-    - acceptance_map/#7
-    - acceptance_map/#8
-    - acceptance_map/#9
-    - acceptance_map/#10
-    approved_at: '2026-10-26'
-    measurable: false
+    added: 0
+    added_items: []
+    approved_at: '2026-10-27'
+    measurable: true
     modified: 0
     modified_items: []
     reasons: {}
     removed: 0
     removed_items: []
     stage: 7
-    total: 18
-    unchanged: 0
+    total: 24
+    unchanged: 24
   R60/R60Login/L-101:
-    added: 8
-    added_items:
+    added: 0
+    added_items: []
+    approved_at: '2026-10-27'
+    measurable: true
+    modified: 14
+    modified_items:
     - logic/L-101
-    - logic/L-102
-    - logic/L-103
     - logic/L-104
     - logic/L-105
     - logic/L-106
     - logic/L-107
     - logic/L-108
-    approved_at: '2026-10-26'
-    measurable: false
-    modified: 0
-    modified_items: []
+    - logic/L-109
+    - logic/L-110
+    - logic/L-112
+    - logic/L-113
+    - logic/L-114
+    - logic/L-115
+    - logic/L-116
+    - logic/L-117
     reasons: {}
     removed: 0
     removed_items: []
     stage: 3
-    total: 8
-    unchanged: 0
+    total: 17
+    unchanged: 3
   R60/R60Login/Q-101:
     added: 0
     added_items: []
-    approved_at: '2026-10-26'
+    approved_at: '2026-10-27'
     measurable: true
-    modified: 0
-    modified_items: []
+    modified: 12
+    modified_items:
+    - questions/Q-101
+    - questions/Q-102
+    - questions/Q-103
+    - questions/Q-104
+    - questions/Q-105
+    - questions/Q-106
+    - questions/Q-107
+    - questions/Q-108
+    - questions/Q-109
+    - questions/Q-110
+    - questions/Q-111
+    - questions/Q-112
     reasons: {}
     removed: 0
     removed_items: []
     stage: 1
-    total: 8
-    unchanged: 8
+    total: 12
+    unchanged: 0
   R60/R60Login/R-101:
-    added: 0
-    added_items: []
-    approved_at: '2026-10-26'
-    measurable: true
+    added: 10
+    added_items:
+    - requirements/R-101
+    - requirements/R-102
+    - requirements/R-103
+    - requirements/R-104
+    - requirements/R-105
+    - requirements/R-106
+    - requirements/R-107
+    - requirements/R-108
+    - requirements/R-109
+    - requirements/R-110
+    approved_at: '2026-10-27'
+    measurable: false
     modified: 0
     modified_items: []
     reasons: {}
@@ -185,13 +198,12 @@ results:
     removed_items: []
     stage: 1
     total: 10
-    unchanged: 10
+    unchanged: 0
   R60/R60Login/REL-101:
-    added: 1
-    added_items:
-    - release/#1
-    approved_at: '2026-10-26'
-    measurable: false
+    added: 0
+    added_items: []
+    approved_at: '2026-10-27'
+    measurable: true
     modified: 0
     modified_items: []
     reasons: {}
@@ -199,9 +211,9 @@ results:
     removed_items: []
     stage: 8
     total: 1
-    unchanged: 0
+    unchanged: 1
   R60/R60Login/TC-101:
-    added: 27
+    added: 68
     added_items:
     - cases/TC-101
     - cases/TC-102
@@ -230,7 +242,48 @@ results:
     - cases/TC-125
     - cases/TC-126
     - cases/TC-127
-    approved_at: '2026-10-26'
+    - cases/TC-128
+    - cases/TC-129
+    - cases/TC-130
+    - cases/TC-131
+    - cases/TC-132
+    - cases/TC-133
+    - cases/TC-134
+    - cases/TC-135
+    - cases/TC-136
+    - cases/TC-137
+    - cases/TC-138
+    - cases/TC-139
+    - cases/TC-140
+    - cases/TC-141
+    - cases/TC-142
+    - cases/TC-143
+    - cases/TC-144
+    - cases/TC-145
+    - cases/TC-146
+    - cases/TC-147
+    - cases/TC-148
+    - cases/TC-149
+    - cases/TC-150
+    - cases/TC-151
+    - cases/TC-152
+    - cases/TC-153
+    - cases/TC-154
+    - cases/TC-155
+    - cases/TC-156
+    - cases/TC-157
+    - cases/TC-158
+    - cases/TC-159
+    - cases/TC-160
+    - cases/TC-161
+    - cases/TC-162
+    - cases/TC-163
+    - cases/TC-164
+    - cases/TC-165
+    - cases/TC-166
+    - cases/TC-167
+    - cases/TC-168
+    approved_at: '2026-10-27'
     measurable: false
     modified: 0
     modified_items: []
@@ -238,7 +291,7 @@ results:
     removed: 0
     removed_items: []
     stage: 6
-    total: 27
+    total: 68
     unchanged: 0
   R60/R60Maker/ASM-201:
     added: 0
@@ -521,47 +574,151 @@ results:
 schema: '1'
 snapshots:
   R60/R60Login/ASM-101:
-    captured_at: 2026-10-26 16:37
+    captured_at: 2026-10-27 11:05
     items:
-      assumptions/ASM-101: f05368b6104db071
-      assumptions/ASM-102: 6702b562f0eb9ebf
-      assumptions/ASM-103: c71ffa2ff86223e2
-      assumptions/ASM-104: e9a1002290110cfc
-      assumptions/ASM-105: 08c0b8a62dfa0060
+      assumptions/ASM-101: 495e5a7deb89df74
+      assumptions/ASM-102: 154408f6882dd3bc
+      assumptions/ASM-103: d0567b105ac59a53
+      assumptions/ASM-104: 2ff3e86e75750042
+      assumptions/ASM-105: 02223f16a9dfa0d3
+      assumptions/ASM-106: d192e897f694e8e2
+      assumptions/ASM-107: fdb2f064c183bb1a
+      assumptions/ASM-108: e8e6ba1a5f68d528
     stage: 1
+  R60/R60Login/D-101:
+    captured_at: 2026-10-27 14:06
+    items:
+      models/D-101: fabb38e4f1667c3a
+      models/D-102: b4d70e9d3fea3361
+      models/D-103: 54de06875a0a448a
+      models/D-104: ecc2748e29e2a2f3
+      models/D-105: ee902f54aa437da3
+    stage: 3
+  R60/R60Login/E-101:
+    captured_at: 2026-10-27 14:07
+    items:
+      messages/E-101: d6e857cf992357d0
+      messages/E-102: 1be7a6c196a756ac
+      messages/E-103: 6d1d3a8fb1591ade
+      messages/E-104: 520c735a1c4b0772
+      messages/E-105: 3eb33afd2834d56b
+      messages/E-106: c8e0104305c10327
+      messages/E-107: 1ec8ef8259f0ecc8
+      messages/E-108: 818154378e7efaa3
+      messages/E-109: 43ab2588c8d64c33
+      messages/E-110: 0de49624fb2f0274
+      messages/E-111: d558a0e0f1ce8bf1
+    stage: 3
+  R60/R60Login/F-101:
+    captured_at: 2026-10-27 11:32
+    items:
+      functions/F-101: 9504ad99bdf2b03c
+      functions/F-102: df8f46dd82eaff12
+      functions/F-103: 3ac7003a315c7157
+      functions/F-104: 5361f7f96003abd2
+      functions/F-105: 9013f3bcc857bb35
+      functions/F-106: 05cd0fc7bd6048ed
+      functions/F-107: 02e065e34bd880dd
+      functions/F-108: ed8b3f296e9ae5fc
+      functions/F-109: 1f34e4b3a4137e87
+      functions/F-110: cd219c39853203d9
+      functions/F-111: 9fc4ca724b93d0f5
+      functions/F-112: ed89c123dc13aa52
+      functions/F-113: c475343fee2ffd5a
+    stage: 2
+  R60/R60Login/I-101:
+    captured_at: 2026-10-27 11:32
+    items:
+      items/I-101: 52f3bf09b3ba08e9
+      items/I-102: 4962e2f7aac33a40
+      items/I-103: b85b0204532a0db3
+      items/I-104: 956dd2962d730733
+      items/I-105: 3ddfe8ee55eea5f5
+      items/I-106: db40c78d58b2ecb0
+      items/I-107: 01e66f8462be01cf
+      items/I-108: 93839629de6706fc
+      items/I-109: 5eb0bde3bba00a9e
+      items/I-110: d1c7fdd4d4ef28be
+      items/I-111: 45a1bb5d574e08b8
+      items/I-112: d9f431f6876de24a
+    stage: 2
   R60/R60Login/ISS-101:
-    captured_at: 2026-10-26 16:37
+    captured_at: 2026-10-27 11:05
     items:
-      issues/ISS-101: 08ab510716a6aa12
-      issues/ISS-102: f688addd24f14e3b
-      issues/ISS-103: 16a5bfa03e0df21f
+      issues/ISS-101: 3c958e39874d2485
+      issues/ISS-102: 54d1aff25a4b98ba
+      issues/ISS-103: 2b97f56f050c5cc2
     stage: 1
+  R60/R60Login/IT-101:
+    captured_at: 2026-10-27 15:09
+    items:
+      acceptance_map/#1: ea2b9ac8d0cf04d6
+      acceptance_map/#10: cadd9e65191567d8
+      acceptance_map/#2: aa3a46edac100393
+      acceptance_map/#3: 4c1f5dca840f4b24
+      acceptance_map/#4: b2ffc1ba192ba6ce
+      acceptance_map/#5: 66592ce3f5d2e1f6
+      acceptance_map/#6: 7a156004e6bfead3
+      acceptance_map/#7: 538f973dd5884fd5
+      acceptance_map/#8: d9ae81783c1694bc
+      acceptance_map/#9: c18cfa6b5bef47bd
+      non_functional_observations/#1: 608b58bdfd7bf62b
+      non_functional_observations/#2: cec87abdaa94b3c8
+      non_functional_observations/#3: 8b45dc9b335b5ed0
+      scenarios/IT-101: dd4ef36e87cd52dc
+      scenarios/IT-102: f928dbbc7711c187
+      scenarios/IT-103: 27bb91fc2c6aa61f
+      scenarios/IT-104: 7d54d191b8875484
+      scenarios/IT-105: df0510014cf8930c
+      scenarios/IT-106: 15c6050dcc0cbfe8
+      scenarios/IT-107: a3682dffd6d614f3
+      scenarios/IT-108: a84a7038aea1ced6
+      scenarios/IT-109: e8453b4a122c7070
+      scenarios/IT-110: 5fef712bb257d586
+      scenarios/IT-111: 640e3371b63f7180
+    stage: 7
+  R60/R60Login/L-101:
+    captured_at: 2026-10-27 14:18
+    items:
+      logic/L-101: 36ebb6e7d8b98ec2
+      logic/L-102: 8991d95e2e8ee26e
+      logic/L-103: a3246cc1a612176e
+      logic/L-104: c5f172153407ec78
+      logic/L-105: 2cb3902d33ec92d2
+      logic/L-106: 7e2640e44207b072
+      logic/L-107: 64bc8547009e6f66
+      logic/L-108: e1f5b6474b0e0290
+      logic/L-109: 58b3db5930979a1e
+      logic/L-110: befd03ee97c2e5f5
+      logic/L-111: 55e63016767703c8
+      logic/L-112: a33334a4336f8023
+      logic/L-113: c679bc66438bf39d
+      logic/L-114: 25b655cd559dab93
+      logic/L-115: 2bc5c0e14bfa0d47
+      logic/L-116: e61ba2f51c2cca32
+      logic/L-117: afdbeaeb98a0cbee
+    stage: 3
   R60/R60Login/Q-101:
-    captured_at: 2026-10-26 16:37
+    captured_at: 2026-10-27 11:05
     items:
-      questions/Q-101: ab721d03efd2724c
-      questions/Q-102: 6d0b36fa42214f9a
-      questions/Q-103: e6c1563fe4cbceab
-      questions/Q-104: 5ea1a464e2a96b3d
-      questions/Q-105: b016dec955af8d55
-      questions/Q-106: ee58efe27d6869ac
-      questions/Q-107: 89e346cef7a74021
-      questions/Q-108: 6d40f019ff4259d1
+      questions/Q-101: 48a3f63440abc18e
+      questions/Q-102: 5a4842d05465b5f9
+      questions/Q-103: 8452f682cc81897b
+      questions/Q-104: b34919e9623448c4
+      questions/Q-105: b692c801403963dc
+      questions/Q-106: 856c409480abea44
+      questions/Q-107: 386d3f8c43d3474d
+      questions/Q-108: 01c12a7735478a06
+      questions/Q-109: b8026b4287cd42a8
+      questions/Q-110: 849626b020c6cc1f
+      questions/Q-111: 3a1182f70a3a8041
+      questions/Q-112: fb2856645362767f
     stage: 1
-  R60/R60Login/R-101:
-    captured_at: 2026-10-26 16:37
+  R60/R60Login/REL-101:
+    captured_at: 2026-10-27 15:11
     items:
-      requirements/R-101: 4f42de216dfec96c
-      requirements/R-102: bf6b7f257e7b80fb
-      requirements/R-103: bfe44ba037a29eb2
-      requirements/R-104: 8969d651db4558a1
-      requirements/R-105: 422262ba3dc32531
-      requirements/R-106: 6da481a8d1e9e30b
-      requirements/R-107: 49f9e7d6558ff315
-      requirements/R-108: 6ac750a013c8d53e
-      requirements/R-109: 88d993d72b2fd5c4
-      requirements/R-110: 4c93adfb3372722e
-    stage: 1
+      release/#1: 7c9180eacb9b41de
+    stage: 8
   R60/R60Maker/ASM-201:
     captured_at: 2026-10-26 16:58
     items:

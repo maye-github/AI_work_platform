@@ -1,24 +1,26 @@
-"""FastAPI アプリ。端点は 3 本のみ。"""
+"""R60Login バックエンド。"""
 from __future__ import annotations
 
-from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+import os
 
-from .api.routers import login
-from .core.errors import BizError, resolve
-from .core.response import err
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="R60Login", version="0.1.0")
-app.include_router(login.router)
+from .api.routers.login import router as login_router
 
+app = FastAPI(title="R60Login")
 
-@app.exception_handler(BizError)
-async def _biz(_req: Request, exc: BizError) -> JSONResponse:
-    r = resolve(exc.error_id)
-    return JSONResponse(status_code=200, content=err(r["code"], r["message"]))
+# 開発時は Vite（5173）から、Docker 時は Nginx（8081）から呼ばれる。
+# 本番では R60_CORS_ORIGINS を実際のオリジンに絞る。
+_origins = [o.strip() for o in os.getenv(
+    "R60_CORS_ORIGINS", "http://localhost:5173,http://localhost:8081"
+).split(",") if o.strip()]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-
-@app.exception_handler(Exception)
-async def _sys(_req: Request, _exc: Exception) -> JSONResponse:
-    r = resolve("E-104")
-    return JSONResponse(status_code=500, content=err(r["code"], r["message"]))
+app.include_router(login_router)

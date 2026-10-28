@@ -1,10 +1,9 @@
-"""L-107 稼働状態チェック（3 端点の前処理）。"""
+"""L-114 稼働状態判定（3 端点のサーバ側前処理）。"""
 from __future__ import annotations
 
-from ..core.errors import BizError
+from ..repository.masters import operation_repo
 
 
-def ensure_online(online_flg: str | None) -> None:
-    """オンライン可（Y）でなければ業務エラー E-103。"""
-    if (online_flg or "").upper() != "Y":
-        raise BizError("E-103")
+def is_online(sys_id: str = "R60") -> bool:
+    row = operation_repo.get(sys_id)
+    return bool(row) and row.get("ONLINE_FLG") == "1"

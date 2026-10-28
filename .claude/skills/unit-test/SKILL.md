@@ -32,6 +32,9 @@ python -m plat gate
 6. **覆盖**：把 `TRACEABILITY.yaml` 的 `test_viewpoints` 补上。
 7. **自查**：`python -m plat gate`。
 
+> **人読版**：成果物を書いたら `python -m plat md --module <模块> --html` を実行する。
+> `readable/*.md`（日文・人読）と `*.zh.html`（中文ビュー）は**生成物**。手で編集しない。
+
 ## 产出（`tests/unit/`）
 `TC.yaml`（TC）＋ 执行结果（附在 TC 每一项的 `result`）＋ 必要なら `BUG.yaml`
 

@@ -2,64 +2,143 @@ doc: TRACEABILITY
 title: コード-設計 追溯対照表（R60Login）
 status: confirmed
 approved_by: ["SE-001"]
-approved_at: "2026-10-26"
+approved_at: "2026-10-27"
 version: '0.1'
 owner: SE-001
-created_at: '2026-10-26'
-updated_at: '2026-10-26'
+created_at: '2026-10-27'
+updated_at: '2026-10-27'
 human_review_required: true
-scope: 工程3 の L-101〜L-108 と、工程5 で実装したソースの対応
+scope: 工程3 の L-101〜L-117 をすべて実装。フロントは 12 画面項目と 3 API 呼び出しを実装。
 traces:
+- design_id: D-101
+  logic_ids:
+  - L-104
+  - L-105
+  - L-106
+  - L-107
+  - L-108
+  - L-109
+  - L-115
+  - L-116
+  test_viewpoints:
+  - TC-113
+  - TC-114
+  - TC-115
+  - TC-116
+  - TC-117
+  - TC-118
+  - TC-119
+  - TC-120
+  - TC-121
+  - TC-122
+  - TC-123
+  - TC-124
+  - TC-125
+  - TC-126
+  - TC-127
+  - TC-128
+  - TC-129
+  - TC-130
+  - TC-131
+  - TC-132
+  - TC-133
+  - TC-134
+  - TC-135
+  - TC-136
+  - TC-157
+  - TC-158
+  - TC-159
+  - TC-160
+  - TC-161
+  - TC-162
+  - TC-163
+  - TC-164
+  source_files:
+  - src/backend/app/logic/validate.py
+  - src/backend/app/logic/stmt_cipher.py
+  - src/backend/app/logic/login_service.py
+  - src/backend/app/logic/close_service.py
+  - src/backend/app/logic/error_classifier.py
+  - src/backend/app/repository/masters.py
 - design_id: D-102
   logic_ids:
   - L-101
-  source_files:
-  - src/backend/app/repository/masters.py
-  test_viewpoints: []
-- design_id: D-101
-  logic_ids:
-  - L-103
-  - L-104
-  source_files:
-  - src/backend/app/repository/masters.py
-  - src/backend/app/api/routers/login.py
-  test_viewpoints: []
-- design_id: D-101
-  logic_ids:
-  - L-106
-  source_files:
-  - src/backend/app/logic/stmt_cipher.py
-  test_viewpoints: []
-- design_id: D-102
-  logic_ids:
-  - L-105
-  source_files:
-  - src/backend/app/logic/url_builder.py
-  test_viewpoints: []
-- design_id: D-101
-  logic_ids:
   - L-102
+  - L-103
+  - L-111
+  - L-112
+  - L-113
+  - L-117
+  test_viewpoints:
+  - TC-101
+  - TC-102
+  - TC-103
+  - TC-104
+  - TC-105
+  - TC-106
+  - TC-107
+  - TC-108
+  - TC-109
+  - TC-110
+  - TC-111
+  - TC-112
+  - TC-141
+  - TC-142
+  - TC-143
+  - TC-144
+  - TC-145
+  - TC-146
+  - TC-147
+  - TC-148
+  - TC-149
+  - TC-150
+  - TC-151
+  - TC-152
+  - TC-165
+  - TC-166
+  - TC-167
+  - TC-168
   source_files:
-  - src/backend/app/logic/validate.py
-  test_viewpoints: []
+  - src/backend/app/logic/initializer.py
+  - src/backend/app/logic/menu_service.py
+  - src/backend/app/logic/generate_url_service.py
+  - src/backend/app/logic/login_service.py
 - design_id: D-103
   logic_ids:
-  - L-107
+  - L-101
+  - L-102
+  test_viewpoints:
+  - TC-101
+  - TC-102
+  - TC-103
+  - TC-104
+  - TC-105
+  - TC-106
+  - TC-107
+  - TC-108
+  source_files:
+  - src/backend/app/logic/initializer.py
+- design_id: D-104
+  logic_ids:
+  - L-110
+  test_viewpoints:
+  - TC-137
+  - TC-138
+  - TC-139
+  - TC-140
+  source_files:
+  - src/backend/app/core/session_store.py
+  - src/backend/app/logic/login_service.py
+- design_id: D-105
+  logic_ids:
+  - L-114
+  test_viewpoints:
+  - TC-153
+  - TC-154
+  - TC-155
+  - TC-156
   source_files:
   - src/backend/app/logic/operability.py
-  test_viewpoints: []
-- design_id: D-101
-  logic_ids:
-  - L-108
-  source_files:
-  - src/backend/app/core/errors.py
-  - src/backend/app/core/response.py
-  test_viewpoints: []
-unimplemented:
-- id: L-104
-  reason: Session 保存はサーバ側ストア未実装（セッション基盤は顧客の共通部品 Q-103 待ち）。
-- id: L-101
-  reason: 画面マスタの実 SELECT は接続層未実装。SQL 文とマッピングのみ用意（D-102）。
-- id: L-103
-  reason: 社員の存在確認は SQL 文とマッピングのみ。実接続は DB 環境が決まってから。
+unimplemented: []
 extra: []
+note: L-101〜L-117 をすべて実装。unimplemented / extra は実測で 0 件。

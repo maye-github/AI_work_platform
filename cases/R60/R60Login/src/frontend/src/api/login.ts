@@ -1,16 +1,14 @@
-import axios from "axios";
+const baseUrl = import.meta.env.VITE_API_BASE ?? 'http://localhost:8080'
 
-const http = axios.create({ baseURL: "/", timeout: 15000 });
+async function post<T>(path: string, params: Record<string, unknown>): Promise<T> {
+  const response = await fetch(`${baseUrl}${path}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ params }),
+  })
+  return (await response.json()) as T
+}
 
-export interface Item { value: string; label: string }
-export interface InitResp { errorCode: string; pageList?: Item[]; kbnList?: Item[] }
-export interface UrlResp { errorCode: string; url?: string }
-
-export const fetchInit = async (): Promise<InitResp> =>
-  (await http.post("/R60Login/init", { params: {} })).data;
-
-export const postLogin = async (params: Record<string, string>) =>
-  (await http.post("/R60Login/login", { params })).data;
-
-export const postGenerateUrl = async (params: Record<string, string>): Promise<UrlResp> =>
-  (await http.post("/R60Login/generateUrl", { params })).data;
+export const initLogin = () => post('/R60Login/init', {})
+export const doLogin = (params: Record<string, unknown>) => post('/R60Login/login', params)
+export const generateUrl = (params: Record<string, unknown>) => post('/R60Login/generateUrl', params)

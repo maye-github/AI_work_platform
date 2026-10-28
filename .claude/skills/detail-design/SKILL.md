@@ -26,6 +26,9 @@ python -m plat gate
 4. **境界値**：L の中に境界値を明記（テストはここから機械的に作られる）。
 5. **発番** → 書く（`status: draft`）→ `python -m plat gate`。
 
+> **人読版**：成果物を書いたら `python -m plat md --module <模块> --html` を実行する。
+> `readable/*.md`（日文・人読）と `*.zh.html`（中文ビュー）は**生成物**。手で編集しない。
+
 ## 产出（`designs/detail/`）
 `DSN.yaml`（D）／`LGC.yaml`（L）／`ERR.yaml`（E）
 

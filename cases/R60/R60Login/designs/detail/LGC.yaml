@@ -1,9 +1,9 @@
 id: L-101
 type: L
-title: 業務ロジック一覧
+title: 業務ロジック一覧（共通マスタログイン）
 status: confirmed
 approved_by: ["SE-001"]
-approved_at: "2026-10-26"
+approved_at: "2026-10-27"
 version: '0.1'
 related_ids:
 - L-101
@@ -14,32 +14,129 @@ related_ids:
 - L-106
 - L-107
 - L-108
+- L-109
+- L-110
+- L-111
+- L-112
+- L-113
+- L-114
+- L-115
+- L-116
+- L-117
 - D-101
 - D-102
 - D-103
+- D-104
+- D-105
 - E-101
 - E-102
 - E-103
 - E-104
 - E-105
+- E-106
+- E-107
+- E-108
+- E-109
+- E-110
+- E-111
 - F-101
 - F-102
 - F-103
+- F-104
 - F-105
+- F-106
 - F-107
 - F-108
 - F-109
+- F-110
+- F-111
+- F-112
+- F-113
+- F-114
+- R-101
+- R-102
+- R-103
+- R-104
+- R-105
+- R-106
+- R-107
+- R-108
+- R-109
+- R-110
+- Q-101
+- Q-102
+- Q-103
+- Q-104
+- Q-105
+- Q-106
+- Q-107
+- Q-108
+- Q-109
+- Q-110
+- Q-111
+- Q-112
+- ASM-101
+- ASM-102
+- ASM-103
+- ASM-104
+- ASM-105
+- ASM-106
+- ASM-107
+- ASM-108
+- ISS-101
+- ISS-102
+- ISS-103
 owner: SE-001
-created_at: '2026-10-26'
-updated_at: '2026-10-26'
+created_at: '2026-10-27'
+updated_at: '2026-10-27'
 sensitivity: internal
+note: API パラメータ（stfCd / errorCode / userInfo / mngInfo / pageList / kbnList）は正式なデータ項目が未定義のため、L の inputs / outputs では文字列名で表現する。IF.yaml は未作成（工程2 の任意成果物）。
 logic:
 - id: L-101
-  title: 初期表示処理
+  title: 初期表示API呼び出し
+  belongs_to: F-101
+  inputs: []
+  outputs:
+  - I-106
+  - I-107
+  steps:
+  - 'no': 1
+    do: 初期表示 API に空の params を送る。
+  - 'no': 2
+    do: 応答 errorCode を検証する。
+    cond: errorCode が "0"
+    else: 次のステップへ進む
+  - 'no': 3
+    do: messageId に応じた業務エラー（E-105/E-107）を返し L-116 へ渡す。
+    cond: errorCode が "1"
+    else: E-111 を返し L-116 へ渡す
+  - 'no': 4
+    do: pageList と kbnList を保持する。
+  boundaries:
+  - item: pageList
+    value: 0 件
+    expect: 画面は表示し、画面候補は未選択
+  - item: pageList
+    value: 1 件以上
+    expect: 先頭を初期選択
+  errors:
+  - E-105
+  - E-107
+  - E-111
+  note: 稼働状態チェックはサーバ側の前処理（L-114）で行い、不可時は E-105 が返る。
+  related_ids:
+  - F-101
+  - D-102
+  - D-103
+  - E-105
+  - E-107
+  - E-111
+  - L-116
+  - Q-104
+- id: L-102
+  title: 画面候補・権限区分候補の整形
   belongs_to: F-101
   inputs:
-  - I-101
-  - I-102
   - I-106
   - I-107
   outputs:
@@ -47,116 +144,408 @@ logic:
   - I-107
   steps:
   - 'no': 1
-    do: 画面タイトルを固定値で設定する
-    cond: null
-    else: null
+    do: pageList のうち有効フラグ=1 のものを残す。
   - 'no': 2
-    do: 画面マスタから有効な候補を表示順で取得する
-    cond: null
-    else: null
+    do: 表示順の昇順に並べる。
   - 'no': 3
-    do: 権限区分候補（Y/N）を設定し、初期値を Y にする
-    cond: null
-    else: null
+    do: 同一画面のシミュレーション版も除外せず保持する（ASM-106）。
   - 'no': 4
-    do: 各入力を初期値にする（ユーザーＩＤ・URL は空白、起動区分は 3）
-    cond: null
-    else: null
-  boundaries: []
-  errors:
-  - E-104
+    do: kbnList を Y=更新あり / N=更新なし の順に整える。
+  boundaries:
+  - item: pageList
+    value: 0 件
+    expect: 空リストのまま画面表示
+  - item: pageList
+    value: 1 件
+    expect: その 1 件が初期値
+  errors: []
   related_ids:
-  - L-101
   - F-101
-  - E-104
   - D-102
-- id: L-102
-  title: 入力チェック
+  - D-103
+  - ASM-102
+  - ASM-106
+  - Q-104
+- id: L-103
+  title: 画面初期値設定
   belongs_to: F-102
   inputs:
-  - I-103
-  outputs:
-  - 妥当/不可
-  steps:
-  - 'no': 1
-    do: 未入力か
-    cond: 未入力
-    else: 業務エラー E-101
-  - 'no': 2
-    do: 半角数字 7 桁か
-    cond: 半角数字以外または桁違い
-    else: 業務エラー E-101
-  boundaries:
-  - item: I-103
-    value: '7'
-    expect: 妥当
-  - item: I-103
-    value: '6'
-    expect: 不可 E-101
-  - item: I-103
-    value: '8'
-    expect: 不可 E-101
-  errors:
-  - E-101
-  related_ids:
-  - L-102
-  - F-102
-  - E-101
-- id: L-103
-  title: ログイン判定
-  belongs_to: F-103
-  inputs:
-  - I-103
   - I-106
   - I-107
   outputs:
-  - ログイン可否
-  - 利用者情報
+  - I-101
+  - I-102
+  - I-103
+  - I-104
+  - I-105
+  - I-106
+  - I-107
+  - I-108
+  - I-109
+  - I-110
+  - I-111
+  - I-112
   steps:
   - 'no': 1
-    do: stfCd を復号して平文社員コードを得る
-    cond: null
-    else: null
+    do: I-101 に固定タイトル「共通マスタ　ログイン」を設定する。
   - 'no': 2
-    do: 社員マスタを社員コードで参照する（DEL_FLG=N のみ）
-    cond: 1 件
-    else: 次工程へ
+    do: I-102 にサーバ日時を YYYY/MM/DD hh:mm:ss で設定する。
   - 'no': 3
-    do: 該当なし
-    cond: 0 件
-    else: 業務エラー E-102
-  boundaries: []
-  errors:
-  - E-102
-  - E-105
+    do: I-103 を空白、I-104 を "3"、I-110 を空白に設定する。
+  - 'no': 4
+    do: I-105 に固定説明文「1：本店ユーザー、2：工場ユーザー、3：システム管理者」を設定する。
+  - 'no': 5
+    do: I-106 に pageList 先頭、I-107 に "Y" を設定する。
+  - 'no': 6
+    do: I-108・I-109・I-111・I-112 を活性に設定する。
+  boundaries:
+  - item: I-106
+    value: pageList 0 件
+    expect: 未選択
+  errors: []
   related_ids:
-  - L-103
-  - F-103
-  - E-102
-  - E-105
-  - D-101
+  - F-102
+  - I-101
+  - I-102
+  - I-103
+  - I-104
+  - I-105
+  - I-106
+  - I-107
+  - I-108
+  - I-109
+  - I-110
+  - I-111
+  - I-112
+  - Q-108
+  - ASM-106
 - id: L-104
-  title: Session 保存
+  title: ユーザーＩＤチェック
   belongs_to: F-103
   inputs:
-  - 利用者情報
-  outputs:
-  - Session
+  - I-103
+  outputs: []
   steps:
   - 'no': 1
-    do: 会社コード・事業場コード・氏名・社員コードを Session に保存する
-    cond: null
-    else: null
-  boundaries: []
+    do: I-103 の必須チェックを行う。
+    cond: 空でない
+    else: E-101 を返し L-116 へ渡す
+  - 'no': 2
+    do: I-103 の半角 7 桁チェックを行う。
+    cond: 半角数字 7 桁である
+    else: E-102 を返し L-116 へ渡す
+  - 'no': 3
+    do: 妥当として次工程へ渡す。
+  boundaries:
+  - item: I-103
+    value: 6 桁
+    expect: E-102
+  - item: I-103
+    value: 7 桁
+    expect: 妥当
+  - item: I-103
+    value: 8 桁
+    expect: E-102
+  - item: I-103
+    value: 全角数字
+    expect: E-102
+  - item: I-103
+    value: 英字を含む
+    expect: E-102
   errors:
+  - E-101
   - E-102
   related_ids:
-  - L-104
   - F-103
+  - I-103
+  - R-102
+  - L-116
+  - E-101
   - E-102
 - id: L-105
-  title: 遷移 URL の生成
+  title: 起動区分チェック
+  belongs_to: F-103
+  inputs:
+  - I-104
+  outputs: []
+  steps:
+  - 'no': 1
+    do: I-104 が 1／2／3 のいずれかであることを検証する。
+    cond: いずれかである
+    else: E-103 を返し L-116 へ渡す
+  boundaries:
+  - item: I-104
+    value: '"1"'
+    expect: 妥当
+  - item: I-104
+    value: '"2"'
+    expect: 妥当
+  - item: I-104
+    value: '"3"'
+    expect: 妥当
+  - item: I-104
+    value: '"0"'
+    expect: E-103
+  - item: I-104
+    value: '"4"'
+    expect: E-103
+  - item: I-104
+    value: 空
+    expect: E-103
+  - item: I-104
+    value: 英字
+    expect: E-103
+  errors:
+  - E-103
+  related_ids:
+  - F-103
+  - I-104
+  - Q-110
+  - L-116
+  - E-103
+- id: L-106
+  title: 社員コード暗号化
+  belongs_to: F-104
+  inputs:
+  - I-103
+  outputs:
+  - 暗号化済み社員コード
+  steps:
+  - 'no': 1
+    do: 当日日付 yyyymmdd を鍵の材料にする。
+  - 'no': 2
+    do: 社員コードを暗号化する（Q-111 の模拟方式）。
+  - 'no': 3
+    do: 暗号化済み社員コードを L-107 へ引き渡す。
+  boundaries:
+  - item: 社員コード
+    value: 半角 7 桁
+    expect: 暗号化成功
+  - item: 日付
+    value: 当日
+    expect: 当日内の復号で一致
+  errors: []
+  note: 【模拟】AES-128-CBC、鍵=yyyymmdd の SHA-256 先頭 16 バイト、IV=固定（全ゼロ）、暗号文は Base64URL。
+  related_ids:
+  - F-104
+  - I-103
+  - R-110
+  - ASM-103
+  - Q-111
+- id: L-107
+  title: ログインAPI呼び出しと応答分岐
   belongs_to: F-105
+  inputs:
+  - I-103
+  - I-104
+  - I-106
+  - I-107
+  - 暗号化済み社員コード
+  outputs: []
+  steps:
+  - 'no': 1
+    do: gmnId が選択されていることを確認する。
+    cond: 選択済み
+    else: E-108 を返し L-116 へ渡す
+  - 'no': 2
+    do: params {stfCd(暗号化済み), stfKbn, gmnId, kgnKbn} を送る。
+  - 'no': 3
+    do: userInfo・mngInfo を保持して F-107 へ渡す。
+    cond: errorCode が "0"
+    else: 次のステップへ進む
+  - 'no': 4
+    do: messageId に応じて E-104/E-105/E-106 を返し L-116 へ渡す。
+    cond: errorCode が "1"
+    else: 次のステップへ進む
+  - 'no': 5
+    do: E-111 を返し L-116 へ渡す。
+    cond: errorCode が "9"
+    else: E-111 を返し L-116 へ渡す
+  boundaries:
+  - item: errorCode
+    value: '"0"'
+    expect: 成功
+  - item: errorCode
+    value: '"1"'
+    expect: 業務エラー（E-104）
+  - item: errorCode
+    value: '"9"'
+    expect: システムエラー（E-111）
+  errors:
+  - E-104
+  - E-105
+  - E-108
+  - E-111
+  note: 稼働状態チェックはサーバ側の前処理（L-114）で行い、不可時は E-105 が返る。
+  related_ids:
+  - F-105
+  - I-103
+  - I-104
+  - I-106
+  - I-107
+  - R-103
+  - E-104
+  - E-105
+  - E-108
+  - E-111
+  - L-114
+  - L-116
+  - Q-109
+- id: L-108
+  title: 社員コード復号
+  belongs_to: F-106
+  inputs:
+  - stfCd
+  outputs:
+  - 復号済み社員コード
+  steps:
+  - 'no': 1
+    do: stfCd を当日鍵で復号する。
+    cond: 復号成功
+    else: E-106 を返し L-116 へ渡す
+  - 'no': 2
+    do: 復号結果を存在確認へ渡す。
+  boundaries:
+  - item: stfCd
+    value: 当日鍵で暗号化した値
+    expect: 復号成功
+  - item: stfCd
+    value: 前日鍵で暗号化した値
+    expect: E-106
+  errors:
+  - E-106
+  note: 【模拟】復号方式は Q-111 の模拟方式に従う。
+  related_ids:
+  - F-106
+  - R-110
+  - L-116
+  - E-106
+  - Q-111
+- id: L-109
+  title: 社員存在確認
+  belongs_to: F-106
+  inputs:
+  - 復号済み社員コード
+  outputs:
+  - userInfo
+  - mngInfo
+  steps:
+  - 'no': 1
+    do: 社員マスタを STF_CD で検索する。
+  - 'no': 2
+    do: 存在し、かつ論理削除されていないことを確認する。
+    cond: 存在し DEL_FLG が "0"
+    else: E-104 を返し L-116 へ渡す
+  - 'no': 3
+    do: CMP_CD・JGY_CD・STF_NM を取得する。
+  - 'no': 4
+    do: 所属・権限・有効期限は判定しない（ASM-108）。
+  boundaries:
+  - item: DEL_FLG
+    value: '"0"'
+    expect: ログイン可
+  - item: DEL_FLG
+    value: '"1"'
+    expect: E-104
+  errors:
+  - E-104
+  related_ids:
+  - F-106
+  - D-101
+  - R-103
+  - ASM-101
+  - ASM-108
+  - L-116
+  - E-104
+- id: L-110
+  title: セッション保存
+  belongs_to: F-107
+  inputs:
+  - userInfo
+  - mngInfo
+  outputs: []
+  steps:
+  - 'no': 1
+    do: STF_CD・CMP_CD・JGY_CD・STF_NM を Session に保存する。
+    cond: 保存成功
+    else: E-111 を返し L-116 へ渡す
+  - 'no': 2
+    do: 後続の業務画面から参照可能にする。
+  boundaries:
+  - item: Session
+    value: 保存成功
+    expect: 保存される
+  - item: Session
+    value: 保存失敗
+    expect: E-111
+  errors:
+  - E-111
+  note: mngInfo の内容は素材に定義が無い（Q-106 / ISS-102）。保存項目は userInfo の範囲に限定する。
+  related_ids:
+  - F-107
+  - D-104
+  - R-104
+  - Q-106
+  - L-116
+  - ISS-102
+- id: L-111
+  title: ログイン成功時の遷移先決定
+  belongs_to: F-108
+  inputs:
+  - I-106
+  - I-107
+  outputs: []
+  steps:
+  - 'no': 1
+    do: 選択済みの gmnId を遷移先にする。
+  - 'no': 2
+    do: kgnKbn（権限区分）を遷移先へ引き継ぐ。
+  - 'no': 3
+    do: 遷移方式は Q-101 に従う。
+  boundaries:
+  - item: gmnId
+    value: 選択済み
+    expect: 遷移先が決まる
+  errors: []
+  related_ids:
+  - F-108
+  - I-106
+  - I-107
+  - R-103
+  - Q-101
+- id: L-112
+  title: メニュー遷移
+  belongs_to: F-109
+  inputs:
+  - I-104
+  outputs: []
+  steps:
+  - 'no': 1
+    do: メニュー画面へ遷移する。
+  - 'no': 2
+    do: stfKbn（起動区分）を引き継ぐ。
+  - 'no': 3
+    do: 遷移方式は Q-101 に従う。
+  boundaries:
+  - item: stfKbn
+    value: '"1"'
+    expect: 引き継ぎ
+  - item: stfKbn
+    value: '"2"'
+    expect: 引き継ぎ
+  - item: stfKbn
+    value: '"3"'
+    expect: 引き継ぎ
+  errors: []
+  related_ids:
+  - F-109
+  - I-104
+  - R-105
+  - Q-101
+  - Q-109
+- id: L-113
+  title: URL出力要求と表示
+  belongs_to: F-110
   inputs:
   - I-103
   - I-104
@@ -166,112 +555,210 @@ logic:
   - I-110
   steps:
   - 'no': 1
-    do: 社員コードを暗号化する
-    cond: null
-    else: null
+    do: 起動区分を検証する（L-105）。
+    cond: 1／2／3 のいずれか
+    else: E-103 を返し L-116 へ渡す
   - 'no': 2
-    do: stfCd / stfKbn / gmnId / kgnKbn の順で URL を組み立てる
-    cond: null
-    else: null
+    do: params {stfCd(平文), stfKbn, gmnId, kgnKbn} を送る。
   - 'no': 3
-    do: host/port は環境設定から取得する
-    cond: null
-    else: null
-  boundaries:
-  - item: I-110
-    value: '150'
-    expect: 受理
-  - item: I-110
-    value: '151'
-    expect: 不可（上限超過）
-  errors:
-  - E-101
-  related_ids:
-  - L-105
-  - F-105
-  - E-101
-  - D-102
-- id: L-106
-  title: 社員コードの暗号化・復号
-  belongs_to: F-109
-  inputs:
-  - 平文社員コード
-  outputs:
-  - 暗号化/復号結果
-  steps:
-  - 'no': 1
-    do: 当日日付（yyyymmdd）を鍵材料にする
-    cond: null
-    else: null
-  - 'no': 2
-    do: 桁変換して暗号化する
-    cond: null
-    else: null
-  - 'no': 3
-    do: 復号時は同じ当日鍵を用いる
-    cond: null
-    else: null
+    do: 応答を処理する。
+    cond: errorCode が "0"
+    else: 次のステップへ進む
   - 'no': 4
-    do: 復号できない
-    cond: null
-    else: 業務エラー E-105
-  boundaries: []
+    do: messageId に応じた業務エラー（E-103/E-105）を返し L-116 へ渡す。
+    cond: errorCode が "1"
+    else: E-111 を返し L-116 へ渡す
+  - 'no': 5
+    do: I-110 に url を表示する。
+    cond: url が 150 文字以内
+    else: E-109 を返し L-116 へ渡す
+  boundaries:
+  - item: url
+    value: 150 文字
+    expect: 表示可
+  - item: url
+    value: 151 文字
+    expect: E-109
   errors:
+  - E-103
   - E-105
+  - E-109
+  - E-111
+  note: 稼働状態チェックはサーバ側の前処理（L-114）で行い、不可時は E-105 が返る。
   related_ids:
-  - L-106
-  - F-109
+  - F-110
+  - I-103
+  - I-104
+  - I-106
+  - I-107
+  - I-110
+  - R-106
+  - Q-107
+  - Q-110
+  - Q-112
+  - E-103
   - E-105
-- id: L-107
-  title: 稼働状態チェック
-  belongs_to: F-107
-  inputs: []
-  outputs:
-  - 可/不可
+  - E-109
+  - E-111
+  - L-105
+  - L-116
+- id: L-114
+  title: 稼働状態判定
+  belongs_to: F-111
+  inputs:
+  - ONLINE_FLG
+  outputs: []
   steps:
   - 'no': 1
-    do: 稼働状態を参照する
-    cond: ONLINE_FLG=Y
-    else: 続行
+    do: 稼働状態マスタの ONLINE_FLG を参照する。
   - 'no': 2
-    do: オンライン不可
-    cond: ONLINE_FLG=N
-    else: 業務エラー E-103
-  boundaries: []
+    do: 利用可と判定する。
+    cond: ONLINE_FLG が "1"
+    else: E-105 を返す
+  boundaries:
+  - item: ONLINE_FLG
+    value: '"1"'
+    expect: 利用可
+  - item: ONLINE_FLG
+    value: '"0"'
+    expect: E-105
   errors:
-  - E-103
+  - E-105
+  note: 3 端点のサーバ側前処理として実行する（クライアントからは呼ばない）。
   related_ids:
-  - L-107
-  - F-107
-  - E-103
-  - D-103
-- id: L-108
+  - F-111
+  - D-105
+  - R-107
+  - Q-105
+  - ASM-104
+  - E-105
+- id: L-115
+  title: 確認メッセージと終了
+  belongs_to: F-112
+  inputs: []
+  outputs: []
+  steps:
+  - 'no': 1
+    do: 確認メッセージ E-110 を表示する。
+  - 'no': 2
+    do: 画面を閉じる。
+    cond: 「はい」
+    else: 何もしない
+  boundaries:
+  - item: I-112
+    value: 「はい」
+    expect: 画面を閉じる
+  - item: I-112
+    value: 「いいえ」
+    expect: 画面に戻る
+  errors:
+  - E-110
+  note: E-110 は info メッセージ。schema に messages が無いため errors に置く（要 schema 改訂）。
+  related_ids:
+  - F-112
+  - I-112
+  - R-108
+  - Q-102
+  - E-110
+- id: L-116
   title: エラー区分と遷移
-  belongs_to: F-108
-  inputs: []
-  outputs:
-  - 区分されたエラー
+  belongs_to: F-113
+  inputs:
+  - エラー区分
+  outputs: []
   steps:
   - 'no': 1
-    do: 業務エラーならメッセージを解決してセッションエラー画面へ遷移させる
-    cond: null
-    else: null
+    do: エラー区分（正常／業務エラー／システムエラー）を判定する。
   - 'no': 2
-    do: システムエラーなら汎用エラー応答を返す
-    cond: null
-    else: null
-  boundaries: []
+    do: セッションエラー画面へ遷移する。
+    cond: 業務エラー
+    else: 次のステップへ進む
+  - 'no': 3
+    do: システムエラー処理へ渡す。
+    cond: システムエラー
+    else: 正常終了する
+  boundaries:
+  - item: エラー区分
+    value: 業務エラー
+    expect: セッションエラー画面へ遷移
+  - item: エラー区分
+    value: システムエラー
+    expect: システムエラー処理へ
+  - item: エラー区分
+    value: 正常
+    expect: 何もしない
   errors:
   - E-101
   - E-102
   - E-103
   - E-104
   - E-105
+  - E-106
+  - E-107
+  - E-108
+  - E-109
+  - E-111
   related_ids:
-  - L-108
-  - F-108
-  - E-101
-  - E-102
+  - F-113
+  - R-109
+  - Q-102
+  - Q-103
+  - ISS-101
+- id: L-117
+  title: 遷移URL組立
+  belongs_to: F-114
+  inputs:
+  - stfCd
+  - stfKbn
+  - gmnId
+  - kgnKbn
+  outputs:
+  - url
+  steps:
+  - 'no': 1
+    do: 社員コードを決定する。
+    cond: stfCd が空でない
+    else: '"NaN" を社員コードとして扱う'
+  - 'no': 2
+    do: 社員コードを当日鍵で暗号化する。
+  - 'no': 3
+    do: stfKbn を検証する。
+    cond: 1／2／3 のいずれか
+    else: E-103 を返す
+  - 'no': 4
+    do: host／port を環境設定から取得する。
+    cond: 取得成功
+    else: E-111 を返す
+  - 'no': 5
+    do: stfCd・stfKbn・gmnId・kgnKbn の順で URL を組み立てる。
+  - 'no': 6
+    do: 暗号化値を URL エンコードする（ASM-107）。
+  boundaries:
+  - item: stfCd
+    value: 未入力
+    expect: '"NaN" を暗号化して URL に載せる'
+  - item: stfKbn
+    value: '"1"'
+    expect: URL 組立可
+  - item: stfKbn
+    value: '"0"'
+    expect: E-103
+  - item: stfKbn
+    value: '"4"'
+    expect: E-103
+  errors:
   - E-103
-  - E-104
-  - E-105
+  - E-111
+  note: 【模拟】暗号化方式は Q-111 の模拟方式に従う。
+  related_ids:
+  - F-114
+  - R-106
+  - R-110
+  - Q-107
+  - Q-110
+  - Q-111
+  - ASM-103
+  - ASM-105
+  - ASM-107
+  - E-103
+  - E-111

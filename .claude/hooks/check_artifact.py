@@ -49,6 +49,24 @@ def main() -> int:
     if p.name in ("module.yaml", "README.md"):
         return 0
 
+    # 成果物 YAML を書いたら、そのモジュールの人読版（readable/*.md + *.zh.html）を再生成する。
+    # 生成物なので手で編集しない。失敗しても作業は止めない。
+    parts = rel.split("/")
+    if (p.suffix.lower() in (".yaml", ".yml") and len(parts) >= 3
+            and "readable" not in parts and "raw" not in parts):
+        case, module = parts[1], parts[2]
+        try:
+            r = subprocess.run(
+                [sys.executable, "-m", "plat", "md", "--case", case,
+                 "--module", module, "--html"],
+                cwd=str(ROOT), capture_output=True, text=True,
+                encoding="utf-8", timeout=60,
+            )
+            if r.returncode != 0:
+                print(f"[hook] 人読版の生成に失敗しました: {r.stderr[:300]}", file=sys.stderr)
+        except Exception as e:  # フックは絶対に作業を止めない
+            print(f"[hook] 人読版を生成できませんでした: {e}", file=sys.stderr)
+
     try:
         r = subprocess.run(
             [sys.executable, "-m", "plat", "gate", "--json"],

@@ -3,7 +3,7 @@ type: I
 title: 画面項目一覧（共通マスタログイン）
 status: confirmed
 approved_by: ["SE-001"]
-approved_at: "2026-10-26"
+approved_at: "2026-10-27"
 version: '0.1'
 related_ids:
 - I-101
@@ -27,9 +27,47 @@ related_ids:
 - F-107
 - F-108
 - F-109
+- F-110
+- F-111
+- F-112
+- F-113
+- F-114
+- R-101
+- R-102
+- R-103
+- R-104
+- R-105
+- R-106
+- R-107
+- R-108
+- R-109
+- R-110
+- Q-101
+- Q-102
+- Q-103
+- Q-104
+- Q-105
+- Q-106
+- Q-107
+- Q-108
+- Q-109
+- Q-110
+- Q-111
+- Q-112
+- ASM-101
+- ASM-102
+- ASM-103
+- ASM-104
+- ASM-105
+- ASM-106
+- ASM-107
+- ASM-108
+- ISS-101
+- ISS-102
+- ISS-103
 owner: SE-001
-created_at: '2026-10-26'
-updated_at: '2026-10-26'
+created_at: '2026-10-27'
+updated_at: '2026-10-27'
 sensitivity: internal
 items:
 - id: I-101
@@ -39,27 +77,23 @@ items:
   data_type: string
   length: null
   required: false
-  spec: 固定値「共通マスタ　ログイン」（全角空白を含む）
   source_req: R-101
-  source_function: F-101
+  spec: 固定値「共通マスタ　ログイン」を表示する。
   related_ids:
-  - I-101
   - R-101
-  - F-101
+  - F-102
 - id: I-102
   title: システム日時
   screen: 共通マスタログイン
   kind: label
-  data_type: string
-  length: null
+  data_type: date
+  length: 19
   required: false
-  spec: YYYY/MM/DD hh:mm:ss
   source_req: R-101
-  source_function: F-101
+  spec: YYYY/MM/DD hh:mm:ss 形式で表示する。
   related_ids:
-  - I-102
   - R-101
-  - F-101
+  - F-102
 - id: I-103
   title: ユーザーＩＤ
   screen: 共通マスタログイン
@@ -67,13 +101,14 @@ items:
   data_type: string
   length: 7
   required: true
-  spec: 社員コード。半角 7 桁・必須・初期値空白
   source_req: R-102
-  source_function: F-102
+  spec: 社員コード。半角 7 桁。初期値は空白。
   related_ids:
-  - I-103
   - R-102
-  - F-102
+  - F-103
+  - F-104
+  - F-105
+  - F-110
 - id: I-104
   title: 起動区分
   screen: 共通マスタログイン
@@ -81,13 +116,16 @@ items:
   data_type: code
   length: 1
   required: false
-  spec: 1=本店 2=工場 3=システム管理者・初期値 3・ログイン可否に影響しない
   source_req: R-101
-  source_function: F-101
+  spec: 初期値「3」。1＝本店ユーザー／2＝工場ユーザー／3＝システム管理者。1／2／3 のみ許可（Q-110）。
   related_ids:
-  - I-104
   - R-101
-  - F-101
+  - R-106
+  - F-103
+  - F-105
+  - F-109
+  - F-110
+  - Q-110
 - id: I-105
   title: 説明文
   screen: 共通マスタログイン
@@ -95,13 +133,11 @@ items:
   data_type: string
   length: null
   required: false
-  spec: 「1：本店ユーザー、2：工場ユーザー、3：システム管理者」
   source_req: R-101
-  source_function: F-101
+  spec: 「1：本店ユーザー、2：工場ユーザー、3：システム管理者」を表示する。
   related_ids:
-  - I-105
   - R-101
-  - F-101
+  - F-102
 - id: I-106
   title: 画面
   screen: 共通マスタログイン
@@ -109,13 +145,15 @@ items:
   data_type: code
   length: null
   required: false
-  spec: 画面マスタから取得（全社共通）。初期値は先頭
   source_req: R-101
-  source_function: F-101
+  spec: 画面マスタの有効な候補を表示順に表示する。初期値は先頭。利用者ごとに絞り込まない。
   related_ids:
-  - I-106
   - R-101
   - F-101
+  - F-105
+  - F-108
+  - F-110
+  - Q-104
 - id: I-107
   title: 権限区分
   screen: 共通マスタログイン
@@ -123,13 +161,15 @@ items:
   data_type: code
   length: 1
   required: false
-  spec: 更新あり／更新なし。初期値「更新あり」。遷移先へ引き継ぐ
   source_req: R-101
-  source_function: F-101
+  spec: 更新あり／更新なし。初期値は「更新あり」。遷移先へ引き継ぐ。
   related_ids:
-  - I-107
   - R-101
+  - R-106
   - F-101
+  - F-105
+  - F-108
+  - F-110
 - id: I-108
   title: ログイン
   screen: 共通マスタログイン
@@ -137,13 +177,13 @@ items:
   data_type: '-'
   length: null
   required: false
-  spec: 初期状態は活性
   source_req: R-103
-  source_function: F-103
+  spec: 初期状態は活性。押下で F-103 → F-105 → F-108 を実行する。
   related_ids:
-  - I-108
   - R-103
   - F-103
+  - F-105
+  - F-108
 - id: I-109
   title: メニュー
   screen: 共通マスタログイン
@@ -151,13 +191,11 @@ items:
   data_type: '-'
   length: null
   required: false
-  spec: 初期状態は活性。起動区分を引き継ぐ
   source_req: R-105
-  source_function: F-104
+  spec: 初期状態は活性。押下で F-109 を実行する。
   related_ids:
-  - I-109
   - R-105
-  - F-104
+  - F-109
 - id: I-110
   title: URL
   screen: 共通マスタログイン
@@ -165,13 +203,12 @@ items:
   data_type: string
   length: 150
   required: false
-  spec: 半角。入力上限 150 文字・表示幅 120 文字。利用者が直接編集できる
   source_req: R-106
-  source_function: F-105
+  spec: 半角。入力上限 150 文字、表示幅 120 文字（超える分は表示上スクロール）。利用者が直接編集できる。
   related_ids:
-  - I-110
   - R-106
-  - F-105
+  - F-110
+  - Q-112
 - id: I-111
   title: URL出力
   screen: 共通マスタログイン
@@ -179,13 +216,11 @@ items:
   data_type: '-'
   length: null
   required: false
-  spec: 初期状態は活性
   source_req: R-106
-  source_function: F-105
+  spec: 初期状態は活性。押下で F-110 を実行する。
   related_ids:
-  - I-111
   - R-106
-  - F-105
+  - F-110
 - id: I-112
   title: 閉じる
   screen: 共通マスタログイン
@@ -193,10 +228,8 @@ items:
   data_type: '-'
   length: null
   required: false
-  spec: 初期状態は活性。確認メッセージのうえ閉じる
   source_req: R-108
-  source_function: F-106
+  spec: 初期状態は活性。押下で確認メッセージを表示して F-112 を実行する。
   related_ids:
-  - I-112
   - R-108
-  - F-106
+  - F-112
