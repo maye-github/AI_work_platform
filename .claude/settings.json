@@ -5,14 +5,38 @@
     "deny": [
       "Read(./registry/MASK_MAP.yaml)",
       "Read(./cases/*/*/raw/**)",
+      "Read(./cases/*/*/requirements/raw/**)",
       "Read(./.env)",
       "Read(./.env.*)",
       "Read(./**/*.pem)",
       "Read(./**/id_rsa)"
     ]
   },
-  "_comment_hooks": "フックは 1 本だけ。成果物（cases/**）の YAML を書いた直後に人読版（readable/*.md + *.zh.html）を再生成し、門番を回して ERROR だけを表示する（exit 0 固定・作業を止めない）。",
+  "_comment_hooks": "PreToolUse: AI の raw/ 直接アクセスを遮断。PostToolUse: 成果物 YAML を書いた直後に人読版を再生成し、門番を回して ERROR だけを表示（exit 0 固定・作業を止めない）。",
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/session_start.py\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read|Grep|Glob|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard_raw.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit|NotebookEdit",

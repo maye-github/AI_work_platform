@@ -100,6 +100,7 @@ draft ──▶ reviewed ──▶ confirmed ──▶ frozen ──▶ (終端)
   **不生成日文 `.html`**；`.zh.md` 用完即删。
 - 各成果物の**人読版**は `plat md` が `readable/` に生成する（YAML が正）。
   `readable/*.md` と `*.zh.html` は**生成物**で、手で編集しない。
+- **AI は `raw/` を直接読まない。** 工程1 の取込前に `plat mask prep` を実行し、`requirements/ai_input/` を読む。
 - 对外的正式版（Excel / Word）由 `plat export` 生成，放 `export/`（不入库）。
 - **中文视图里不翻译实现值**（画面文言、项目名、ID）。译了就等于改规格。
 
@@ -132,6 +133,7 @@ Review: <人的标识符>
 5. 生成物（`.zh.html` / `export/**`）を直接編集すること
 6. 未マスクの機密を成果物・対外物へ書くこと
 7. `plat gate` を通さないコミット
+8. AI に `raw/` を直接読ませること（`plat mask prep` の `ai_input/` を読む）
 
 ---
 
@@ -164,5 +166,7 @@ Review: <人的标识符>
 5. 未確定：<人に決めてほしいこと。無ければ「無し」>
 6. 停止理由：<止まったなら。無ければ「無し」>
 ```
+
+**工程の終わり**：`python -m plat handoff --module <模块> --write` を実行し、`SESSION_HANDOFF.md` の `AI-NOTES` に「今回決めたこと・なぜ」を 3〜5 条残す。新セッションはこのファイルから始める。
 
 **報告で守ること**：実測値（コマンドの生出力）を添える。「確認しました」「問題ありません」だけの報告は**報告ではない**。

@@ -1,0 +1,19 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f8fafc;color:#111827;font-family:-apple-system,"Segoe UI","Microsoft YaHei",Meiryo,sans-serif;padding:30px 34px}
+h2{margin:0 0 4px;font-size:24px;color:#1d4ed8}
+.sub{color:#6b7280;font-size:13px;margin:0 0 16px}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:13px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+th,td{border:1px solid #e5e7eb;padding:8px 10px;vertical-align:top;text-align:left}
+th{background:#eef2ff;font-weight:700;white-space:nowrap}
+td.d{color:#1d4ed8;font-weight:700;white-space:nowrap}
+td.src{font-family:Consolas,Menlo,monospace;font-size:11px;color:#374151}
+tr:nth-child(even) td{background:#fcfcfd}
+.foot{margin-top:10px;font-size:11px;color:#6b7280}
+</style></head><body>
+<h2>コード-設計 追溯対照表（R60Login）</h2>
+<p class="sub">D → L → TC → 源码（按实际 TRACEABILITY.yaml 制作）</p>
+<table><tr><th>設計</th><th>ロジック</th><th>テスト観点</th><th>ソース</th></tr><tr><td class='d'>D-101</td><td>L-104<br>L-105<br>L-106<br>L-107<br>L-108<br>L-109<br>L-115<br>L-116</td><td>TC-113<br>TC-114<br>TC-115<br>TC-116<br>TC-117<br>TC-118<br>… 他 26 件</td><td class='src'>src/backend/app/logic/validate.py<br>src/backend/app/logic/stmt_cipher.py<br>src/backend/app/logic/login_service.py<br>… 他 3 件</td></tr><tr><td class='d'>D-102</td><td>L-101<br>L-102<br>L-103<br>L-111<br>L-112<br>L-113<br>L-117</td><td>TC-101<br>TC-102<br>TC-103<br>TC-104<br>TC-105<br>TC-106<br>… 他 22 件</td><td class='src'>src/backend/app/logic/initializer.py<br>src/backend/app/logic/menu_service.py<br>src/backend/app/logic/generate_url_service.py<br>… 他 1 件</td></tr><tr><td class='d'>D-103</td><td>L-101<br>L-102</td><td>TC-101<br>TC-102<br>TC-103<br>TC-104<br>TC-105<br>TC-106<br>… 他 2 件</td><td class='src'>src/backend/app/logic/initializer.py</td></tr><tr><td class='d'>D-104</td><td>L-110</td><td>TC-137<br>TC-138<br>TC-139<br>TC-140</td><td class='src'>src/backend/app/core/session_store.py<br>src/backend/app/logic/login_service.py</td></tr><tr><td class='d'>D-105</td><td>L-114</td><td>TC-153<br>TC-154<br>TC-155<br>TC-156</td><td class='src'>src/backend/app/logic/operability.py</td></tr></table>
+<div class="foot">出典：cases/R60/R60Login/src/TRACEABILITY.yaml</div>
+</body></html>

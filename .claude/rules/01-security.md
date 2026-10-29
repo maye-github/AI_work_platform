@@ -49,6 +49,8 @@ plat mask list --safe                                  # 対照一覧（画面�
 
 - `registry/MASK_MAP.yaml` は**それ自体が機密**。`.gitignore` 済み、コミット禁止、外発禁止。
 - `raw/`（日方の生資料）も同様。**成果物には代号だけを書く**。
+- **工程1 の取込前**：`plat mask prep --module <模块>` を実行し、AI は `requirements/ai_input/` **だけ**を読む。
+  `raw/` は AI が直接読まない（`guard_raw` フックが遮断する）。`raw_requirements.md` は脱敏後の正規化ファイルとして例外的に読み書きできる。
 
 ## 5. 外に出す前の 3 点チェック
 

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f8fafc;color:#111827;
+       font-family:-apple-system,"Segoe UI","Microsoft YaHei",Meiryo,sans-serif;
+       padding:28px 34px}
+  h2{margin:0 0 4px;font-size:24px;color:#1d4ed8}
+  .sub{color:#6b7280;font-size:13px;margin:0 0 14px}
+  table{border-collapse:collapse;width:100%;background:#fff;font-size:15px;
+        box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  th,td{border:1px solid #e5e7eb;padding:8px 11px;text-align:left;vertical-align:top}
+  th{background:#1d4ed8;color:#fff;font-weight:700;white-space:nowrap}
+  td.dir{font-family:Consolas,"Cascadia Mono",Menlo,monospace;color:#1d4ed8;
+         font-weight:700;white-space:nowrap}
+  td.note{color:#4b5563;font-size:13.5px}
+  tbody tr:nth-child(even){background:#fbfcff}
+  .foot{margin-top:10px;font-size:11px;color:#6b7280}
+</style>
+</head>
+<body>
+  <h2>项目目录架构：每个目录做什么</h2>
+  <p class="sub">AI_work_platform_dev/　（源码、成果物、规则、台账、演示各自归位）</p>
+  <table>
+    <tr><th>目录 / 文件</th><th>作用</th><th>备注</th></tr>
+    <tr><td class="dir">.claude/</td><td>规则、11 个 skill、9 个 agent、写盘钩子</td><td class="note">人机分工与门禁的实现</td></tr>
+    <tr><td class="dir">plat/</td><td>平台 CLI：gate / ids / kpi / export / mask / md</td><td class="note">唯一执行入口</td></tr>
+    <tr><td class="dir">cases/</td><td>每个案件/模块的全部成果物</td><td class="note">requirements / designs / src / tests / release / readable</td></tr>
+    <tr><td class="dir">templates/</td><td>8 个工程的输入模板</td><td class="note">新案件照着填</td></tr>
+    <tr><td class="dir">registry/</td><td>ID 台账 + 采用率台账</td><td class="note">唯一发号口，脚本写</td></tr>
+    <tr><td class="dir">knowledge/</td><td>踩坑记录</td><td class="note">traps.md，经验资产</td></tr>
+    <tr><td class="dir">backlog/</td><td>未排期待办池</td><td class="note">BL-001〜，不进 ID 台账</td></tr>
+    <tr><td class="dir">presentation/</td><td>演示稿 md + demo.html + img</td><td class="note">汇报材料</td></tr>
+    <tr><td class="dir">export/</td><td>对外 Excel / Word</td><td class="note">生成物，gitignore</td></tr>
+    <tr><td class="dir">README.md / 使用手册.md</td><td>入口与完整手册</td><td class="note">第一次先看这里</td></tr>
+    <tr><td class="dir">客户需求书</td><td>本次案例的原始输入</td><td class="note">R60Login_00_输入_客户需求书.md</td></tr>
+    <tr><td class="dir">Makefile / docker-compose.yml</td><td>一条命令启动 / 测试 / 构建</td><td class="note">编排层，不改源码位置</td></tr>
+    <tr><td class="dir">CODE_INDEX.md</td><td>模块 → 代码路径 → 启动命令</td><td class="note">找代码用</td></tr>
+  </table>
+  <div class="foot">与 README「目录」一节一致；详细用法见使用手册.md</div>
+</body>
+</html>

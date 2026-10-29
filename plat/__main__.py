@@ -106,7 +106,7 @@ def cmd_ids(a) -> int:
                 continue
             if a.status and v.get("status") != a.status:
                 continue
-            print(f"{k:<34} {v.get('status',''):<10} {v.get('title','')}")
+            print(f"{k:<34} {v.get('status', ''):<10} {v.get('title', '')}")
         print(f"--- 計 {len(items)} 件")
         return 0
 
@@ -185,6 +185,21 @@ def cmd_mask(a) -> int:
         e = mask.assign(a.plain, a.code, a.category)
         print(f"[mask] 登録: {e['plain']} → {e['code']}")
         return 0
+    if a.action == "prep":
+        if not a.module and not (a.src and a.out):
+            raise SystemExit("--module か、--src と --out を指定してください")
+        case = module = ""
+        if a.module:
+            hit = _need_module(a.module)
+            case, module = hit[0], hit[1]
+        res = mask.prep(case=case, module=module, src=a.src, out=a.out)
+        print(f"[mask] prep: files={res['files']} known={res['known']} "
+              f"patterns={res['patterns']} unsupported={len(res['unsupported'])} "
+              f"candidates={res['candidates']}")
+        print(f"[mask] 出力: {res['out']}")
+        if res["unsupported"]:
+            print("[mask] 未対応: " + ", ".join(res["unsupported"]))
+        return 0
     if a.action == "apply":
         changed = mask.apply(write=a.write)
         for p, n in changed:
@@ -250,6 +265,17 @@ def cmd_md(a) -> int:
     return 0
 
 
+def cmd_handoff(a) -> int:
+    from . import handoff
+    hit = _need_module(a.module)
+    if a.write:
+        out = handoff.write(hit[0], hit[1], session_id=a.session)
+        print(f"[handoff] {out}")
+    else:
+        print(handoff.build(hit[0], hit[1], session_id=a.session))
+    return 0
+
+
 # ---------------------------------------------------------------- 入口
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
@@ -307,13 +333,16 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("--out")
     s.set_defaults(func=cmd_export)
 
-    s = sub.add_parser("mask", help="脱敏（対照表・置換・検査）")
-    s.add_argument("action", choices=["assign", "apply", "check", "list"])
+    s = sub.add_parser("mask", help="脱敏（対照表・置換・検査・取込前脱敏）")
+    s.add_argument("action", choices=["assign", "apply", "check", "list", "prep"])
     s.add_argument("--plain")
     s.add_argument("--code")
     s.add_argument("--category", default="customer")
     s.add_argument("--write", action="store_true")
     s.add_argument("--safe", action="store_true")
+    s.add_argument("--module")
+    s.add_argument("--src", help="prep の入力（既定: requirements/raw/）")
+    s.add_argument("--out", help="prep の出力（既定: requirements/ai_input/）")
     s.set_defaults(func=cmd_mask)
 
     s = sub.add_parser("adopt", help="採用率（初稿→承認版の修正量）")
@@ -337,6 +366,12 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("--html", action="store_true",
                    help="人読 MD から中国語ビュー .zh.html も生成する")
     s.set_defaults(func=cmd_md)
+
+    s = sub.add_parser("handoff", help="SESSION_HANDOFF.md（新セッションへの交接単）")
+    s.add_argument("--module", required=True)
+    s.add_argument("--write", action="store_true")
+    s.add_argument("--session")
+    s.set_defaults(func=cmd_handoff)
 
     return p
 

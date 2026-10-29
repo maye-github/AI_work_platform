@@ -4,6 +4,8 @@
 registry/MASK_MAP.yaml
 cases/*/*/raw/
 cases/*/*/requirements/raw/
+cases/*/*/ai_input/
+cases/*/*/requirements/ai_input/
 .env
 .env.*
 

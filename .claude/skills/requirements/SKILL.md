@@ -22,14 +22,25 @@ python -m plat gate            # 现有内容必须是 6 道全 PASS
 ```
 
 ## 输入
-- `cases/<案件>/<模块>/raw/` 下的素材（docx / xlsx / pdf / png / txt）
-- 或用户在对话里直接贴的口头需求
+- `cases/<案件>/<模块>/requirements/raw/`（或模块根 `raw/`）下的素材：**只有人能读**
+- `plat mask prep` 生成的 `requirements/ai_input/`：**AI 只读这里**
+- 或用户在对话里直接贴的口头需求（同样先脱敏）
 - 上一模块的同类成果物（**只当作写法参考，不当事实来源**）
+
+> **AI 不得直接读 `raw/`。** `guard_raw` 钩子会阻断；只读 `ai_input/`。
 
 ## 手顺
 
-1. **取込**：把每个素材读成 `raw/raw_requirements.md`。每条一段，**必须有来源锚点**：
-   `> 出典: <文件名> / <页・sheet・行> / <摘录>`。读不了的（旧 .doc/.xls、扫描件）→ 记进“未取込”清单，不要猜。
+0. **脱敏取込（最初に必ず）**：
+   ```bash
+   python -m plat mask prep --module <模块>
+   ```
+   - 脚本读 `raw/`，在 `requirements/ai_input/` 生成脱敏副本。**AI 不直接读 `raw/`。**
+   - 确认 `ai_input/MASK_REPORT.md`。如仍有人名/公司名候选，请人用 `plat mask assign` 登记后重跑。
+   - `ai_input/` 不存在或为空 → 停下交给人。PDF/图片未対応 → 请人先转成文本。
+
+1. **取込**：读 `ai_input/` 里的文件，归一成 `raw/raw_requirements.md`。每条一段，**必须有来源锚点**：
+   `> 出典: ai_input/<文件名> / <页・sheet・行> / <摘录>`。读不了的（旧 .doc/.xls、扫描件）→ 记进“未取込”清单，不要猜。
 2. **抽争议点**：曖昧・矛盾・前提不足 → 写成 `Q`（对日方确认事项），**不要自己定**。
 3. **抽前提**：素材里没说但必须成立的东西 → `ASM`（前提假设），写明“若此前提不成立会怎样”。
 4. **抽阻塞**：需要日方回答才能继续的 → `ISS` 且 `block: true`。
@@ -40,7 +51,7 @@ python -m plat gate            # 现有内容必须是 6 道全 PASS
    ```
    `Q` / `ASM` / `ISS` 同理（`--type Q` / `ASM` / `ISS`）。
 7. **写成果物** → `references/schema.md` の形。`status: draft`、`related_ids` 必填。
-8. **自查**：`python -m plat gate` 全 PASS。
+8. **自查**：`python -m plat gate` 全 PASS；`python -m plat mask check` 为 0 件。
 
 > **人読版**：成果物を書いたら `python -m plat md --module <模块> --html` を実行する。
 > `readable/*.md`（日文・人読）と `*.zh.html`（中文ビュー）は**生成物**。手で編集しない。

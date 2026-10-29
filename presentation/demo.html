@@ -46,6 +46,11 @@ pre .ok{color:#34d399} pre .bad{color:#f87171} pre .dim{color:#9ca3af}
   padding:.42em .85em; font-size:clamp(11px,1.2vw,15px); white-space:nowrap}
 .gate{color:var(--muted); font-size:clamp(10px,1.05vw,13px)}
 .big{font-size:clamp(26px,4.2vw,58px); font-weight:800; color:var(--accent); line-height:1.2}
+.shot{width:auto; height:auto; max-width:100%; max-height:31vh; object-fit:contain;
+  border:1px solid var(--line); border-radius:8px; background:#fff; display:block;
+  margin-left:auto; margin-right:auto}
+figure{margin:0}
+figcaption{font-size:clamp(10px,1.1vw,13px); color:var(--muted); margin-top:6px; text-align:center}
 .kv{display:flex; gap:38px; margin-top:6px; flex-wrap:wrap}
 .kv div{min-width:120px}
 .kv .n{font-size:clamp(24px,3.4vw,46px); font-weight:800; color:var(--accent)}
@@ -89,10 +94,10 @@ pre .ok{color:#34d399} pre .bad{color:#f87171} pre .dim{color:#9ca3af}
   <table>
     <tr><th>章</th><th>回答的问题</th><th>页数</th></tr>
     <tr><td><b>第一章</b></td><td>这个平台是什么？为什么做？解决了什么问题？</td><td>3〜10</td></tr>
-    <tr><td><b>第二章</b></td><td>怎么用？给 AI 什么、AI 给什么、人做什么？</td><td>11〜22</td></tr>
-    <tr><td><b>第三章</b></td><td>还差哪些功能？接下来怎么补？</td><td>23〜28</td></tr>
+    <tr><td><b>第二章</b></td><td>怎么用？给 AI 什么、AI 给什么、人做什么？</td><td>11〜23</td></tr>
+    <tr><td><b>第三章</b></td><td>还差哪些功能？接下来怎么补？</td><td>24〜29</td></tr>
   </table>
-  <div class="note">先给领导一张地图，后面每页都知道自己在哪一章。</div>
+  <div class="note">先给听众一张地图，后面每页都知道自己在哪一章。</div>
   <div class="src">—</div>
   <div class="pageno"></div>
 </section>
@@ -185,32 +190,19 @@ pre .ok{color:#34d399} pre .bad{color:#f87171} pre .dim{color:#9ca3af}
     <tr><td>G5</td><td>文档一致性：键名、管理文档登记、手册命令真实存在</td><td>文档与实现脱节</td></tr>
     <tr><td>G6</td><td>机密零命中：内部 IP、连接串、社内邮箱、密钥形态</td><td>泄露风险</td></tr>
   </table>
-  <pre>[gate] gate1=PASS gate2=PASS gate3=PASS gate4=PASS gate5=PASS gate6=PASS
-       | ids=308 artifacts=24 orphans=0 hits=0        <span class="ok">← Exit 0</span></pre>
-  <div class="src">python -m plat gate</div>
+  <img class="shot" style="max-height:45vh;margin-top:10px" src="img/fig_gate.png" alt="六道门与 8 工程进度">
+  <div class="src">python -m plat gate ／ python -m plat status</div>
   <div class="pageno"></div>
 </section>
 
 <!-- 8 -->
 <section class="slide">
   <h2>ID 与追溯：一条链，断一环就红</h2>
-  <div class="flow">
-    <span class="step">R 要件</span><span class="gate">→</span>
-    <span class="step">F 功能</span><span class="gate">→</span>
-    <span class="step">I 画面项目</span><span class="gate">→</span>
-    <span class="step">D 数据</span><span class="gate">→</span>
-    <span class="step">L 逻辑</span><span class="gate">→</span>
-    <span class="step">E 错误</span><span class="gate">→</span>
-    <span class="step">TC 单测</span><span class="gate">→</span>
-    <span class="step">IT 结合</span><span class="gate">→</span>
-    <span class="step">REL 发布</span>
-  </div>
-  <div class="kv" style="margin-top:22px">
-    <div><div class="n">308</div><div class="l">个 ID，0 个孤立</div></div>
-    <div><div class="n">1xx / 2xx</div><div class="l">模块按号段区分，零串号</div></div>
-    <div><div class="n">impact</div><div class="l">改一条需求，能算下游影响面</div></div>
-  </div>
-  <div class="note">格式 <code>R-101</code>；发号只能走 <code>plat ids alloc</code>。手写、猜号、跳号、复用一律禁止。</div>
+  <p style="font-size:clamp(12px,1.4vw,17px);color:#374151;margin:0 0 8px">
+    R 要件 → F 功能 → I 画面项目 → D 数据 → L 逻辑 → E 错误 → TC 单测 → IT 结合 → REL 发布<br>
+    <b>308 个 ID，0 个孤立</b>；模块按号段区分（1xx / 2xx）。
+  </p>
+  <img class="shot" style="max-height:68vh" src="img/fig_trace.png" alt="设计-代码追溯">
   <div class="src">registry/ids.yaml ／ plat gate G1·G2 ／ plat impact &lt;ID&gt;</div>
   <div class="pageno"></div>
 </section>
@@ -218,34 +210,26 @@ pre .ok{color:#34d399} pre .bad{color:#f87171} pre .dim{color:#9ca3af}
 <!-- 9 -->
 <section class="slide">
   <h2>成果物：一个真源，三种读者</h2>
-  <p class="claim">同一份内容，AI 读 YAML，工程师读 MD，领导看中文 HTML，客户拿 Excel。</p>
-  <table>
-    <tr><th>形态</th><th>给谁</th><th>规矩</th></tr>
-    <tr><td>机读源（YAML）</td><td>AI 与工具</td><td><b>唯一真源</b>，人只读不手改</td></tr>
-    <tr><td>人读版（<code>readable/*.md</code>）</td><td>工程师 / 评审</td><td>由 YAML 生成，日文，<b>生成物不许手改</b></td></tr>
-    <tr><td>中文视图（<code>*.zh.html</code>）</td><td>内部 / 领导</td><td>由人读版生成，外框中文，<b>生成物不许手改</b></td></tr>
-    <tr><td>对外正式版（Excel / Word）</td><td>客户</td><td>脚本生成，<b>生成物不许手改</b></td></tr>
-  </table>
-  <div class="kv" style="margin-top:18px">
-    <div><div class="n">30</div><div class="l">份人读 MD（两模块）</div></div>
-    <div><div class="n">30</div><div class="l">份中文 HTML</div></div>
-    <div><div class="n">24</div><div class="l">份对外 Excel</div></div>
-  </div>
-  <div class="note"><b>写盘钩子</b>：每写一个成果物 YAML，自动重生成该模块的人读版；skill 里也写了这一步（双保险）。</div>
+  <p class="claim">同一份内容，AI 读 YAML，工程师读 MD，内部评审看中文 HTML，客户拿 Excel。</p>
+  <ul>
+    <li><b>YAML</b>：唯一真源（AI 与工具）</li>
+    <li><b><code>readable/*.md</code></b>：人读版（日文，由 YAML 生成）</li>
+    <li><b><code>*.zh.html</code></b>：中文外框视图（内部 / 汇报）</li>
+    <li><b>Excel / Word</b>：对外正式版（客户）</li>
+  </ul>
+  <img class="shot" style="max-height:54vh;margin-top:10px" src="img/fig_tree.png" alt="成果物目录">
+  <div class="note">30 份人读 MD + 30 份中文 HTML + 24 份对外 Excel；写盘钩子自动重生成。</div>
   <div class="src">python -m plat md --module &lt;模块&gt; --html ／ plat export</div>
   <div class="pageno"></div>
 </section>
 
 <!-- 10 -->
 <section class="slide">
-  <h2>平台架构：四层，每层都有实际文件</h2>
-  <table>
-    <tr><th>层</th><th>是什么</th><th>实际文件</th></tr>
-    <tr><td><b>入口层</b></td><td>AI 与人的共同起点</td><td>README · 使用手册 · 规则 2 份</td></tr>
-    <tr><td><b>规则层</b></td><td>把“怎么做”写成可检查的条文</td><td>8 工程 · ID 体系 · 状态机 · 机密 13 项</td></tr>
-    <tr><td><b>执行层</b></td><td>一条命令干一个工程</td><td>11 个 skill · 9 个 agent · 8 个输入模板</td></tr>
-    <tr><td><b>验证层</b></td><td>不用人眼判断的部分</td><td>6 道门 · 写盘钩子（门禁 + 人读版生成）· 采用率测定</td></tr>
-  </table>
+  <h2>平台架构：四层 + 项目目录</h2>
+  <p style="font-size:clamp(12px,1.4vw,17px);color:#374151;margin:0 0 8px">
+    入口（README / 使用手册 / 规则）· 规则（8 工程 / ID / 状态机 / 机密）· 执行（11 skill / 9 agent / 8 模板）· 验证（6 道门 / 写盘钩子 / 采用率）
+  </p>
+  <img class="shot" style="max-height:62vh;margin-top:8px" src="img/fig_project_tree.png" alt="项目目录架构">
   <div class="note"><b>和两份 PPT 的 7 层架构对照</b>：<br>已对齐 = 工程别 Agent、ID 台账、成果物仓库、质量门禁、脱敏、KPI。<br>还没对齐 = 模型网关、RAG 知识库、Web 画面、CI/CD、SSO/审计、成本管理、闭域/GPU。</div>
   <div class="src">plat/ 14 个模块 + .claude/</div>
   <div class="pageno"></div>
@@ -301,20 +285,26 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
 <section class="slide">
   <h2>工程 1：要件理解（含取込）</h2>
   <p class="claim">/requirements　输入：日方素材或口头需求</p>
-  <table>
-    <tr><th>AI 给你</th><th>内容</th><th>本例</th></tr>
-    <tr><td><code>raw/raw_requirements.md</code></td><td>归一后的素材，每条带 <code>出典</code></td><td>37 个出处锚点</td></tr>
-    <tr><td><code>REQ.yaml</code></td><td>要件 R</td><td>R-101〜R-110（10）</td></tr>
-    <tr><td><code>QST.yaml</code></td><td>对日方确认事项 Q</td><td>Q-101〜Q-112（12）</td></tr>
-    <tr><td><code>ASM.yaml</code></td><td>前提・假设</td><td>ASM-101〜ASM-108（8）</td></tr>
-    <tr><td><code>ISS.yaml</code></td><td>未决事项（<code>block: true</code> 会挡路）</td><td>ISS-101〜ISS-103（3）</td></tr>
-  </table>
+  <p style="font-size:clamp(12px,1.4vw,17px);color:#374151;margin:0 0 8px">
+    <code>REQ.yaml</code> / <code>QST.yaml</code> / <code>ASM.yaml</code> / <code>ISS.yaml</code> + <code>raw/raw_requirements.md</code>（本例 R 10 / Q 12 / ASM 8 / ISS 3）
+  </p>
+  <img class="shot" style="max-height:62vh" src="img/fig_readable.png" alt="人读版示例">
   <div class="note"><b>人要看</b>：R 是不是“一条能独立验收的要求”；Q 是不是真该问日方；ASM 错了会怎样；ISS 阻塞的是哪个工程。<br><b>承认</b>：<code>/approve requirements</code></div>
   <div class="src">cases/&lt;案件&gt;/&lt;模块&gt;/requirements/</div>
   <div class="pageno"></div>
 </section>
 
 <!-- 14 -->
+<section class="slide">
+  <h2>工程 1 的前置：脱敏取込（AI 看不到 raw）</h2>
+  <p class="claim">客户信息不直接进 AI：<code>raw/</code> 只有人能读，AI 只读 <code>ai_input/</code>。</p>
+  <img class="shot" style="max-height:66vh" src="img/fig_mask.png" alt="脱敏取込">
+  <div class="note">AI 不读 raw（guard_raw 阻断）；人名/公司名先登记；<code>mask check</code> 0 + G6 PASS。</div>
+  <div class="src">plat mask prep ／ .claude/hooks/guard_raw.py</div>
+  <div class="pageno"></div>
+</section>
+
+<!-- 15 -->
 <section class="slide">
   <h2>工程 2：基本设计</h2>
   <p class="claim">/basic-design　输入：已承认的 REQ.yaml</p>
@@ -323,17 +313,13 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
     <tr><td><code>designs/basic/FNC.yaml</code></td><td>功能 F</td><td>F-101〜F-114（14）</td></tr>
     <tr><td><code>designs/basic/SCR.yaml</code></td><td>画面项目 I</td><td>I-101〜I-112（12）</td></tr>
   </table>
-  <ul style="margin-top:18px">
-    <li>每个 F 都有 <code>req_ids</code> / <code>related_ids</code>，<b>挂不到 R 的 F 就是创作</b></li>
-    <li>每个 I 都有 <code>source_req</code>，<b>1 项目 1 ID</b></li>
-    <li>画面 12 项 = 素材 §3.2 的 12 项，没有多加字段</li>
-  </ul>
+  <img class="shot" style="max-height:50vh;margin-top:12px" src="img/fig_ui.png" alt="登录画面">
   <div class="note"><b>人要看</b>：F 能不能独立开发/测试；I 有没有“要件里没有”的字段。<br><b>承认</b>：<code>/approve basic-design</code></div>
   <div class="src">cases/&lt;案件&gt;/&lt;模块&gt;/designs/basic/</div>
   <div class="pageno"></div>
 </section>
 
-<!-- 15 -->
+<!-- 16 -->
 <section class="slide">
   <h2>工程 3：详细设计</h2>
   <p class="claim">/detail-design　输入：已承认的 F / I</p>
@@ -343,17 +329,13 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
     <tr><td><code>designs/detail/LGC.yaml</code></td><td>业务逻辑 L（输入/分支/输出/异常/边界值）</td><td>L-101〜L-117（17）</td></tr>
     <tr><td><code>designs/detail/ERR.yaml</code></td><td>错误与消息 E</td><td>E-101〜E-111（11）</td></tr>
   </table>
-  <ul style="margin-top:16px">
-    <li>每条 L 有 <code>belongs_to</code>（对应哪个 F）、<code>steps</code>、<code>boundaries</code>、<code>errors</code></li>
-    <li><b>边界值是测试的种子</b>：6 桁 / 7 桁 / 8 桁、150 字 / 151 字</li>
-    <li>E 的 <code>message</code> 是业务语言，技术码放在 <code>message_id</code></li>
-  </ul>
+  <img class="shot" style="max-height:48vh;margin-top:10px" src="img/fig_api.png" alt="API docs">
   <div class="note"><b>人要看</b>：排他/更新日時（本画面是参照のみ，不需要）；异常系是否网罗；消息有没有技术术语。<br><b>承认</b>：<code>/approve detail-design</code></div>
   <div class="src">cases/&lt;案件&gt;/&lt;模块&gt;/designs/detail/</div>
   <div class="pageno"></div>
 </section>
 
-<!-- 16 -->
+<!-- 17 -->
 <section class="slide">
   <h2>工程 4：框架・环境构筑</h2>
   <p class="claim">/framework　输入：D / L</p>
@@ -367,7 +349,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <div class="pageno"></div>
 </section>
 
-<!-- 17 -->
+<!-- 18 -->
 <section class="slide">
   <h2>工程 5：制造（编码）</h2>
   <p class="claim">/coding　输入：D / L / E + TECH_STACK / COMPONENTS</p>
@@ -382,22 +364,20 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <div class="pageno"></div>
 </section>
 
-<!-- 18 -->
+<!-- 19 -->
 <section class="slide">
   <h2>工程 6：单元测试</h2>
   <p class="claim">/unit-test　输入：LGC（分支与边界值）/ ERR（异常）/ 源码</p>
-  <table>
-    <tr><th>AI 给你</th><th>内容</th><th>本例</th></tr>
-    <tr><td><code>tests/unit/TC.yaml</code></td><td>TC（正常 / 边界 / 异常）</td><td>TC-101〜TC-168（68）</td></tr>
-    <tr><td>执行结果</td><td>每条 <code>result</code> = pass / fail / skipped</td><td>全部已填</td></tr>
-    <tr><td><code>BUG.yaml</code>（必要时）</td><td>NG 登记 + 责任层</td><td>本例 0 件</td></tr>
-  </table>
-  <div class="note"><b>怎么读</b>：每条 TC 有 <code>design_id</code>（测哪个 L）和 <code>related_ids</code>（含 R）；边界值从 L 的 <code>boundaries</code> 机械生成。<br><b>比例下限</b>：每个 L 至少正常 3 / 边界 2 / 异常 3；号段不足时人会决定扩段。<br><b>承认</b>：<code>/approve unit-test</code></div>
+  <p style="font-size:clamp(12px,1.4vw,17px);color:#374151;margin:0 0 8px">
+    TC 68 件（正常 / 边界 / 异常），<code>result</code> 全填；NG 登记 BUG。
+  </p>
+  <img class="shot" style="max-height:64vh" src="img/fig_excel.png" alt="TC 的 Excel 视图">
+  <div class="note"><b>人要看</b>：观点是否够；NG 责任层；覆盖率不足的部分是否真的不重要。<br><b>承认</b>：<code>/approve unit-test</code></div>
   <div class="src">cases/&lt;案件&gt;/&lt;模块&gt;/tests/unit/</div>
   <div class="pageno"></div>
 </section>
 
-<!-- 19 -->
+<!-- 20 -->
 <section class="slide">
   <h2>工程 7：结合・综合测试</h2>
   <p class="claim">/integration-test　输入：TC / 基本设计 / 受入条件</p>
@@ -417,7 +397,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <div class="pageno"></div>
 </section>
 
-<!-- 20 -->
+<!-- 21 -->
 <section class="slide">
   <h2>工程 8：发布・运维</h2>
   <p class="claim">/release　输入：IT / R</p>
@@ -434,7 +414,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <div class="pageno"></div>
 </section>
 
-<!-- 21 -->
+<!-- 22 -->
 <section class="slide">
   <h2>人的操作：承认、问路、变更</h2>
   <p class="claim">人不需要记 8 套工具，只需要记 5 个动作。</p>
@@ -451,7 +431,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <div class="pageno"></div>
 </section>
 
-<!-- 22 -->
+<!-- 23 -->
 <section class="slide">
   <h2>skill 与 agent 怎么配合 + 完整走查</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px">
@@ -490,7 +470,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <div class="pageno"></div>
 </section>
 
-<!-- 23 -->
+<!-- 24 -->
 <section class="slide">
   <div class="chapter-tag">第三章 · 还差什么、接下来怎么做</div>
   <h2>对照两份 PPT：三层清单</h2>
@@ -505,7 +485,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <div class="pageno"></div>
 </section>
 
-<!-- 24 -->
+<!-- 25 -->
 <section class="slide">
   <h2>未实现的功能要件（按 PPT 的平台层）</h2>
   <table>
@@ -522,7 +502,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <div class="pageno"></div>
 </section>
 
-<!-- 25 -->
+<!-- 26 -->
 <section class="slide">
   <h2>Backlog：22 条，按优先级</h2>
   <p class="claim">不一次全铺开，先做“投入小、立刻见效”的。</p>
@@ -537,7 +517,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <div class="pageno"></div>
 </section>
 
-<!-- 26 -->
+<!-- 27 -->
 <section class="slide">
   <h2>落地路线：Phase 1 / 2 / 3</h2>
   <table>
@@ -551,7 +531,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <div class="pageno"></div>
 </section>
 
-<!-- 27 -->
+<!-- 28 -->
 <section class="slide">
   <h2>已知边界（主动摆出来）</h2>
   <p class="claim warn">没跑就说没跑，没做就说没做。</p>
@@ -570,7 +550,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <div class="pageno"></div>
 </section>
 
-<!-- 28 -->
+<!-- 29 -->
 <section class="slide">
   <h2>下一步 90 天 + 一句话</h2>
   <p class="claim">先补 6 个 P0，再谈全社展开。</p>
@@ -585,7 +565,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <div class="pageno"></div>
 </section>
 
-<!-- 29 -->
+<!-- 30 -->
 <section class="slide">
   <h2>附录：每个数字对应哪条命令</h2>
   <table>
@@ -631,7 +611,8 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   document.addEventListener('click', function (e) {
     if (e.clientX > window.innerWidth * 0.5) show(i + 1); else show(i - 1);
   });
-  show(0);
+  var start = parseInt((location.hash || '').replace('#', ''), 10);
+  show(isNaN(start) ? 0 : start - 1);
 })();
 </script>
 </body>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f8fafc;color:#111827;
+       font-family:-apple-system,"Segoe UI","Microsoft YaHei",Meiryo,sans-serif;
+       padding:26px 32px}
+  h2{margin:0 0 4px;font-size:24px;color:#1d4ed8}
+  .sub{color:#6b7280;font-size:13px;margin:0 0 14px}
+  .flow{display:flex;align-items:stretch;gap:8px;margin:8px 0 6px}
+  .box{flex:1;border:1px solid #e5e7eb;border-radius:8px;background:#fff;padding:10px 12px}
+  .box h3{margin:0 0 4px;font-size:16px;color:#1d4ed8}
+  .box p{margin:0;font-size:12.5px;line-height:1.45;color:#4b5563}
+  .box.red{border-left:4px solid #b91c1c}
+  .box.green{border-left:4px solid #047857}
+  .arrow{display:flex;align-items:center;color:#6b7280;font-size:22px}
+  .guard{margin:4px 0 14px;padding:8px 12px;border-left:4px solid #b91c1c;
+         background:#fef2f2;color:#991b1b;font-size:13px;border-radius:0 6px 6px 0}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  h3.sec{margin:0 0 8px;font-size:16px;color:#111827}
+  table{border-collapse:collapse;width:100%;background:#fff;font-size:14px}
+  th,td{border:1px solid #e5e7eb;padding:6px 9px;text-align:left;vertical-align:top}
+  th{background:#eef2ff;font-weight:700}
+  code{font-family:Consolas,Menlo,monospace;font-size:13px;color:#1d4ed8}
+  pre{margin:0;background:#0f172a;color:#e5e7eb;border-radius:8px;padding:12px 14px;
+      font-family:Consolas,Menlo,monospace;font-size:12.5px;line-height:1.55;white-space:pre-wrap}
+  .ok{color:#34d399}.bad{color:#f87171}.dim{color:#94a3b8}
+  .foot{margin-top:10px;font-size:11px;color:#6b7280}
+</style>
+</head>
+<body>
+  <h2>脱敏取込：客户信息不直接进 AI</h2>
+  <p class="sub">工程 1 的第 0 步：raw → ai_input → AI（原文与 AI 之间隔一道脚本）</p>
+
+  <div class="flow">
+    <div class="box red"><h3>raw/</h3><p>原文<br>只有人能读；AI 不得直接访问</p></div>
+    <div class="arrow">→</div>
+    <div class="box"><h3>plat mask prep</h3><p>脚本读 raw<br>MASK_MAP + 正则替换</p></div>
+    <div class="arrow">→</div>
+    <div class="box green"><h3>ai_input/</h3><p>脱敏副本<br>AI 只读这里</p></div>
+    <div class="arrow">→</div>
+    <div class="box"><h3>/requirements</h3><p>生成 R / Q / ASM / ISS<br>只出现代号</p></div>
+  </div>
+  <div class="guard"><b>guard_raw</b>：AI 的 Read / Grep / Glob / Bash 碰到 <code>raw/</code> → 拒绝（exit 2）；<code>plat mask prep</code> 放行。</div>
+
+  <div class="cols">
+    <div>
+      <h3 class="sec">脱敏前后（模拟数据）</h3>
+      <table>
+        <tr><th>原文</th><th>AI 看到的</th></tr>
+        <tr><td>株式会社テスト</td><td><code>&lt;客户A&gt;</code></td></tr>
+        <tr><td>山田 太郎</td><td><code>&lt;NAME_1&gt;</code></td></tr>
+        <tr><td>1234567</td><td><code>&lt;EMP_1&gt;</code></td></tr>
+        <tr><td>192.168.1.10</td><td><code>&lt;IP_1&gt;</code></td></tr>
+        <tr><td>taro.yamada@test.co.jp</td><td><code>&lt;MAIL_1&gt;</code></td></tr>
+      </table>
+    </div>
+    <div>
+      <h3 class="sec">实测（终端）</h3>
+      <pre><span class="dim">$ python -m plat mask prep --module R60Login</span>
+[mask] prep: files=1 <span class="ok">known=3</span> patterns={'IP':1,'MAIL':1}
+[mask] 出力: requirements/ai_input/
+
+<span class="dim">$ python -m plat mask check</span>
+[mask] check: <span class="ok">error=0</span>
+
+<span class="dim">(AI) Read raw/secret.docx</span>
+<span class="bad">[guard_raw] raw/ は AI が直接読めません。</span>
+<span class="dim">→ 请先跑 plat mask prep，再读 ai_input/</span></pre>
+    </div>
+  </div>
+  <div class="foot">规则：AI 不读 raw；人名/公司名/项目名先登记 MASK_MAP；PDF/图片需人先转文本；mask check 0 + G6 PASS 才算完成。</div>
+</body>
+</html>

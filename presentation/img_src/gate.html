@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#0f172a;color:#e5e7eb;
+       font-family:Consolas,"Cascadia Mono",Menlo,monospace;padding:34px 42px}
+  .bar{display:flex;gap:8px;margin-bottom:16px}
+  .dot{width:12px;height:12px;border-radius:50%}
+  .r{background:#f87171}.y{background:#fbbf24}.g{background:#34d399}
+  pre{margin:0;font-size:21px;line-height:1.62;white-space:pre-wrap}
+  .ok{color:#34d399}.dim{color:#94a3b8}.cmd{color:#93c5fd}
+</style>
+</head>
+<body>
+  <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+  <pre><span class="cmd">$ python -m plat gate</span>
+=== gate1 ID 合法性 : <span class="ok">PASS</span>
+=== gate2 追跡閉ループ : <span class="ok">PASS</span>
+=== gate3 成果物形式 : <span class="ok">PASS</span>
+=== gate4 人工卡点 : <span class="ok">PASS</span>
+=== gate5 文書一貫性 : <span class="ok">PASS</span>
+=== gate6 機密ゼロヒット : <span class="ok">PASS</span>
+
+<span class="ok">[gate] gate1=PASS gate2=PASS gate3=PASS gate4=PASS gate5=PASS gate6=PASS</span>
+       <span class="dim">| ids=308 artifacts=24 orphans=0 hits=0</span>
+
+<span class="cmd">$ python -m plat status</span>
+  1 要件理解             <span class="ok">✅ 承認済</span>
+  2 基本設計             <span class="ok">✅ 承認済</span>
+  3 詳細設計             <span class="ok">✅ 承認済</span>
+  4 フレームワーク・環境構築 <span class="ok">✅ 承認済</span>
+  5 製造（コーディング）   <span class="ok">✅ 承認済</span>
+  6 単体テスト           <span class="ok">✅ 承認済</span>
+  7 結合・総合テスト      <span class="ok">✅ 承認済</span>
+  8 リリース・運用保守    <span class="ok">✅ 承認済</span>
+</pre>
+</body>
+</html>
