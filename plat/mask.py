@@ -280,6 +280,15 @@ def prep(case: str = "", module: str = "", src: str | Path | None = None,
         "",
         "> このレポートには明文を書かない。原文は `raw/` にのみ残す。",
     ]
+    if unsupported:
+        report += [
+            "",
+            "## ⚠ 未脱敏ファイル（AI に渡さない）",
+            "",
+            "以下はテキスト抽出できず、**脱敏していません**。AI に読ませる前に、",
+            "人がテキスト化して `raw/` に置き直すか、`plat mask assign` で対照を登録してください。",
+            "",
+        ] + [f"- `{u}`" for u in unsupported]
     (out_p / "MASK_REPORT.md").write_text(
         "\n".join(report) + "\n", encoding="utf-8", newline="\n")
 

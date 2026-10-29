@@ -2,10 +2,10 @@ case: R60
 module: R60Login
 title: 共通マスタログイン
 owner: SE-001
-status: draft
+status: active
 version: '0.1'
 created_at: '2026-10-27'
-updated_at: '2026-10-27'
+updated_at: '2026-10-29'
 note: 模擬プロジェクト。工程1〜工程3 の承認者は SE-001。Q/ISS の回答は【模拟】。
 known_issues:
 - F-108（ログイン成功時の画面遷移）は素材 §3.5 由来だが、上流 R-103 に明記が無い。工程2/3 では note として記録し、上流変更時に R を補う。
@@ -18,6 +18,7 @@ known_issues:
 - 工程3: E-108（遷移先未選択）は派生ルール。素材に明記が無く、要顧客確認。
 - 工程3: D-103 の供給元（マスタ／固定値）、D-104 の Session 有効期限、mngInfo の内容は未確定（ISS-101/ISS-102）。
 - 工程3: ボタン I-108/109/111/112 はトリガーのため L の inputs に含めない（F→L の連結は F の trigger で担保）。
+- TC 68 件 / IT 10 件の `result: pass` は `actual` / `evidence` に【模拟】を明記（実測ではない）。G3 は pass 時の証跡必須を検査する。
 simulated_decisions:
 - Q-111 暗号方式: 【模拟】AES-128-CBC、鍵=yyyymmdd の SHA-256 先頭 16 バイト、IV=固定（全ゼロ）、暗号文は Base64URL。
 - E-108 遷移先未選択: 【模拟】業務エラーとして扱い、セッションエラー画面へ送る。
@@ -28,3 +29,4 @@ simulated_decisions:
 - message_id: 【模拟】R60W=業務エラー / R60E=システムエラー / R60I=情報 の暫定規則。
 - API データ項: 【模拟】I-ID を新設せず、L の inputs/outputs は文字列名で確定（schema 改訂待ち）。
 - DSN model 级 note: 【模拟】schema 外の運用注記として残す。
+- TC/IT の pass: 【模拟】証跡（実環境での実行なし）。

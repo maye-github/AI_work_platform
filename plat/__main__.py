@@ -198,7 +198,8 @@ def cmd_mask(a) -> int:
               f"candidates={res['candidates']}")
         print(f"[mask] 出力: {res['out']}")
         if res["unsupported"]:
-            print("[mask] 未対応: " + ", ".join(res["unsupported"]))
+            print("[mask] ⚠ 未脱敏（AI に渡さない）: " + ", ".join(res["unsupported"]))
+            print("[mask]   人がテキスト化して raw/ に置き直し、再実行してください")
         return 0
     if a.action == "apply":
         changed = mask.apply(write=a.write)

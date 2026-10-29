@@ -16,7 +16,7 @@ items:
   ppt_refs:
   - 落地篇 slide 26 知識層 / slide 27 ④ナレッジベース（RAG）
   - 统一方案 slide 12 知识库层
-  why: knowledge/README.md 明确写「RAG はこの版では実装していない」，目前只有 search 空命令。
+  why: knowledge/README.md 明确写「RAG はこの版では実装していない」，且 plat 未注册 search 子命令（实现为零，不是「空命令」）。
   acceptance:
   - python -m plat search "<query>" 能在 cases/ 与 knowledge/ 中检索，返回文件路径与命中行。
   - 结果按相关度排序；空结果返回 0 并给出提示。

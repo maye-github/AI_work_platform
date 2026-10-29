@@ -116,7 +116,7 @@ figcaption{font-size:clamp(10px,1.1vw,13px); color:var(--muted); margin-top:6px;
     <div><div class="n">6 / 6</div><div class="l">六道门全部 PASS</div></div>
     <div><div class="n">24 / 24</div><div class="l">需求覆盖率 100%</div></div>
   </div>
-  <div class="note"><b>一句话</b>：命令是人敲的，活是 AI 干的，检查是机器做的，责任是人担的。</div>
+  <div class="note"><b>一句话</b>：阶段命令是人敲的，活是 AI 干的，检查是钩子自动跑的，责任是人担的。</div>
   <div class="src">python -m plat gate ／ python -m plat kpi</div>
   <div class="pageno"></div>
 </section>
@@ -141,7 +141,7 @@ figcaption{font-size:clamp(10px,1.1vw,13px); color:var(--muted); margin-top:6px;
   <h2>核心主张与三条硬约束</h2>
   <p class="claim">AI 执行，人拍板。这三条是代码，不是口号。</p>
   <div class="cards">
-    <div class="card"><h3>① 人敲命令才能推进</h3><p><b>11 个 skill 全部</b>设 <code>disable-model-invocation</code>。AI 不是“不建议”往下走，是“做不到”。</p></div>
+    <div class="card"><h3>① 人敲 skill 才能推进</h3><p><b>11 个 skill 全部</b>设 <code>disable-model-invocation</code>。AI 不是“不建议”往下走，是“做不到”。</p></div>
     <div class="card"><h3>② 承认只能人填</h3><p><code>approved_by</code> 由 <code>/approve</code> 写入，必须是<b>人的标识符</b>。AI 写 = 自己批自己。</p></div>
     <div class="card"><h3>③ 机检不过不许往下</h3><p>G4：上游成果物没被承认，下游成果物<b>根本不允许存在</b>。不是“提醒”，是“拦住”。</p></div>
   </div>
@@ -185,13 +185,13 @@ figcaption{font-size:clamp(10px,1.1vw,13px); color:var(--muted); margin-top:6px;
     <tr><th>门</th><th>查什么</th><th>失败意味着</th></tr>
     <tr><td>G1</td><td>ID 合法性：野号、跳号、复用、废号引用</td><td>台账被绕过</td></tr>
     <tr><td>G2</td><td>追溯闭环：每条需求走得到测试</td><td>断链、漏测</td></tr>
-    <tr><td><b>G3</b></td><td>成果物格式：必填字段、状态值、放置位置</td><td>机器读不动</td></tr>
+    <tr><td><b>G3</b></td><td>成果物格式：必填字段、状态值、放置位置；<b><code>pass</code> 必须有 <code>actual</code> / <code>evidence</code> 证跡</b></td><td>机器读不动／空壳通过</td></tr>
     <tr><td><b>G4</b></td><td><b>人工卡点：上游未承认，下游不许存在</b></td><td>跳过评审</td></tr>
     <tr><td>G5</td><td>文档一致性：键名、管理文档登记、手册命令真实存在</td><td>文档与实现脱节</td></tr>
     <tr><td>G6</td><td>机密零命中：内部 IP、连接串、社内邮箱、密钥形态</td><td>泄露风险</td></tr>
   </table>
   <img class="shot" style="max-height:45vh;margin-top:10px" src="img/fig_gate.png" alt="六道门与 8 工程进度">
-  <div class="src">python -m plat gate ／ python -m plat status</div>
+  <div class="src">写文件后钩子自动跑 ／ 全量：python -m plat gate ／ python -m plat status</div>
   <div class="pageno"></div>
 </section>
 
@@ -249,7 +249,8 @@ figcaption{font-size:clamp(10px,1.1vw,13px); color:var(--muted); margin-top:6px;
     <span class="step">/integration-test</span><span class="gate">→ /approve →</span>
     <span class="step">/release</span><span class="gate">→ /approve</span>
   </div>
-  <pre>python -m plat init --case R60 --module &lt;模块名&gt; --block 100
+  <pre><span class="dim"># 平台底层命令：AI / 钩子会跑，人不用记</span>
+python -m plat init --case R60 --module &lt;模块名&gt; --block 100
 python -m plat status        <span class="dim"># 看现在到哪、下一步敲什么</span></pre>
   <ul>
     <li>每个工程产出先是 <code>draft</code>，<b>人不承认，不能进下一工程</b></li>
@@ -369,7 +370,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <h2>工程 6：单元测试</h2>
   <p class="claim">/unit-test　输入：LGC（分支与边界值）/ ERR（异常）/ 源码</p>
   <p style="font-size:clamp(12px,1.4vw,17px);color:#374151;margin:0 0 8px">
-    TC 68 件（正常 / 边界 / 异常），<code>result</code> 全填；NG 登记 BUG。
+    TC 68 件（正常 / 边界 / 异常），<code>result</code> 全填，<code>actual</code> 标【模拟】（证跡不是实测）；NG 登记 BUG。
   </p>
   <img class="shot" style="max-height:64vh" src="img/fig_excel.png" alt="TC 的 Excel 视图">
   <div class="note"><b>人要看</b>：观点是否够；NG 责任层；覆盖率不足的部分是否真的不重要。<br><b>承认</b>：<code>/approve unit-test</code></div>
@@ -422,7 +423,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
     <tr><th>动作</th><th>命令</th><th>作用</th></tr>
     <tr><td><b>承认</b></td><td><code>/approve &lt;阶段&gt;</code></td><td>把 <code>draft</code> 改成 <code>confirmed</code>，写入 <code>approved_by</code> / <code>approved_at</code></td></tr>
     <tr><td><b>问路</b></td><td><code>/next</code></td><td>看现在到哪、下一步敲什么、有没有阻塞</td></tr>
-    <tr><td><b>检查</b></td><td><code>python -m plat gate</code></td><td>6 道门一起跑；FAIL 就停下来查原因</td></tr>
+    <tr><td><b>检查</b></td><td>写文件后钩子自动跑；阶段结束看 <code>python -m plat gate</code></td><td>钩子只提示当前文件的 ERROR；全量确认在阶段结束/提交前；FAIL 就停下来查原因</td></tr>
     <tr><td><b>变更</b></td><td><code>/change &lt;ID&gt;</code> + <code>plat impact</code></td><td>算下游影响面；<b>退回哪个工程由人决定</b></td></tr>
     <tr><td><b>独立复核</b></td><td><code>gate-reviewer</code> agent</td><td>干净上下文重跑门禁，不信任产出方的说法</td></tr>
   </table>
@@ -476,7 +477,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
   <h2>对照两份 PPT：三层清单</h2>
   <p class="claim">主线已经能跑，缺的是“平台基础设施”。</p>
   <div class="cards">
-    <div class="card" style="border-left-color:var(--ok)"><h3>✅ 已实现</h3><p>8 工程全链路、人机卡点、ID 台账与追溯、6 道门、成果物三态（YAML/MD/HTML）、Excel/Word 导出、脱敏、变更影响、采用率、覆盖率 KPI、9 个 agent、8 个模板、两套完整案例、<b>R60Login 可运行的前后端（FastAPI + Vue）+ Makefile / Docker Compose</b></p></div>
+    <div class="card" style="border-left-color:var(--ok)"><h3>✅ 已实现</h3><p>8 工程全链路、人机卡点、ID 台账与追溯、6 道门、平台自测 9 件（pytest）、成果物三态（YAML/MD/HTML）、Excel/Word 导出、脱敏、变更影响、采用率、覆盖率 KPI、9 个 agent、8 个模板、两套完整案例、<b>R60Login 可运行的前后端（FastAPI + Vue）+ Makefile / Docker Compose</b></p></div>
     <div class="card" style="border-left-color:#f59e0b"><h3>△ 部分实现</h3><p>Context Hub（只有 ID 台账）、知识层（只有 traps/cases）、治理审计（只有 git + 承认栏）、利用层（CLI + 聊天 + 本地/容器运行；无 Web 平台画面、无 CI/CD）、RACI、成本/工数、测试执行结果、OpenAPI/DDL/脚手架、静态解析</p></div>
     <div class="card" style="border-left-color:var(--bad)"><h3>❌ 未实现</h3><p>模型网关、RAG/向量库、Web 平台画面、CI/CD 集成、SSO/角色权限、审计日志、成本管理、闭域/GPU/认证基盘、专用 IDE 插件、Jira/Redmine 集成</p></div>
   </div>
@@ -545,6 +546,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
     <tr><td>6</td><td>人月削减率</td><td><b>没有实测数据</b>，本稿不放百分比</td></tr>
     <tr><td>7</td><td>知识库检索（RAG）</td><td>只留目录与空命令，<b>未实现</b></td></tr>
     <tr><td>8</td><td>平台基础设施</td><td>模型网关、CI、SSO、审计、成本、闭域均未做（见第三章）</td></tr>
+    <tr><td>9</td><td>素材取込の未対応形式</td><td>PDF / 扫描件 / 图片未対応：<code>mask prep</code> 列入 <code>unsupported</code>，需人工文本化后再脱敏</td></tr>
   </table>
   <div class="src">各模块 REL.yaml 的 criteria ／ src/TRACEABILITY.yaml ／ backlog/backlog.yaml</div>
   <div class="pageno"></div>
@@ -554,13 +556,15 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
 <section class="slide">
   <h2>下一步 90 天 + 一句话</h2>
   <p class="claim">先补 6 个 P0，再谈全社展开。</p>
+  <div class="note"><b>先做 0（影子期）</b>：真实项目照常做，平台并行出参考稿，<b>不进交付</b>；1〜2 个月后再选单模块试点。</div>
   <ul>
     <li><b>CI 里跑 6 道门</b>（BL-002）：未通过不可合并</li>
     <li><b>补审计与检索</b>（BL-001 / BL-003）：谁改了什么、知识能搜到</li>
     <li><b>真跑单测</b>（BL-006）：把【模拟】pass 换成真实执行结果</li>
   </ul>
   <div class="note"><b>建议的试点</b>：选一个真实案件的一个模块，按 Phase 1 跑一遍；两周内给三样东西：① 6 道门的状态 ② 一条需求的完整追溯 ③ 该模块的初稿采用率（标明样本量与是否含模拟）。</div>
-  <p class="big" style="margin-top:24px">命令是人敲的，活是 AI 干的，<br>检查是机器做的，责任是人担的。</p>
+  <p class="big" style="margin-top:24px">阶段命令是人敲的，活是 AI 干的，<br>检查是钩子自动跑的，责任是人担的。</p>
+  <div class="note"><b>边界不是自我否定</b>：真实项目要补的三块是 <b>客户确认、实测执行、CI 接入</b>。</div>
   <div class="src">backlog/backlog.yaml ／ 两份 PPT 的 Phase 1</div>
   <div class="pageno"></div>
 </section>
@@ -582,7 +586,7 @@ python -m plat status        <span class="dim"># 看现在到哪、下一步敲�
     <tr><td>11 条踩坑</td><td><code>knowledge/traps.md</code></td></tr>
     <tr><td>待办池</td><td><code>backlog/backlog.yaml</code></td></tr>
   </table>
-  <div class="src">现场可逐条复现；复现不了的数字本稿不写</div>
+  <div class="src">现场可逐条复现；日常由 AI / 钩子执行，人只敲 / 开头的 skill</div>
   <div class="pageno"></div>
 </section>
 

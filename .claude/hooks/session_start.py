@@ -35,10 +35,13 @@ def main() -> int:
             if p.is_file():
                 handoffs.append((p.stat().st_mtime, p))
         if handoffs:
-            p = max(handoffs, key=lambda x: x[0])[1]
-            print(f"[session-start] 交接单: {paths.rel(p)}")
-            print(p.read_text(encoding="utf-8")[:5000])
-            print()
+            # 全モジュール分を出す。1 つだけ出すと、並行中の他モジュールの
+            # AI-NOTES が新セッションから見えなくなる。
+            handoffs.sort(key=lambda x: x[0], reverse=True)
+            for i, (_mt, p) in enumerate(handoffs, 1):
+                print(f"[session-start] 交接单 {i}/{len(handoffs)}: {paths.rel(p)}")
+                print(p.read_text(encoding="utf-8")[:4000])
+                print()
         else:
             print("[session-start] SESSION_HANDOFF.md がありません。")
             print("  `python -m plat handoff --module <模块> --write` を実行してください。")

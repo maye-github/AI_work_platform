@@ -127,7 +127,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-101
   - R-101
@@ -140,7 +140,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-101
   - R-101
@@ -153,7 +153,7 @@ cases:
   input: pageList=0 件
   expected: 画面は表示し、画面候補は未選択
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-101
   - R-101
@@ -166,7 +166,7 @@ cases:
   input: 異常入力
   expected: E-105
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-101
   - R-101
@@ -181,7 +181,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-102
   - R-101
@@ -194,7 +194,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-102
   - R-101
@@ -207,7 +207,7 @@ cases:
   input: pageList=0 件
   expected: 空リストのまま画面表示
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-102
   - R-101
@@ -220,7 +220,7 @@ cases:
   input: pageList=1 件
   expected: その 1 件が初期値
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-102
   - R-101
@@ -233,7 +233,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-103
   - R-101
@@ -246,7 +246,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-103
   - R-101
@@ -259,7 +259,7 @@ cases:
   input: I-106=pageList 0 件
   expected: 未選択
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-103
   - R-101
@@ -272,7 +272,7 @@ cases:
   input: 異常入力
   expected: エラー終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-103
   - R-101
@@ -285,7 +285,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-104
   - R-102
@@ -298,7 +298,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-104
   - R-102
@@ -311,7 +311,7 @@ cases:
   input: I-103=6 桁
   expected: E-102
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-104
   - R-102
@@ -324,7 +324,7 @@ cases:
   input: 異常入力
   expected: E-101
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-104
   - R-102
@@ -339,7 +339,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-105
   - R-101
@@ -352,7 +352,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-105
   - R-101
@@ -365,7 +365,7 @@ cases:
   input: I-104="1"
   expected: 妥当
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-105
   - R-101
@@ -378,7 +378,7 @@ cases:
   input: 異常入力
   expected: E-103
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-105
   - R-101
@@ -393,7 +393,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-106
   - R-110
@@ -406,7 +406,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-106
   - R-110
@@ -419,7 +419,7 @@ cases:
   input: 社員コード=半角 7 桁
   expected: 暗号化成功
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-106
   - R-110
@@ -432,7 +432,7 @@ cases:
   input: 日付=当日
   expected: 当日内の復号で一致
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-106
   - R-110
@@ -445,7 +445,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-107
   - R-103
@@ -458,7 +458,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-107
   - R-103
@@ -471,7 +471,7 @@ cases:
   input: errorCode="0"
   expected: 成功
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-107
   - R-103
@@ -484,7 +484,7 @@ cases:
   input: 異常入力
   expected: E-104
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-107
   - R-103
@@ -499,7 +499,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-108
   - R-110
@@ -512,7 +512,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-108
   - R-110
@@ -525,7 +525,7 @@ cases:
   input: stfCd=当日鍵で暗号化した値
   expected: 復号成功
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-108
   - R-110
@@ -538,7 +538,7 @@ cases:
   input: 異常入力
   expected: E-106
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-108
   - R-110
@@ -553,7 +553,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-109
   - R-103
@@ -566,7 +566,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-109
   - R-103
@@ -579,7 +579,7 @@ cases:
   input: DEL_FLG="0"
   expected: ログイン可
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-109
   - R-103
@@ -592,7 +592,7 @@ cases:
   input: 異常入力
   expected: E-104
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-109
   - R-103
@@ -607,7 +607,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-110
   - R-104
@@ -620,7 +620,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-110
   - R-104
@@ -633,7 +633,7 @@ cases:
   input: Session=保存成功
   expected: 保存される
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-110
   - R-104
@@ -646,7 +646,7 @@ cases:
   input: 異常入力
   expected: E-111
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-110
   - R-104
@@ -661,7 +661,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-111
   - R-103
@@ -674,7 +674,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-111
   - R-103
@@ -687,7 +687,7 @@ cases:
   input: gmnId=選択済み
   expected: 遷移先が決まる
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-111
   - R-103
@@ -700,7 +700,7 @@ cases:
   input: 異常入力
   expected: エラー終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-111
   - R-103
@@ -713,7 +713,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-112
   - R-105
@@ -726,7 +726,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-112
   - R-105
@@ -739,7 +739,7 @@ cases:
   input: stfKbn="1"
   expected: 引き継ぎ
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-112
   - R-105
@@ -752,7 +752,7 @@ cases:
   input: stfKbn="2"
   expected: 引き継ぎ
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-112
   - R-105
@@ -765,7 +765,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-113
   - R-106
@@ -778,7 +778,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-113
   - R-106
@@ -791,7 +791,7 @@ cases:
   input: url=150 文字
   expected: 表示可
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-113
   - R-106
@@ -804,7 +804,7 @@ cases:
   input: 異常入力
   expected: E-103
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-113
   - R-106
@@ -819,7 +819,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-114
   - R-107
@@ -832,7 +832,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-114
   - R-107
@@ -845,7 +845,7 @@ cases:
   input: ONLINE_FLG="1"
   expected: 利用可
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-114
   - R-107
@@ -858,7 +858,7 @@ cases:
   input: 異常入力
   expected: E-105
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-114
   - R-107
@@ -873,7 +873,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-115
   - R-108
@@ -886,7 +886,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-115
   - R-108
@@ -899,7 +899,7 @@ cases:
   input: I-112=「はい」
   expected: 画面を閉じる
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-115
   - R-108
@@ -912,7 +912,7 @@ cases:
   input: 異常入力
   expected: E-110
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-115
   - R-108
@@ -927,7 +927,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-116
   - R-109
@@ -940,7 +940,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-116
   - R-109
@@ -953,7 +953,7 @@ cases:
   input: エラー区分=業務エラー
   expected: セッションエラー画面へ遷移
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-116
   - R-109
@@ -966,7 +966,7 @@ cases:
   input: 異常入力
   expected: E-101
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-116
   - R-109
@@ -981,7 +981,7 @@ cases:
   input: 設計どおりの入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-117
   - R-106
@@ -994,7 +994,7 @@ cases:
   input: 別の正常入力
   expected: 正常終了
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-117
   - R-106
@@ -1007,7 +1007,7 @@ cases:
   input: stfCd=未入力
   expected: '"NaN" を暗号化して URL に載せる'
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-117
   - R-106
@@ -1020,7 +1020,7 @@ cases:
   input: 異常入力
   expected: E-103
   result: pass
-  actual: null
+  actual: '【模拟】未実測（模擬的に pass）'
   related_ids:
   - L-117
   - R-106

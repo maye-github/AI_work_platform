@@ -17,7 +17,6 @@ from __future__ import annotations
 
 import datetime as dt
 from collections import defaultdict, deque
-from pathlib import Path
 
 from . import model, paths, rules_data as R
 
@@ -60,9 +59,11 @@ def _reachable_roots(arts: list[model.Artifact]) -> tuple[int, int]:
 
 def compute(case: str | None = None, module: str | None = None) -> dict:
     all_arts = model.load_all()
+    # 管理文書（doc:）も含める。工程 4/5 は ID を産まないため、
+    # ID 持ちだけを対象にすると所要日数が空欄になる。
     arts = [a for a in all_arts
             if (case is None or a.case == case) and (module is None or a.module == module)
-            and a.id]
+            and (a.id or a.data.get("doc"))]
     ledger = model.load_ledger()
 
     # 生産性：工程別所要日数
@@ -130,7 +131,7 @@ def render(k: dict) -> str:
         f"| 生産性 | 工程別所要日数 | {prod} |",
         f"| 品質 | 門番ヒット / 手戻り | {k['quality']['gate_hits']} / {k['quality']['rework']} |",
         f"| AI 活用度 | 承認到達率 | {k['reach_pct']}%（{k['approved']}/{k['generated']}） |",
-        f"| AI 活用度 | **採用率**（初稿のまま残った条目） | "
+        "| AI 活用度 | **採用率**（初稿→承認版の変動量） | "
         + (f"{k['adoption']['adoption_pct']}%（{k['adoption']['unchanged']}/{k['adoption']['items']}）"
            "／修正 " + str(k['adoption']['modified'])
            + "・追加 " + str(k['adoption']['added'])
@@ -139,5 +140,7 @@ def render(k: dict) -> str:
         f"| 網羅性 | 要件カバレッジ | {k['coverage']['pct']}%（{k['coverage']['req_covered']}/{k['coverage']['req_total']}） |",
         f"| リードタイム | 案件起算からの日数 | {k['lead_time_days']} 日 |",
         f"| 知識資産 | 踩坑記録 | {k['knowledge']['traps']} 件 |",
+        "",
+        "> ※ 採用率は「人の修正率」ではない。人が指示して AI が直した分も「修正」に含む。",
     ]
     return "\n".join(lines)

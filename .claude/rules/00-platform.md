@@ -87,6 +87,9 @@ draft ──▶ reviewed ──▶ confirmed ──▶ frozen ──▶ (終端)
 
 `python -m plat gate` → 6 个 PASS 才准提交。**告警（WARN）不阻断，错误（ERROR）阻断。**
 
+- **テストの証跡**：`TC` / `IT` の `result: pass` は `actual`（IT は `evidence`）が必須。
+  空欄は「未実施」であり G3 が ERROR にする。`【模拟】` の証跡は WARN（W5）で可視化する。
+
 ## 7. 命名
 
 - **定义层**（`.yaml` / `.py` / 台账 / front-matter 键）：`snake_case`。

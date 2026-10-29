@@ -65,7 +65,10 @@ def render(case: str, module: str, arts: list[model.Artifact]) -> str:
     for r in rows:
         s = r["stage"]
         icon = {"not_started": "⏸ 未開始", "in_progress": "▶ 進行中", "approved": "✅ 承認済"}[r["state"]]
-        counts = Counter(a.type for a in r["items"])
+        # 件数は「ファイル数」ではなく「条目数」。集約ファイルを 1 件と数えない。
+        counts: Counter[str] = Counter()
+        for a in r["items"]:
+            counts[a.type] += len(a.items()) or 1
         detail = " / ".join(f"{t} {n}" for t, n in sorted(counts.items())) or "—"
         lines.append(f"  {s.no} {s.name_ja:<16} {icon:<8} {detail}")
     cmd, _ = next_command(rows)

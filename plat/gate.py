@@ -65,11 +65,10 @@ def g2(ledger: dict, arts: list[model.Artifact]) -> tuple[bool, list[str], list[
                 node_rel[it["id"]] = it["related_ids"]
                 node_type[it["id"]] = a.type
 
-        # 対称参照（W4）
-        for nid, rels in node_rel.items():
-            for rid in rels:
-                if rid in node_rel and nid not in node_rel[rid]:
-                    warn.append(f"W4 片方向参照: {nid} → {rid}（{rid} は {nid} を参照していない）")
+        # 注：`related_ids` は「下流 → 上流」の有向辺。上流が下流を逆向きに
+        # 参照する必要はない（追溯は DAG であり、対称グラフではない）。
+        # 以前ここで対称参照（W4）を検査していたが、全辺が WARN になり
+        # 本当の孤立・断線を埋もれさせたため削除した。
         # 到達性
         adj: dict[str, set[str]] = defaultdict(set)
         for nid, rels in node_rel.items():
@@ -158,6 +157,27 @@ def g3(ledger: dict, arts: list[model.Artifact]) -> tuple[bool, list[str], list[
         want = R.stage_of_type(a.type)
         if want and a.stage and want != a.stage:
             err.append(f"G3 置き場所違い: {a.rel} は工程{a.stage} だが {a.type} は工程{want}")
+
+        # テストの証跡：`result: pass` は actual / evidence が必須。
+        # 空欄は「未実施」であり、pass とは両立しない（従来は空欄でも通っていた）。
+        if a.type in ("TC", "IT"):
+            simulated = 0
+            for it in a.items():
+                raw = it.get("raw") or {}
+                res = str(raw.get("result") or "")
+                proof = raw.get("actual") or raw.get("evidence")
+                if res == "pass" and not proof:
+                    err.append(
+                        f"G3 証跡なし: {a.rel} → {it['id']} は result=pass ですが "
+                        f"actual/evidence が空です（空欄は未実施）"
+                    )
+                if res == "pass" and proof and ("模拟" in str(proof) or "模擬" in str(proof)):
+                    simulated += 1
+            if simulated:
+                warn.append(
+                    f"W5 模拟パス: {a.rel} の {simulated} 件は result=pass ですが "
+                    f"証跡が【模拟】です（実測ではない）"
+                )
     return (not err), err, warn
 
 
